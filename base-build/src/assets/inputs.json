@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "name": "Text Form",
+        "component": "textforminput",
+        "file": "TextFormInput.vue"
+    },
+    {
+        "id": 2,
+        "name": "Text",
+        "component": "textinput",
+        "file": "TextInput.vue"
+    }
+]
