@@ -29,5 +29,7 @@ class BuilderController extends Controller
         ];
 
         \App\Jobs\BuildProject::dispatch($data);
+
+        return view('home');
     }
 }

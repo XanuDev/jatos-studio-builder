@@ -37,15 +37,18 @@ class BuildProject implements ShouldQueue
      */
     public function handle()
     {
+        //https://symfony.com/doc/current/components/process.html
         $build_process = new Process(['sh', storage_path() . '/app/base-build/build.sh'], null, [
             'PROJECT_NAME' => $this->data['title'],
         ]);
+        $build_process->setWorkingDirectory(storage_path() . '/app/base-build/');
+
         $build_process->run();
         if(!$build_process->isSuccessful()) {
            throw new ProcessFailedException($build_process);
         }
 
-        Log::info($build_process->getOutput());
+        //Log::info($build_process->getOutput());
 
     }
 }
