@@ -20,8 +20,20 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app" class="wrapper">
-        @yield('content')
+    <div class="wrapper">
+        @include('partials.sidebar')
+
+        <div class="main">
+            @include('partials.navbar')
+
+            <main id="app" class="content">
+                <div class="container-fluid p-0">
+                    @yield('content')
+                </div>
+            </main>
+
+            @include('partials.footer')
+        </div>
     </div>
 </body>
 </html>

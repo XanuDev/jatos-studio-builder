@@ -1,5 +1,5 @@
 require("./bootstrap");
-
+require("./modules");
 import { createApp } from "vue";
 
 import router from "./Router/index";

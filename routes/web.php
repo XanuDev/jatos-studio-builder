@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('home');
-// });
-
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/builder/new', [App\Http\Controllers\BuilderController::class, 'index'])->name('builder.new');
+Route::post('/builder/new', [App\Http\Controllers\BuilderController::class, 'new'])->name('builder.new');
+
+Route::get('/test', [App\Http\Controllers\BuilderController::class, 'build'])->name('builder.test');

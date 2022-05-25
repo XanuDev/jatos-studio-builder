@@ -31,7 +31,8 @@
         "vue-loader": "^17.0.0"
     },
     "dependencies": {
-        "simplebar": "^5.3.6",
+        "feather-icons": "^4.29.0",
+        "simplebar": "^5.3.8",
         "vue": "^3.2.33",
         "vue-router": "^4.0.15",
         "vue-template-compiler": "^2.6.14",
