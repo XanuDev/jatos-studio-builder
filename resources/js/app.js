@@ -1,13 +1,13 @@
-require("./bootstrap");
-require("./modules");
-import { createApp } from "vue";
+require('./bootstrap');
+require('./modules');
+import { createApp } from 'vue';
 
-import router from "./Router/index";
-import store from "./Store/index";
-import App from "./App";
+import router from './Router/index';
+import store from './Store/index';
+import App from './App';
 
 const app = createApp({});
 app.use(router);
 app.use(store);
-app.component("App", App);
-app.mount("#app");
+app.component('App', App);
+app.mount('#app');

@@ -25,17 +25,17 @@
 </template>
 
 <script>
-import { onMounted } from "vue";
+import { onMounted } from 'vue';
 
 export default {
-    name: "NavBar",
+    name: 'NavBar',
     setup: () => {
-        let active = "home";
+        let active = 'home';
         const setActive = (item) => {
             active = item;
         };
 
-        onMounted(() => console.log("mounted!"));
+        onMounted(() => console.log('mounted!'));
 
         return {
             active,
