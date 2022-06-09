@@ -8,16 +8,16 @@
 </template>
 
 <script lang="ts">
-import inputsData from "../assets/inputs.json";
-import { useStore } from "vuex";
-import { Vue } from "vue-class-component";
+import inputsData from '../assets/inputs.json';
+import { useStore } from 'vuex';
+import { Vue } from 'vue-class-component';
 
 export default class HomeView extends Vue {
     store = useStore();
     // eslint-disable-next-line
     inputs: any = inputsData;
     mounted() {
-        this.store.commit("setInputs", this.inputs);
+        this.store.commit('setInputs', this.inputs);
     }
 }
 </script>

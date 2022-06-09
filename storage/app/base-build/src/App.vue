@@ -9,10 +9,10 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import HomeView from "@/components/HomeView.vue";
-import TextFormInput from "@/components/TextFormInput.vue";
-import TextInput from "@/components/TextInput.vue";
+import { Options, Vue } from 'vue-class-component';
+import HomeView from '@/components/HomeView.vue';
+import TextFormInput from '@/components/TextFormInput.vue';
+import TextInput from '@/components/TextInput.vue';
 
 @Options({
     components: {

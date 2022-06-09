@@ -11,10 +11,17 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     setup: () => {
         let inputs = [];
-        const genJson = () => {};
+        const genJson = () => {
+            let data = { id: 1 };
+            axios.post('/builder/build', data).then((res) => {
+                console.log(res);
+            });
+        };
 
         return {
             genJson,

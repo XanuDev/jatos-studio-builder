@@ -25,6 +25,7 @@
             ]
         ]
     },
+    "plugins": ["prettier"],
     "jsRules": {
         "max-line-length": {
             "options": [120]

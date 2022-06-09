@@ -1,22 +1,22 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import HomeView from "../components/HomeView.vue";
-import TextFormInput from "../components/TextFormInput.vue";
-import TextInput from "../components/TextInput.vue";
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import HomeView from '../components/HomeView.vue';
+import TextFormInput from '../components/TextFormInput.vue';
+import TextInput from '../components/TextInput.vue';
 
 const routes: Array<RouteRecordRaw> = [
     {
-        path: "/",
-        name: "home",
+        path: '/',
+        name: 'home',
         component: HomeView,
     },
     {
-        path: "/textforminput",
-        name: "TextFormInput",
+        path: '/textforminput',
+        name: 'TextFormInput',
         component: TextFormInput,
     },
     {
-        path: "/textinput",
-        name: "TextInput",
+        path: '/textinput',
+        name: 'TextInput',
         component: TextInput,
     },
 ];

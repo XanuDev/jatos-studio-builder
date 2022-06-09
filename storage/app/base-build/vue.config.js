@@ -1,13 +1,10 @@
-const { defineConfig } = require("@vue/cli-service");
+const { defineConfig } = require('@vue/cli-service');
 module.exports = defineConfig({
-  transpileDependencies: true,
-  chainWebpack: config => {
-    config
-        .plugin('html')
-        .tap(args => {
-            args[0].title = "Jatos Builder";
+    transpileDependencies: true,
+    chainWebpack: (config) => {
+        config.plugin('html').tap((args) => {
+            args[0].title = 'Jatos Builder';
             return args;
-        })
-  }
+        });
+    },
 });
-

@@ -99,15 +99,17 @@ class BuilderController extends Controller
         return view('builder.builder', ['build' => $build]);
     }
 
-    public function build($build_id)
-    {
+    public function build(Request $request)
+    {   
+        $build_id = $request->id;     
+                
         $build = Build::find($build_id);
         $data = [
-            'title' => $build->title,
+            'title' => $build->name,
         ];
-
+            
         \App\Jobs\BuildProject::dispatch($data);
-
-        return view('home');
+            
+        return response($build->id, 200);
     }
 }

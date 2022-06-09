@@ -21,4 +21,4 @@ Route::get('/builder/show/{build}', [App\Http\Controllers\BuilderController::cla
 Route::get('/builder/new', [App\Http\Controllers\BuilderController::class, 'new'])->name('builder.new');
 Route::post('/builder/store', [App\Http\Controllers\BuilderController::class, 'store'])->name('builder.store');
 
-Route::get('/builder/build/{build_id}', [App\Http\Controllers\BuilderController::class, 'build'])->name('builder.build');
+Route::post('/builder/build', [App\Http\Controllers\BuilderController::class, 'build'])->name('builder.build');

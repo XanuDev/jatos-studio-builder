@@ -2,6 +2,7 @@
 /dist
 .env
 .env.backup
+*.zip
 npm-debug.log
 yarn-error.log
 /.idea
