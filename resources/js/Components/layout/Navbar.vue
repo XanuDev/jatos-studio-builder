@@ -15,7 +15,7 @@
             >Dashboard</router-link
         >
         <router-link
-            to="/"
+            to="/builder"
             class="nav-item nav-link"
             :class="{ active: active === 'other' }"
             @click="setActive('other')"

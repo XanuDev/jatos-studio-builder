@@ -27,6 +27,15 @@
 
             <li class="sidebar-item">
                 <div class="sidebar-link">
+                    <a href="{{ route('builder.index') }}">
+                        <i class="align-middle" data-feather="sliders"></i>
+                        <span class="align-middle">Proyects</span>
+                    </a>
+                </div>
+            </li>
+
+            <li class="sidebar-item">
+                <div class="sidebar-link">
                     <a href="{{ route('builder.new') }}">
                         <i class="align-middle" data-feather="sliders"></i>
                         <span class="align-middle">New Proyect</span>

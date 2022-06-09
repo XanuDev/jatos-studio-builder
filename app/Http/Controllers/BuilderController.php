@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\{ Build, User };
 
 class BuilderController extends Controller
 {
@@ -16,10 +17,16 @@ class BuilderController extends Controller
 
     public function index()
     {
+        $builds = Build::all();
+        return view('builder.index', ['builds' => $builds]);
+    }
+
+    public function new()
+    {
         return view('builder.new');
     }
 
-    public function new(Request $request)
+    public function store(Request $request)
     {
         $title = $request->title;
         $file = Str::replace(' ', '_', $title);
@@ -75,14 +82,28 @@ class BuilderController extends Controller
 
         Storage::put($file_name, $jas_json);
 
-        dd($jas_json);
-        return view('builder.builder');
+        $build = new Build;
+        $build->name = $title;
+        $build->description = $request->description;
+        $build->jas = $jas_json;
+        $build->file = $file_name;
+        $build->save();
+
+        $build->users()->attach(Auth::id());
+        
+        return view('builder.builder', ['build' => $build]);
     }
 
-    public function build()
+    public function show(Build $build)
     {
+        return view('builder.builder', ['build' => $build]);
+    }
+
+    public function build($build_id)
+    {
+        $build = Build::find($build_id);
         $data = [
-            'title' => 'test'
+            'title' => $build->title,
         ];
 
         \App\Jobs\BuildProject::dispatch($data);

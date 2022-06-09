@@ -12,6 +12,14 @@
 
 <script>
 export default {
-    setup: () => ({}),
+    setup: () => {
+        let inputs = [];
+        const genJson = () => {};
+
+        return {
+            genJson,
+            inputs,
+        };
+    },
 };
 </script>

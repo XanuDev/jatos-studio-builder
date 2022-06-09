@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('builder.new') }}" method="POST">
+    <form action="{{ route('builder.store') }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="title">Title</label>
