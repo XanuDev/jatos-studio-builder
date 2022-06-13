@@ -1,5 +1,5 @@
 <template>
-    <Navbar />
+    <NavBar />
     <main class="content">
         <div class="container-fluid p-0">
             <router-view />
@@ -7,12 +7,16 @@
     </main>
 </template>
 
-<script>
-import Navbar from './Components/layout/Navbar.vue';
-export default {
-    name: 'app',
-    components: {
-        Navbar,
-    },
-};
+<script setup>
+import NavBar from './Components/NavBar.vue';
+import { onMounted } from 'vue';
+import { useStore } from 'vuex';
+const store = useStore();
+
+// eslint-disable-next-line
+const props = defineProps(['project_id']);
+
+onMounted(() => {
+    store.commit('setProject', props.project_id);
+});
 </script>

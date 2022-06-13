@@ -6,7 +6,7 @@
         <ul class="sidebar-nav">
             <li class="sidebar-header">Pages</li>
 
-            <li class="sidebar-item active">
+            <li class="sidebar-item {{ set_active('/') }}">
                 <div class="sidebar-link">
                     <a href="{{ route('home') }}">
                         <i class="align-middle" data-feather="home"></i>
@@ -14,9 +14,9 @@
                     </a>
                 </div>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ set_active('dashboard') }}">
                 <div class="sidebar-link">
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('dashboard') }}">
                         <i class="align-middle" data-feather="sliders"></i>
                         <span class="align-middle">Dashboard</span>
                     </a>
@@ -25,29 +25,29 @@
 
             <li class="sidebar-header">Form Builder</li>
 
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ set_active('builder') }}">
                 <div class="sidebar-link">
                     <a href="{{ route('builder.index') }}">
-                        <i class="align-middle" data-feather="sliders"></i>
-                        <span class="align-middle">Proyects</span>
+                        <i class="align-middle" data-feather="database"></i>
+                        <span class="align-middle">Projects</span>
                     </a>
                 </div>
             </li>
 
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ set_active('builder/new') }}">
                 <div class="sidebar-link">
                     <a href="{{ route('builder.new') }}">
-                        <i class="align-middle" data-feather="sliders"></i>
-                        <span class="align-middle">New Proyect</span>
+                        <i class="align-middle" data-feather="tool"></i>
+                        <span class="align-middle">New Project</span>
                     </a>
                 </div>
             </li>
 
             <li class="sidebar-header">Tools & Components</li>
 
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ set_active('about') }}">
                 <div class="sidebar-link">
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('about') }}">
                         <i class="align-middle" data-feather="help-circle"></i>
                         <span class="align-middle">About</span>
                     </a>

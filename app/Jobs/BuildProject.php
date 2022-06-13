@@ -40,6 +40,7 @@ class BuildProject implements ShouldQueue
         //https://symfony.com/doc/current/components/process.html
         $build_process = new Process(['sh', storage_path() . '/app/base-build/build.sh'], null, [
             'PROJECT_NAME' => $this->data['title'],
+            'JAS_FILE' => $this->data['jas']
         ]);
         $build_process->setWorkingDirectory(storage_path() . '/app/base-build/');
 
@@ -48,7 +49,7 @@ class BuildProject implements ShouldQueue
            throw new ProcessFailedException($build_process);
         }
 
-        //Log::info($build_process->getOutput());
+        Log::info($build_process->getOutput());
 
     }
 }

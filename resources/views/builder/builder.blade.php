@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <App />
+    <App :project_id="{{ $build->id }}" />
 @endsection

@@ -5,28 +5,45 @@
             {{ input.name }}
         </div>
         <div>
-            <button @click="genJson">Generate json</button>
+            <button v-if="!building" @click="genJson">Generate json</button>
+            <div v-else class="text-center">
+                <span>Building...</span>
+                <div class="progress">
+                    <div
+                        class="progress-bar progress-bar-striped progress-bar-animated"
+                        role="progressbar"
+                        aria-valuenow="100"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        style="width: 100%"
+                    ></div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
-<script>
+<script setup>
 import axios from 'axios';
+import { ref } from 'vue';
+import { useStore } from 'vuex';
 
-export default {
-    setup: () => {
-        let inputs = [];
-        const genJson = () => {
-            let data = { id: 1 };
-            axios.post('/builder/build', data).then((res) => {
-                console.log(res);
-            });
-        };
+const store = useStore();
 
-        return {
-            genJson,
-            inputs,
-        };
-    },
+const inputs = [];
+const building = ref(false);
+
+const genJson = () => {
+    building.value = true;
+    let data = { id: store.state.project_id };
+
+    axios
+        .post('/builder/build', data)
+        .then(() => {
+            building.value = false;
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 };
 </script>

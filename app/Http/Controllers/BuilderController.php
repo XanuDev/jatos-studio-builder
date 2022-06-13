@@ -34,7 +34,7 @@ class BuilderController extends Controller
         $jas = [
             'version' => "3",
             'data' => [
-                'uuide' => Str::uuid()->toString(),
+                'uuid' => Str::uuid()->toString(),
                 'title' => $title,
                 'description' => $request->description,
                 'active' => true,
@@ -106,6 +106,7 @@ class BuilderController extends Controller
         $build = Build::find($build_id);
         $data = [
             'title' => $build->name,
+            'jas' => $build->file,
         ];
             
         \App\Jobs\BuildProject::dispatch($data);

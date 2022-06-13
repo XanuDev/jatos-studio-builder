@@ -4,6 +4,7 @@ const store = createStore({
     state: {
         kaixo: `Kaixo Mundua!`,
         active: `dashboard`,
+        project_id: null,
     },
     getters: {
         getKaixo(state) {
@@ -12,8 +13,15 @@ const store = createStore({
         getActive(state) {
             return state.active;
         },
+        getProject(state) {
+            return state.project_id;
+        },
     },
-    mutations: {},
+    mutations: {
+        setProject(state, id) {
+            state.project_id = id;
+        },
+    },
     actions: {},
     modules: {},
 });
