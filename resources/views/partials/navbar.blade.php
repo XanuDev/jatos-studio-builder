@@ -2,7 +2,6 @@
     <a class="sidebar-toggle js-sidebar-toggle">
         <i class="hamburger align-self-center mx-1"></i>
     </a>
-
     <div class="navbar-collapse collapse">
         <ul class="navbar-nav navbar-align">
             <li class="nav-item dropdown">
@@ -238,3 +237,5 @@
         </ul>
     </div>
 </nav>
+
+

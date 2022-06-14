@@ -90,7 +90,7 @@ class BuilderController extends Controller
         $build->save();
 
         $build->users()->attach(Auth::id());
-        
+
         return view('builder.builder', ['build' => $build]);
     }
 
@@ -100,17 +100,17 @@ class BuilderController extends Controller
     }
 
     public function build(Request $request)
-    {   
-        $build_id = $request->id;     
-                
+    {
+        $build_id = $request->id;
+
         $build = Build::find($build_id);
         $data = [
             'title' => $build->name,
             'jas' => $build->file,
         ];
-            
+
         \App\Jobs\BuildProject::dispatch($data);
-            
+
         return response($build->id, 200);
     }
 }

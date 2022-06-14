@@ -54,5 +54,17 @@
                 </div>
             </li>
         </ul>
+        <div class="text-center text-white mb-4">
+            @foreach ( get_locales() as $key => $locale )
+                @if(app()->getLocale() == $key)
+                    {{ $locale }}
+                @else
+                    <a href="{{ route('changeLocale', ['locale' => $key]) }}">{{ $locale }}</a>
+                @endif
+                @if (!$loop->last)
+                    |
+                @endif
+            @endforeach
+        </div>
     </div>
 </nav>

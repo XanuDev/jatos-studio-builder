@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    Home
+    {{ __('Home') }}
+    <br>
+    {{ app()->getLocale() }}
 @endsection
