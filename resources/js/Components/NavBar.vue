@@ -16,6 +16,13 @@
         >
     </nav> -->
     <nav class="nav nav-pills nav-justified">
+        <router-link
+            to="/"
+            class="nav-item nav-link"
+            :class="{ active: active === 'dashboard' }"
+            @click="setActive('dashboard')"
+            >Dashboard</router-link
+        >
         <a
             href="#"
             class="nav-item nav-link"

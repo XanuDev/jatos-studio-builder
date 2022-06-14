@@ -7,17 +7,15 @@
     </div>
 </template>
 
-<script lang="ts">
+<script setup>
 import inputsData from '../assets/inputs.json';
+import { onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
-import { Vue } from 'vue-class-component';
+const store = useStore();
 
-export default class HomeView extends Vue {
-    store = useStore();
-    // eslint-disable-next-line
-    inputs: any = inputsData;
-    mounted() {
-        this.store.commit('setInputs', this.inputs);
-    }
-}
+const inputs = ref(inputsData);
+
+onMounted(() => {
+    store.commit('setInputs', inputs);
+});
 </script>

@@ -34,9 +34,9 @@ services:
             JATOS_DB_PASSWORD: '${DB_PASSWORD}'
             JATOS_DB_DRIVER: com.mysql.cj.jdbc.Driver
             JATOS_JPA: mysqlPersistenceUnit
-        volumes:
-            - 'jatos-assets:/opt/docker/study_assets_root'
-            - 'jatos-uploads:/opt/docker/result_uploads'
+        #volumes:
+            #- 'jatos-assets:/opt/docker/study_assets_root'
+            # - 'jatos-uploads:/opt/docker/result_uploads'
             #- 'jatos-db:/opt/docker/database'
     db:
         image: 'mariadb:10.8.2-rc'
