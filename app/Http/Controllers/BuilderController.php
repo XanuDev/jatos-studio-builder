@@ -113,4 +113,14 @@ class BuilderController extends Controller
 
         return response($build->id, 200);
     }
+
+    public function download(Request $request)
+    {
+        $build_id = $request->id;
+
+        $build = Build::find($build_id);
+        $zip = Storage::get('public/test.zip');
+        
+        return response()->download($zip);
+    }
 }

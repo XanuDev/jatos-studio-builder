@@ -5,7 +5,9 @@
             {{ input.name }}
         </div>
         <div>
-            <button v-if="!building" @click="genJson">Generate json</button>
+            <button v-if="!building" @click="buildProject">
+                Build Project
+            </button>
             <div v-else class="text-center">
                 <span>Building...</span>
                 <div class="progress">
@@ -19,6 +21,13 @@
                     ></div>
                 </div>
             </div>
+            <button
+                v-if="builded"
+                @click="downloadProject"
+                class="btn btn-success"
+            >
+                Download
+            </button>
         </div>
     </div>
 </template>
@@ -32,8 +41,9 @@ const store = useStore();
 
 const inputs = [];
 const building = ref(false);
+const builded = ref(true);
 
-const genJson = () => {
+const buildProject = () => {
     building.value = true;
     let data = { id: store.state.project_id };
 
@@ -44,6 +54,25 @@ const genJson = () => {
         })
         .catch((error) => {
             console.log(error);
+        });
+};
+
+const downloadProject = () => {
+    let data = { id: store.state.project_id };
+
+    axios
+        .post('/builder/download', data)
+        .then((res) => {
+            let blob = new Blob([res.data], {
+                type: 'application/zip',
+            });
+            let link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'test.zip';
+            link.click();
+        })
+        .catch((error) => {
+            console.log('Error dowloading :' + error);
         });
 };
 </script>

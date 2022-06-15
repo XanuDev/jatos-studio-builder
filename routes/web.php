@@ -24,6 +24,7 @@ Route::get('/builder/show/{build}', [App\Http\Controllers\BuilderController::cla
 Route::get('/builder/new', [App\Http\Controllers\BuilderController::class, 'new'])->name('builder.new');
 Route::post('/builder/store', [App\Http\Controllers\BuilderController::class, 'store'])->name('builder.store');
 Route::post('/builder/build', [App\Http\Controllers\BuilderController::class, 'build'])->name('builder.build');
+Route::post('/builder/download', [App\Http\Controllers\BuilderController::class, 'download'])->name('builder.download');
 
 
 Route::get('locale/change/{locale}', [App\Http\Controllers\LangController::class, 'change'])->name('changeLocale');
