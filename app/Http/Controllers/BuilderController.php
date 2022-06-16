@@ -78,15 +78,17 @@ class BuilderController extends Controller
             $randomString .= (string)rand(0, 9);
         }
 
-        $file_name = $file. $randomString. '.jas';
+        $jas_file = $file. $randomString. '.jas';
+        $zip_file = $file. '.zip';
 
-        Storage::put($file_name, $jas_json);
+        Storage::put($jas_file, $jas_json);
 
         $build = new Build;
         $build->name = $title;
         $build->description = $request->description;
         $build->jas = $jas_json;
-        $build->file = $file_name;
+        $build->jas_file = $jas_file;
+        $build->zip_file = $zip_file;
         $build->save();
 
         $build->users()->attach(Auth::id());
@@ -106,21 +108,18 @@ class BuilderController extends Controller
         $build = Build::find($build_id);
         $data = [
             'title' => $build->name,
-            'jas' => $build->file,
+            'jas' => $build->jas_file,
         ];
 
         \App\Jobs\BuildProject::dispatch($data);
 
-        return response($build->id, 200);
+        return response([ 'id' => $build->id, 'name' => $build->name], 200);
     }
 
     public function download(Request $request)
     {
-        $build_id = $request->id;
+        $build = Build::find($request->id);
 
-        $build = Build::find($build_id);
-        $zip = Storage::get('public/test.zip');
-        
-        return response()->download($zip);
+        return Storage::download('public/'.$build->zip_file);
     }
 }

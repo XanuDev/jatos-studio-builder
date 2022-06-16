@@ -2,24 +2,28 @@ import { createStore } from 'vuex';
 
 const store = createStore({
     state: {
-        kaixo: `Kaixo Mundua!`,
         active: `dashboard`,
         project_id: null,
+        project_name: null,
+        project_file: null,
     },
     getters: {
-        getKaixo(state) {
-            return state.kaixo;
-        },
         getActive(state) {
             return state.active;
         },
         getProject(state) {
-            return state.project_id;
+            return {
+                id: state.project_id,
+                name: state.project_name,
+                file: state.project_file,
+            };
         },
     },
     mutations: {
-        setProject(state, id) {
-            state.project_id = id;
+        setProject(state, project) {
+            state.project_id = project.id;
+            state.project_name = project.name;
+            state.project_file = project.file;
         },
     },
     actions: {},

@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');            
             $table->text('jas');
-            $table->string('file');
+            $table->string('jas_file');
+            $table->string('zip_file');
             $table->boolean('is_private')->default(false);
             $table->timestamps();
         });

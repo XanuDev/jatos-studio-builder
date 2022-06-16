@@ -41,16 +41,18 @@ const store = useStore();
 
 const inputs = [];
 const building = ref(false);
-const builded = ref(true);
-
+const builded = ref(false);
+const name = ref('');
 const buildProject = () => {
     building.value = true;
     let data = { id: store.state.project_id };
 
     axios
         .post('/builder/build', data)
-        .then(() => {
+        .then((res) => {
+            name.value = res.data.name;
             building.value = false;
+            builded.value = true;
         })
         .catch((error) => {
             console.log(error);
@@ -59,20 +61,25 @@ const buildProject = () => {
 
 const downloadProject = () => {
     let data = { id: store.state.project_id };
-
-    axios
-        .post('/builder/download', data)
+    console.log(store.state.project_file);
+    axios({
+        url: 'builder/download',
+        method: 'POST',
+        responseType: 'blob',
+        data: data,
+    })
         .then((res) => {
             let blob = new Blob([res.data], {
                 type: 'application/zip',
             });
+
             let link = document.createElement('a');
             link.href = window.URL.createObjectURL(blob);
-            link.download = 'test.zip';
+            link.download = store.state.project_file;
             link.click();
         })
         .catch((error) => {
-            console.log('Error dowloading :' + error);
+            console.log('Error downloading :' + error);
         });
 };
 </script>

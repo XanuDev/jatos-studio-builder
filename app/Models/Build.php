@@ -13,7 +13,8 @@ class Build extends Model
         'name',
         'description',
         'jas',
-        'file',
+        'jas_file',
+        'zip_file',
     ];
 
     public function users()

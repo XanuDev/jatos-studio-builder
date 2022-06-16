@@ -14,9 +14,13 @@ import { useStore } from 'vuex';
 const store = useStore();
 
 // eslint-disable-next-line
-const props = defineProps(['project_id']);
+const props = defineProps(['project_id', 'project_name', 'project_file']);
 
 onMounted(() => {
-    store.commit('setProject', props.project_id);
+    store.commit('setProject', {
+        id: props.project_id,
+        name: props.project_name,
+        file: props.project_file,
+    });
 });
 </script>
