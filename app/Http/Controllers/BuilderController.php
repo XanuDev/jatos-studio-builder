@@ -81,7 +81,7 @@ class BuilderController extends Controller
         $jas_file = $file. $randomString. '.jas';
         $zip_file = $file. '.zip';
 
-        Storage::put($jas_file, $jas_json);
+        Storage::put('jas/'.$jas_file, $jas_json);
 
         $build = new Build;
         $build->name = $title;

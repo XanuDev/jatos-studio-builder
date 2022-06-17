@@ -23,6 +23,13 @@
             @click="setActive('dashboard')"
             >Dashboard</router-link
         >
+        <router-link
+            to="/audiorecording"
+            class="nav-item nav-link"
+            :class="{ active: active === 'audiorecording' }"
+            @click="setActive('audiorecording')"
+            >Dashboard</router-link
+        >
         <a
             href="#"
             class="nav-item nav-link"
