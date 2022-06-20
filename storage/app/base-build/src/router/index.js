@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../components/HomeView.vue';
 import TextInput from '../components/TextInput.vue';
 import AudioRecording from '../components/AudioRecording.vue';
+import SubmitResult from '../components/SubmitResult.vue';
 
 const routes = [
     {
@@ -18,6 +19,11 @@ const routes = [
         path: '/audiorecording',
         name: 'AudioRecording',
         component: AudioRecording,
+    },
+    {
+        path: '/SubmitResult',
+        name: 'SubmitResult',
+        component: SubmitResult,
     },
 ];
 

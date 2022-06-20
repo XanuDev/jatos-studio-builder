@@ -1,13 +1,15 @@
 [
     {
-        "id": 1,
+        "id": 0,
         "name": "Text Form",
-        "component": "textforminput",
-        "file": "TextFormInput.vue"
+        "text": "Text form text test",
+        "component": "textinput",
+        "file": "TextInput.vue"
     },
     {
-        "id": 2,
+        "id": 1,
         "name": "Text",
+        "text": "Text form text test 2",
         "component": "textinput",
         "file": "TextInput.vue"
     }

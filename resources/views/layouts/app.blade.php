@@ -23,11 +23,14 @@
 
 <body>
     <div class="wrapper">
-        @include('partials.sidebar')
+        @auth
+            @include('partials.sidebar')
+        @endauth
 
         <div class="main">
-            @include('partials.navbar')
-
+            @auth
+                @include('partials.navbar')
+            @endauth
             <main id="app" class="content">
                 <div class="container-fluid p-0">
                     @yield('content')
