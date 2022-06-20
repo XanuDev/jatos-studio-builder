@@ -1,35 +1,40 @@
 <template>
-    <div class="container text-center">
-        <div>
-            Test
-            <h3>{{ $store.state.inputs[$store.state.position].text }}</h3>
-        </div>
-        <div>
-            <label for="text">Froga</label>
-            <input type="text" id="text" v-model="froga" />
-        </div>
-        <div>
-            <button
-                type="submit"
-                class="btn btn-primary"
-                @click="onNextButtonClick"
-            >
-                Next
-            </button>
-            <button class="btn btn-danger" @click="onCancelButtonClick">
-                Cancel
-            </button>
-        </div>
+    <div class="text-center">
+        <h3>{{ $store.state.inputs[$store.state.position].title }}</h3>
+        <p>{{ $store.state.inputs[$store.state.position].text }}</p>
     </div>
+    <form>
+        <div class="form-group">
+            <label for="text">Froga</label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="text"
+                v-model="textInputValue"
+            />
+        </div>
+
+        <button
+            type="submit"
+            class="btn btn-primary mt-2 mx-1"
+            @click="onNextButtonClick"
+        >
+            Next
+        </button>
+        <button class="btn btn-danger mt-2 mx-1" @click="onCancelButtonClick">
+            Cancel
+        </button>
+    </form>
 </template>
 <script setup>
 import { ref } from 'vue';
 
-const froga = ref('');
+const textInputValue = ref('');
 
 const onNextButtonClick = () => {
     var resultData = {
-        name: froga.value,
+        name: textInputValue.value,
     };
     // eslint-disable-next-line
     jatos.addJatosIds(resultData);

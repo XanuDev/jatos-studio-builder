@@ -1,16 +1,14 @@
 [
     {
         "id": 0,
-        "name": "Text Form",
+        "name": "Home",
         "text": "Text form text test",
-        "component": "textinput",
-        "file": "TextInput.vue"
+        "component": "homeView"        
     },
     {
         "id": 1,
         "name": "Text",
         "text": "Text form text test 2",
-        "component": "textinput",
-        "file": "TextInput.vue"
+        "component": "textInput" 
     }
 ]

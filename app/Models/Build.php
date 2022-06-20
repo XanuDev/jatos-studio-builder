@@ -21,4 +21,9 @@ class Build extends Model
     {   
         return $this->belongsToMany(User::class);
     }
+
+    public function components()
+    {
+        return $this->belongsToMany(Component::class);
+    }
 }

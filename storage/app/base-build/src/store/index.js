@@ -4,6 +4,7 @@ export default createStore({
     state: {
         inputs: [],
         position: 0,
+        active: 'homeView',
     },
     getters: {
         getInputs(state) {
@@ -12,6 +13,9 @@ export default createStore({
         getPosition(state) {
             return state.position;
         },
+        getActive(state) {
+            return state.active;
+        },
     },
     mutations: {
         setInputs(state, inputs) {
@@ -19,6 +23,9 @@ export default createStore({
         },
         setPosition(state, position) {
             state.position = position;
+        },
+        setActive(state, active) {
+            state.active = active;
         },
     },
     actions: {},

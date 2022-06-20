@@ -31,6 +31,22 @@ class BuilderController extends Controller
         $title = $request->title;
         $file = Str::replace(' ', '_', $title);
 
+        $component_list = [];
+        $component_list[] = [
+                'uuid' => Str::uuid()->toString(),
+                'title' => $title,
+                'htmlFilePath' => 'index.html',
+                'reloadable' => true,
+                'active' => true,
+                'comments' => '',
+                'jsonData' => null
+        ];
+            
+        $component_pages = [];
+        foreach ($component_list as $key => $component) {
+            $component_pages[] = Str::replace(' ', '_', $component);
+        }
+
         $jas = [
             'version' => "3",
             'data' => [
@@ -44,17 +60,7 @@ class BuilderController extends Controller
                 'comments' => "",
                 'jsonData' => null,
                 'endRedirectUrl' => "",
-                'componentList' => array(
-                    [
-                        'uuid' => Str::uuid()->toString(),
-                        'title' => $title,
-                        'htmlFilePath' => 'index.html',
-                        'reloadable' => true,
-                        'active' => true,
-                        'comments' => '',
-                        'jsonData' => null
-                    ]
-                ),
+                'componentList' => $component_list,
                 'batchList' => array(
                     [
                       'uuid' => Str::uuid()->toString(),
@@ -89,6 +95,7 @@ class BuilderController extends Controller
         $build->jas = $jas_json;
         $build->jas_file = $jas_file;
         $build->zip_file = $zip_file;
+        $build->component_pages = serialze($component_pages);
         $build->save();
 
         $build->users()->attach(Auth::id());
@@ -109,6 +116,7 @@ class BuilderController extends Controller
         $data = [
             'title' => $build->name,
             'jas' => $build->jas_file,
+            'pages' => unserialize($build->component_pages),
         ];
 
         \App\Jobs\BuildProject::dispatch($data);

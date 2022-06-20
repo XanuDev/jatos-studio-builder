@@ -5,7 +5,7 @@ if [ ! -d "./node_modules" ]; then
 fi
 
 rm -rf dist
-npm run build -- --dest $PROJECT_NAME
+BUILD_PAGES=$COMPONENT_PAGES npm run build -- --dest $PROJECT_NAME
 rm ../public/$PROJECT_NAME.zip
 zip -r ../public/$PROJECT_NAME.zip $PROJECT_NAME
 zip -ju ../public/$PROJECT_NAME.zip ../jas/$JAS_FILE
