@@ -26,6 +26,18 @@ class BuilderController extends Controller
         return view('builder.new');
     }
 
+    public function create(Request $request)
+    {
+        $build = new Build;
+        $build->name = $request->title;
+        $build->description = $request->description;
+        $build->save();
+
+        $build->users()->attach(Auth::id());
+
+        return view('builder.builder', ['build' => $build]);
+    }
+
     public function store(Request $request)
     {
         $title = $request->title;
@@ -41,7 +53,7 @@ class BuilderController extends Controller
                 'comments' => '',
                 'jsonData' => null
         ];
-            
+
         $component_pages = [];
         foreach ($component_list as $key => $component) {
             $component_pages[] = Str::replace(' ', '_', $component);
@@ -95,7 +107,6 @@ class BuilderController extends Controller
         $build->jas = $jas_json;
         $build->jas_file = $jas_file;
         $build->zip_file = $zip_file;
-        $build->component_pages = serialze($component_pages);
         $build->save();
 
         $build->users()->attach(Auth::id());

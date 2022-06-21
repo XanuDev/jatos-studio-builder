@@ -15,7 +15,7 @@ const store = createStore({
             return {
                 id: state.project_id,
                 name: state.project_name,
-                file: state.project_file,
+                description: state.description,
             };
         },
     },
@@ -23,7 +23,7 @@ const store = createStore({
         setProject(state, project) {
             state.project_id = project.id;
             state.project_name = project.name;
-            state.project_file = project.file;
+            state.description = project.description;
         },
     },
     actions: {},

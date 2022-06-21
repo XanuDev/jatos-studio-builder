@@ -1,26 +1,27 @@
 <template>
     <NavBar />
-    <main class="content">
+    <!-- <main class="content">
         <div class="container-fluid p-0">
             <router-view />
         </div>
-    </main>
+    </main> -->
 </template>
 
 <script setup>
 import NavBar from './Components/NavBar.vue';
 import { onMounted } from 'vue';
 import { useStore } from 'vuex';
+
 const store = useStore();
 
 // eslint-disable-next-line
-const props = defineProps(['project_id', 'project_name', 'project_file']);
+const props = defineProps(['project_id', 'project_name', 'description']);
 
 onMounted(() => {
     store.commit('setProject', {
         id: props.project_id,
         name: props.project_name,
-        file: props.project_file,
+        description: props.description,
     });
 });
 </script>
