@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-require('laravel-mix-eslint')
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -12,10 +12,9 @@ require('laravel-mix-eslint')
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .eslint({
-        fix: true,
-        extensions: ['js', 'vue']
-    })
-    .vue()
     .sass('resources/sass/app.scss', 'public/css')
     .sourceMaps();
+
+if (mix.inProduction()) {
+    mix.version();
+}

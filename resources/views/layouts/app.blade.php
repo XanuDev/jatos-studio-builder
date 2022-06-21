@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @livewireStyles
 </head>
 
 <body>
@@ -31,7 +32,7 @@
             @auth
                 @include('partials.navbar')
             @endauth
-            <main id="app" class="content">
+            <main class="content">
                 <div class="container-fluid p-0">
                     @yield('content')
                 </div>
@@ -40,6 +41,7 @@
             @include('partials.footer')
         </div>
     </div>
+    @livewireScripts
 </body>
 
 </html>

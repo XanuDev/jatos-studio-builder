@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
 use App\Models\{ Build, User };
 
 class BuilderController extends Controller
@@ -26,90 +23,11 @@ class BuilderController extends Controller
         return view('builder.new');
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $build = new Build;
         $build->name = $request->title;
         $build->description = $request->description;
-        $build->save();
-
-        $build->users()->attach(Auth::id());
-
-        return view('builder.builder', ['build' => $build]);
-    }
-
-    public function store(Request $request)
-    {
-        $title = $request->title;
-        $file = Str::replace(' ', '_', $title);
-
-        $component_list = [];
-        $component_list[] = [
-                'uuid' => Str::uuid()->toString(),
-                'title' => $title,
-                'htmlFilePath' => 'index.html',
-                'reloadable' => true,
-                'active' => true,
-                'comments' => '',
-                'jsonData' => null
-        ];
-
-        $component_pages = [];
-        foreach ($component_list as $key => $component) {
-            $component_pages[] = Str::replace(' ', '_', $component);
-        }
-
-        $jas = [
-            'version' => "3",
-            'data' => [
-                'uuid' => Str::uuid()->toString(),
-                'title' => $title,
-                'description' => $request->description,
-                'active' => true,
-                'groupStudy' => false,
-                'linearStudy' => false,
-                'dirName' => $file,
-                'comments' => "",
-                'jsonData' => null,
-                'endRedirectUrl' => "",
-                'componentList' => $component_list,
-                'batchList' => array(
-                    [
-                      'uuid' => Str::uuid()->toString(),
-                      'title' => 'Default',
-                      'active' => true,
-                      'maxActiveMembers' => null,
-                      'maxTotalMembers' => null,
-                      'maxTotalWorkers' => null,
-                      'allowedWorkerTypes' => null,
-                      'comments' => null,
-                      'jsonData' => null
-                    ]
-                )
-            ],
-        ];
-
-        $jas_json = json_encode($jas);
-
-        $randomString = "";
-        for ($i = 0; $i < 18; $i++) {
-            $randomString .= (string)rand(0, 9);
-        }
-
-        $jas_file = $file. $randomString. '.jas';
-        $zip_file = $file. '.zip';
-
-        Storage::put('jas/'.$jas_file, $jas_json);
-
-        $build = new Build;
-        $build->name = $title;
-        $build->description = $request->description;
-        $build->jas = $jas_json;
-        $build->jas_file = $jas_file;
-        $build->zip_file = $zip_file;
-        $build->save();
-
-        $build->users()->attach(Auth::id());
 
         return view('builder.builder', ['build' => $build]);
     }
@@ -117,28 +35,5 @@ class BuilderController extends Controller
     public function show(Build $build)
     {
         return view('builder.builder', ['build' => $build]);
-    }
-
-    public function build(Request $request)
-    {
-        $build_id = $request->id;
-
-        $build = Build::find($build_id);
-        $data = [
-            'title' => $build->name,
-            'jas' => $build->jas_file,
-            'pages' => unserialize($build->component_pages),
-        ];
-
-        \App\Jobs\BuildProject::dispatch($data);
-
-        return response([ 'id' => $build->id, 'name' => $build->name], 200);
-    }
-
-    public function download(Request $request)
-    {
-        $build = Build::find($request->id);
-
-        return Storage::download('public/'.$build->zip_file);
     }
 }

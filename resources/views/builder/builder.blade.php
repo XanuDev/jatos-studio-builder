@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <App project_id="{{ $build->id }}" project_name="{{ $build->name }}" />
+    @livewire('builder-nav', ['build' => $build])
+    @livewire('builder', ['build' => $build])
 @endsection
