@@ -1,24 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Private</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($builds as $build)
+    <div class="card flex-fill">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Projects</h5>
+        </div>
+        <table class="table table-hover my-0">
+            <thead>
                 <tr>
-                    <th scope="row">{{ $build->id }}</th>
-                    <td>{{ $build->name }}</td>
-                    <td>{{ $build->is_private }}</td>
-                    <td><a href="{{ route('builder.show', $build) }}" class="btn btn-primary">Edit</a></td>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th class="d-none d-xl-table-cell">Date</th>
+                    <th>Visibility</th>
+                    <th class="d-none d-md-table-cell">Owner</th>
+                    <th>Actions</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($builds as $build)
+                    <tr>
+                        <td>{{ $build->id }}</th>
+                        <td>{{ $build->title }}</td>
+                        <td class="d-none d-xl-table-cell">31/06/2021</td>
+                        @if ($build->is_private)
+                            <td><span class="badge bg-success">Public</span></td>
+                        @else
+                            <td><span class="badge bg-danger">Private</span></td>
+                        @endif
+                        <td class="d-none d-md-table-cell">Vanessa Tucker</td>
+                        <td><a href="{{ route('builder.show', $build) }}" class="btn btn-primary">Edit</a></td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection

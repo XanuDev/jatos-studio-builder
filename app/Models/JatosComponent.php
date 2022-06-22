@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Component extends Model
+class JatosComponent extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'title',
         'json',
-        'json_file'     
+        'json_file'
     ];
 
     public function builds()

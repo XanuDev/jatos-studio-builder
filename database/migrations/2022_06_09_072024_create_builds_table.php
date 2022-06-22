@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('builds', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');            
+            $table->string('title');
+            $table->text('description');
             $table->text('jas');
             $table->string('jas_file');
             $table->string('zip_file');

@@ -24,15 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
-    }
-
-    public function dashboard()
-    {
         $builds = Build::limit('10')->orderBy('created_at', 'desc')->get();
         $users_count = User::count();
-        $builds_count = Build::count();        
-        return view('dashboard', ['builds' => $builds, 'users_count' => $users_count, 'builds_count' => $builds_count]);
+        $builds_count = Build::count();
+        return view('home', ['builds' => $builds, 'users_count' => $users_count, 'builds_count' => $builds_count]);
     }
 
     public function about()

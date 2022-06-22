@@ -2,6 +2,7 @@ import _ from 'lodash';
 window._ = _;
 
 try {
+    window.$ = window.jQuery = require('jquery');
     require('bootstrap');
 } catch (e) {
     //error loading bootstrap

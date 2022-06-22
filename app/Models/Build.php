@@ -10,7 +10,7 @@ class Build extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'title',
         'description',
         'jas',
         'jas_file',
@@ -18,12 +18,12 @@ class Build extends Model
     ];
 
     public function users()
-    {   
+    {
         return $this->belongsToMany(User::class);
     }
 
-    public function components()
+    public function jatos_components()
     {
-        return $this->belongsToMany(Component::class);
+        return $this->belongsToMany(JatosComponent::class);
     }
 }

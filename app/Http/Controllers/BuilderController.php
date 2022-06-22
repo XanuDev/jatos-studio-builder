@@ -26,7 +26,7 @@ class BuilderController extends Controller
     public function store(Request $request)
     {
         $build = new Build;
-        $build->name = $request->title;
+        $build->title = $request->title;
         $build->description = $request->description;
 
         return view('builder.builder', ['build' => $build]);

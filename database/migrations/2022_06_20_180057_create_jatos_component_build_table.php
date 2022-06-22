@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\{JatosComponent, Build};
 
 return new class extends Migration
 {
@@ -13,11 +14,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('components', function (Blueprint $table) {
+        Schema::create('build_jatos_component', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('json');
-            $table->string('json_file');
+
+            $table->foreignIdFor(JatosComponent::class);
+            $table->foreignIdFor(Build::class);
+
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('components');
+        Schema::dropIfExists('build_jatos_component');
     }
 };

@@ -14,15 +14,16 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
-    <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+
     @livewireStyles
 </head>
 
 <body>
+
     <div class="wrapper">
         @auth
             @include('partials.sidebar')

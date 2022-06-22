@@ -9,6 +9,7 @@ class BuilderNav extends Component
     public $build;
     public $can_build = false;
     public $can_download = false;
+    public $new_title = '';
 
     protected $listeners = [
         'created' => 'created',
@@ -23,6 +24,12 @@ class BuilderNav extends Component
     public function builded()
     {
         $this->can_download = true;
+    }
+
+    public function new_component()
+    {
+        $this->emit('toggleNewComponentModal');
+        $this->emit('new_component', $this->new_title);
     }
 
     public function render()
