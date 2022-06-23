@@ -17,7 +17,7 @@ class Builder extends Component
     public $builded = false;
     public $building = false;
     public $components = [];
-    public $active_component = false;
+    public $active_component = false;    
 
     protected $listeners = [
         'save' => 'store',
@@ -34,6 +34,13 @@ class Builder extends Component
         {
             $this->build_id = $build->id;
             $build = Build::find($this->build_id);
+
+            foreach($build->jatos_components as $key => $component)
+            {
+                $this->addComponent($component->title);
+                $inputs = json_decode($component->json, true);
+                $this->components[$this->active_component]['inputs'] = $inputs;
+            }
         }
 
         $this->build_title = $build->title;
@@ -122,7 +129,6 @@ class Builder extends Component
 
     public function store()
     {
-
         $file = Str::replace(' ', '_', $this->build_title);
 
         $jas_json = $this->createJasJson($file);
@@ -151,9 +157,11 @@ class Builder extends Component
 
         foreach ($this->components as $component)
         {
+            $components_json = json_encode($component['inputs']);
+
             $jatos_component = new JatosComponent;
             $jatos_component->title = $component['title'];
-            $jatos_component->json = "null";
+            $jatos_component->json = $components_json;
             $jatos_component->json_file = "null";
             $jatos_component->save();
             $build->jatos_components()->attach($jatos_component->id);
@@ -169,7 +177,7 @@ class Builder extends Component
     {
         $file = Str::replace(' ', '_', $this->build_title);
 
-        $jas_json = $this->createJasJson();
+        $jas_json = $this->createJasJson($file);
 
         $randomString = "";
         for ($i = 0; $i < 18; $i++) {
@@ -189,6 +197,18 @@ class Builder extends Component
         $build->save();
 
         $build->users()->attach(Auth::id());
+
+        foreach ($this->components as $component)
+        {
+            $components_json = json_encode($component['inputs']);
+
+            $jatos_component = new JatosComponent;
+            $jatos_component->title = $component['title'];
+            $jatos_component->json = $components_json;
+            $jatos_component->json_file = "null";
+            $jatos_component->save();
+            $build->jatos_components()->sync($jatos_component->id);
+        }
 
         session()->flash('message', 'Project successfully updated.');
     }

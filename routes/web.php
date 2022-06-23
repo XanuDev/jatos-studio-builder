@@ -20,6 +20,7 @@ Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->nam
 
 Route::get('/builder', [App\Http\Controllers\BuilderController::class, 'index'])->name('builder.index');
 Route::get('/builder/show/{build}', [App\Http\Controllers\BuilderController::class, 'show'])->name('builder.show');
+Route::get('/builder/edit/{build}', [App\Http\Controllers\BuilderController::class, 'edit'])->name('builder.edit');
 Route::get('/builder/new', [App\Http\Controllers\BuilderController::class, 'new'])->name('builder.new');
 Route::post('/builder/store', [App\Http\Controllers\BuilderController::class, 'store'])->name('builder.store');
 Route::post('/builder/build', [App\Http\Controllers\BuilderController::class, 'build'])->name('builder.build');

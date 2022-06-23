@@ -5,9 +5,15 @@
         </div>
 
         <div class="col-auto ms-auto text-end mt-n1">
-            <button class="btn btn-outline-primary mx-2 my-2 my-sm-0" wire:click="$emit('save')">
-                Save
-            </button>
+            @if ($is_update)
+                <button class="btn btn-outline-primary mx-2 my-2 my-sm-0" wire:click="$emit('update')">
+                    Update
+                </button>
+            @else
+                <button class="btn btn-outline-primary mx-2 my-2 my-sm-0" wire:click="$emit('save')">
+                    Save
+                </button>
+            @endif
             <button class="btn btn-outline-secondary mx-2 my-2 my-sm-0" {{ $can_build ? '' : 'disabled' }}
                 wire:click="$emit('build')">
                 Build

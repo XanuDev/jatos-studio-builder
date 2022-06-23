@@ -10,11 +10,20 @@ class BuilderNav extends Component
     public $can_build = false;
     public $can_download = false;
     public $new_title = '';
-
+    public $is_update = false;
+    
     protected $listeners = [
         'created' => 'created',
         'builded' => 'builded',
     ];
+
+    public function mount($build)
+    {
+        if($build->id)
+        {
+            $this->is_update = true;
+        }
+    }
 
     public function created()
     {

@@ -36,4 +36,9 @@ class BuilderController extends Controller
     {
         return view('builder.builder', ['build' => $build]);
     }
+    
+    public function edit(Build $build)
+    {
+        return view('builder.builder', ['build' => $build]);
+    }
 }
