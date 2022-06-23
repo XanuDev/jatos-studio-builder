@@ -21,12 +21,22 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
+
+(function($) {
+    // $ works fine in here
+    // ...
+
+    // Uncaught TypeError: $(...).summernote is not a function
+    $('#summernote').summernote();
+
+})(window.jQuery);
+
 $(function () {
     // Activate tooltip
     $('[data-toggle="tooltip"]').tooltip();
 
     // Modals
-    window.livewire.on('toggleNewComponentModal', () =>
-        $('#newComponentModal').modal('toggle')
+    window.livewire.on('toggleAddComponentModal', () =>
+        $('#addComponentModal').modal('toggle')
     );
 });

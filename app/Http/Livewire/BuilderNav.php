@@ -26,10 +26,15 @@ class BuilderNav extends Component
         $this->can_download = true;
     }
 
-    public function new_component()
+    public function addComponent()
     {
-        $this->emit('toggleNewComponentModal');
-        $this->emit('new_component', $this->new_title);
+        $this->emit('toggleAddComponentModal');
+        $this->emit('add_component', $this->new_title);        
+    }
+
+    public function addInput($name)
+    {
+        $this->emit('add_input', $name);
     }
 
     public function render()

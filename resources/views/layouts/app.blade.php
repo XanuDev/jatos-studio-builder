@@ -9,21 +9,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
     <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
-
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-
     @livewireStyles
 </head>
 
 <body>
-
     <div class="wrapper">
         @auth
             @include('partials.sidebar')

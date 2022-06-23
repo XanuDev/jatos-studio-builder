@@ -20,7 +20,7 @@
     </div>
     <div class="row mb-2 mb-xl-3">
         <div class="col-auto d-none d-sm-block">
-            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newComponentModal">
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addComponentModal">
                 New Component
             </button>
         </div>
@@ -31,9 +31,13 @@
                     Add input
                 </button>
                 <ul class="dropdown-menu mt-5" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><a class="dropdown-item" href="#" wire:click="addInput('inputs.text')">Text</a></li>
+                    <li><a class="dropdown-item" href="#" wire:click="addInput('inputs.text-input')">Text
+                            Input</a></li>
+                    <li><a class="dropdown-item" href="#" wire:click="addInput('inputs.picture')">Picture</a></li>
+                    <li><a class="dropdown-item" href="#" wire:click="addInput('inputs.audio-recorder')">Audio
+                            Recorder</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -41,12 +45,12 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" wire:ignore.self id="newComponentModal" data-bs-backdrop="static" data-bs-keyboard="false"
-        tabindex="-1" aria-labelledby="newComponentModalLabel" aria-hidden="true">
+    <div class="modal fade" wire:ignore.self id="addComponentModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="addComponentModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="newComponentModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="addComponentModalLabel">Modal title</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -58,8 +62,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary"
-                        wire:click.prevent="new_component">Understood</button>
+                    <button type="button" class="btn btn-primary" wire:click.prevent="addComponent">Understood</button>
                 </div>
             </div>
         </div>

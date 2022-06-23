@@ -16,18 +16,16 @@ class Builder extends Component
     public $created = false;
     public $builded = false;
     public $building = false;
-    public $components = [
-        ['title' => 'prueba 1', 'active' => false],
-        ['title' => 'prueba 2', 'active' => true],
-        ['title' => 'prueba 3', 'active' => false],
-    ];
+    public $components = [];
+    public $active_component = false;
 
     protected $listeners = [
         'save' => 'store',
         'update' => 'update',
         'build' => 'build',
         'download' => 'download',
-        'new_component' => 'newComponent',
+        'add_component' => 'addComponent',
+        'add_input' => 'addInput'
     ];
 
     public function mount($build)
@@ -47,8 +45,11 @@ class Builder extends Component
         foreach ($this->components as $key => $component)
         {
             $active = false;
-
-            if($component['title'] == $title) $active = true;
+            if($component['title'] == $title)
+            {
+                $active = true;
+                $this->active_component = $key;
+            }
             $this->components[$key]['active'] = $active;
         }
     }
@@ -58,20 +59,26 @@ class Builder extends Component
         $this->setComponentActive($this->components[$key]['title']);
     }
 
-    public function newComponent($title)
+    public function addComponent($title)
     {
-        $this->components[] = ['title' => $title, 'active' => false];
-        $this->setComponentActive($title);
+        $this->components[] = ['title' => $title, 'active' => false, 'inputs' => []];        
+        $this->setComponentActive($title);        
+    }
+
+    public function addInput($name)
+    {        
+        $this->components[$this->active_component]['inputs'][] = ['type' => $name];                     
     }
 
     private function createJasJson($file)
     {
         $component_list = [];
         foreach ($this->components as $key => $component) {
+            $component_title = Str::replace(' ', '_', $component['title']);
             $component_list[] = [
                 'uuid' => Str::uuid()->toString(),
-                'title' => Str::replace(' ', '_', $component['title']),
-                'htmlFilePath' => 'index.html',
+                'title' => $component_title,
+                'htmlFilePath' => $component_title.'.html',
                 'reloadable' => true,
                 'active' => true,
                 'comments' => '',
