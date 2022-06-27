@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\{User, Build};
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -15,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('build_user', function (Blueprint $table) {
-            $table->id();            
-            
+            $table->id();
+
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Build::class);
-            
+
             $table->timestamps();
         });
     }

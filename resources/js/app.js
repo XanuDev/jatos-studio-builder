@@ -21,14 +21,12 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-
-(function($) {
+(function ($) {
     // $ works fine in here
     // ...
 
     // Uncaught TypeError: $(...).summernote is not a function
     $('#summernote').summernote();
-
 })(window.jQuery);
 
 $(function () {

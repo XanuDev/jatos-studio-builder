@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\App;
 
 class LangController extends Controller
 {
-        /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-    */
+     */
     public function index()
     {
         return view('lang');
@@ -21,10 +21,10 @@ class LangController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-    */
+     */
     public function change($locale)
     {
-        if (! in_array($locale, ['en', 'es', 'eu'])) {
+        if (!in_array($locale, ['en', 'es', 'eu'])) {
             abort(400);
         }
 

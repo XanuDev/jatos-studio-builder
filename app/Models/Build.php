@@ -13,7 +13,7 @@ class Build extends Model
         'title',
         'description',
         'jas',
-        'jas_file',
+        'jas_json_file_name',
         'zip_file',
     ];
 

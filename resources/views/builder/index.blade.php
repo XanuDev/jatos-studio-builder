@@ -28,7 +28,12 @@
                             <td><span class="badge bg-danger">Private</span></td>
                         @endif
                         <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-                        <td><a href="{{ route('builder.edit', $build) }}" class="btn btn-primary">Edit</a></td>
+                        <td>
+                            <a href="{{ route('builder.edit', $build) }}"><i class="align-middle text-primary"
+                                    data-feather="edit"></i></a>
+                            <a href="{{ route('builder.destroy', $build) }}"><i class="align-middle text-danger"
+                                    data-feather="trash-2"></i></a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

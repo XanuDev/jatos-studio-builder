@@ -5,6 +5,7 @@ export default createStore({
         inputs: [],
         position: 0,
         active: 'homeView',
+        json_inputs: '',
     },
     getters: {
         getInputs(state) {

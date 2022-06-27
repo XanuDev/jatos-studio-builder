@@ -35,14 +35,14 @@ services:
             JATOS_DB_DRIVER: com.mysql.cj.jdbc.Driver
             JATOS_JPA: mysqlPersistenceUnit
         #volumes:
-            #- 'jatos-assets:/opt/docker/study_assets_root'
-            # - 'jatos-uploads:/opt/docker/result_uploads'
-            #- 'jatos-db:/opt/docker/database'
+        #- 'jatos-assets:/opt/docker/study_assets_root'
+        # - 'jatos-uploads:/opt/docker/result_uploads'
+        #- 'jatos-db:/opt/docker/database'
     db:
         image: 'mariadb:10.8.2-rc'
         environment:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ROOT_HOST: "%"
+            MYSQL_ROOT_HOST: '%'
             MYSQL_DATABASE: '${DB_DATABASE}'
             MYSQL_USER: '${DB_USERNAME}'
             MYSQL_PASSWORD: '${DB_PASSWORD}'
@@ -57,7 +57,7 @@ services:
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         ports:
-            -  8080:80
+            - 8080:80
         environment:
             PMA_HOST: db
         networks:
@@ -67,8 +67,8 @@ networks:
         driver: bridge
 volumes:
     mariadb-db:
-      driver: local
+        driver: local
     jatos-assets:
-      driver: local
+        driver: local
     jatos-uploads:
-      driver: local
+        driver: local

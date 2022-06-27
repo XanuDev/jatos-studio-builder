@@ -32,18 +32,16 @@
         </div>
         <div class="col-auto">
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownInputsMenu"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     Add input
                 </button>
-                <ul class="dropdown-menu mt-5" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#" wire:click="addInput('inputs.text')">Text</a></li>
-                    <li><a class="dropdown-item" href="#" wire:click="addInput('inputs.text-input')">Text
-                            Input</a></li>
-                    <li><a class="dropdown-item" href="#" wire:click="addInput('inputs.picture')">Picture</a></li>
-                    <li><a class="dropdown-item" href="#" wire:click="addInput('inputs.audio-recorder')">Audio
-                            Recorder</a>
-                    </li>
+                <ul class="dropdown-menu mt-5" aria-labelledby="dropdownInputsMenu">
+                    @foreach (\App\Constants\Component::LIST as $key => $item)
+                        @continue(!$item['active'])
+                        <li><a class="dropdown-item" href="#"
+                                wire:click="addInput('inputs.{{ $key }}')">{{ $item['name'] }}</a></li>
+                    @endforeach
                 </ul>
             </div>
         </div>

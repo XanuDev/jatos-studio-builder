@@ -13,7 +13,6 @@ use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Illuminate\Support\Facades\Log;
 
-
 class BuildProject implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -38,19 +37,24 @@ class BuildProject implements ShouldQueue
     public function handle()
     {
         //https://symfony.com/doc/current/components/process.html
-        $build_process = new Process(['sh', storage_path() . '/app/base-build/build.sh'], null, [
-            'PROJECT_NAME' => $this->data['title'],
-            'JAS_FILE' => $this->data['jas'],
-            'COMPONENT_PAGES' => $this->data['pages']
-        ]);
-        $build_process->setWorkingDirectory(storage_path() . '/app/base-build/');
+        $build_process = new Process(
+            ['sh', storage_path() . '/app/base-build/build.sh'],
+            null,
+            [
+                'PROJECT_NAME' => $this->data['title'],
+                'FILE_NAME' => $this->data['file_name'],
+                'COMPONENT_PAGES' => $this->data['pages'],
+            ]
+        );
+        $build_process->setWorkingDirectory(
+            storage_path() . '/app/base-build/'
+        );
 
         $build_process->run();
-        if(!$build_process->isSuccessful()) {
-           throw new ProcessFailedException($build_process);
+        if (!$build_process->isSuccessful()) {
+            throw new ProcessFailedException($build_process);
         }
 
         Log::info($build_process->getOutput());
-
     }
 }

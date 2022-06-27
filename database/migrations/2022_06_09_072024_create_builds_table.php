@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -18,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->text('jas');
-            $table->string('jas_file');
+            $table->string('jas_json_file_name');
             $table->string('zip_file');
             $table->boolean('is_private')->default(false);
             $table->timestamps();

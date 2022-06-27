@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
-use App\Models\{ Build, User, JatosComponent };
+use App\Models\{Build, User, JatosComponent};
 use Livewire\Component;
 
 class Builder extends Component
@@ -17,7 +17,7 @@ class Builder extends Component
     public $builded = false;
     public $building = false;
     public $components = [];
-    public $active_component = false;    
+    public $active_component = false;
 
     protected $listeners = [
         'save' => 'store',
@@ -25,18 +25,16 @@ class Builder extends Component
         'build' => 'build',
         'download' => 'download',
         'add_component' => 'addComponent',
-        'add_input' => 'addInput'
+        'add_input' => 'addInput',
     ];
 
     public function mount($build)
     {
-        if($build->id)
-        {
+        if ($build->id) {
             $this->build_id = $build->id;
             $build = Build::find($this->build_id);
 
-            foreach($build->jatos_components as $key => $component)
-            {
+            foreach ($build->jatos_components as $key => $component) {
                 $this->addComponent($component->title);
                 $inputs = json_decode($component->json, true);
                 $this->components[$this->active_component]['inputs'] = $inputs;
@@ -49,11 +47,9 @@ class Builder extends Component
 
     private function setComponentActive($title)
     {
-        foreach ($this->components as $key => $component)
-        {
+        foreach ($this->components as $key => $component) {
             $active = false;
-            if($component['title'] == $title)
-            {
+            if ($component['title'] == $title) {
                 $active = true;
                 $this->active_component = $key;
             }
@@ -68,13 +64,30 @@ class Builder extends Component
 
     public function addComponent($title)
     {
-        $this->components[] = ['title' => $title, 'active' => false, 'inputs' => []];        
-        $this->setComponentActive($title);        
+        $this->components[] = [
+            'title' => $title,
+            'active' => false,
+            'inputs' => [],
+        ];
+        $this->setComponentActive($title);
+        $this->addInput('home');
     }
 
-    public function addInput($name)
-    {        
-        $this->components[$this->active_component]['inputs'][] = ['type' => $name];                     
+    public function addInput($type)
+    {
+        if (sizeof($this->components) < 1) {
+            return;
+        } //TODO: error msg
+        $count = sizeof($this->components[$this->active_component]['inputs']);
+        $input = \App\Constants\Component::LIST[$type];
+
+        $this->components[$this->active_component]['inputs'][] = [
+            'id' => $count,
+            'type' => $type,
+            'name' => $input['name'],
+            'text' => $input['name'],
+            'component' => $input['component'],
+        ];
     }
 
     private function createJasJson($file)
@@ -85,16 +98,16 @@ class Builder extends Component
             $component_list[] = [
                 'uuid' => Str::uuid()->toString(),
                 'title' => $component_title,
-                'htmlFilePath' => $component_title.'.html',
+                'htmlFilePath' => $component_title . '.html',
                 'reloadable' => true,
                 'active' => true,
                 'comments' => '',
-                'jsonData' => null
+                'jsonData' => null,
             ];
         }
 
         $jas = [
-            'version' => "3",
+            'version' => '3',
             'data' => [
                 'uuid' => Str::uuid()->toString(),
                 'title' => $this->build_title,
@@ -103,29 +116,28 @@ class Builder extends Component
                 'groupStudy' => false,
                 'linearStudy' => false,
                 'dirName' => $file,
-                'comments' => "",
+                'comments' => '',
                 'jsonData' => null,
-                'endRedirectUrl' => "",
+                'endRedirectUrl' => '',
                 'componentList' => $component_list,
-                'batchList' => array(
+                'batchList' => [
                     [
-                      'uuid' => Str::uuid()->toString(),
-                      'title' => 'Default',
-                      'active' => true,
-                      'maxActiveMembers' => null,
-                      'maxTotalMembers' => null,
-                      'maxTotalWorkers' => null,
-                      'allowedWorkerTypes' => null,
-                      'comments' => null,
-                      'jsonData' => null
-                    ]
-                )
+                        'uuid' => Str::uuid()->toString(),
+                        'title' => 'Default',
+                        'active' => true,
+                        'maxActiveMembers' => null,
+                        'maxTotalMembers' => null,
+                        'maxTotalWorkers' => null,
+                        'allowedWorkerTypes' => null,
+                        'comments' => null,
+                        'jsonData' => null,
+                    ],
+                ],
             ],
         ];
 
         return json_encode($jas);
     }
-
 
     public function store()
     {
@@ -133,21 +145,23 @@ class Builder extends Component
 
         $jas_json = $this->createJasJson($file);
 
-        $randomString = "";
+        $randomString = '';
         for ($i = 0; $i < 18; $i++) {
-            $randomString .= (string)rand(0, 9);
+            $randomString .= (string) rand(0, 9);
         }
 
-        $jas_file = $file. $randomString. '.jas';
-        $zip_file = $file. '.zip';
+        $file_name = $file . $randomString;
+        $jas_file = $file_name . '.jas';
+        $json_file = $file_name . '.json';
+        $zip_file = $file . '.zip';
 
-        Storage::put('jas/'.$jas_file, $jas_json);
+        Storage::put('jas/' . $jas_file, $jas_json);
 
-        $build = new Build;
+        $build = new Build();
         $build->title = $this->build_title;
         $build->description = $this->build_description;
         $build->jas = $jas_json;
-        $build->jas_file = $jas_file;
+        $build->jas_json_file_name = $file_name;
         $build->zip_file = $zip_file;
         $build->save();
 
@@ -155,23 +169,23 @@ class Builder extends Component
 
         $this->build_id = $build->id;
 
-        foreach ($this->components as $component)
-        {
+        foreach ($this->components as $component) {
             $components_json = json_encode($component['inputs']);
 
-            $jatos_component = new JatosComponent;
+            $jatos_component = new JatosComponent();
             $jatos_component->title = $component['title'];
             $jatos_component->json = $components_json;
-            $jatos_component->json_file = "null";
             $jatos_component->save();
             $build->jatos_components()->attach($jatos_component->id);
         }
+
+        $json_inputs = json_encode($this->components);
+        Storage::put('json/' . $json_file, $json_inputs);
 
         $this->emit('created');
 
         session()->flash('message', 'Project successfully created.');
     }
-
 
     public function update()
     {
@@ -179,36 +193,39 @@ class Builder extends Component
 
         $jas_json = $this->createJasJson($file);
 
-        $randomString = "";
+        $randomString = '';
         for ($i = 0; $i < 18; $i++) {
-            $randomString .= (string)rand(0, 9);
+            $randomString .= (string) rand(0, 9);
         }
 
-        $jas_file = $file. $randomString. '.jas';
-        $zip_file = $file. '.zip';
+        $file_name = $file . $randomString;
+        $jas_file = $file_name . '.jas';
+        $json_file = $file_name . '.json';
+        $zip_file = $file . '.zip';
 
-        Storage::put('jas/'.$jas_file, $jas_json);
+        Storage::put('jas/' . $jas_file, $jas_json);
 
         $build = Build::find($this->build_id);
 
         $build->jas = $jas_json;
-        $build->jas_file = $jas_file;
+        $build->jas_json_file_name = $file_name;
         $build->zip_file = $zip_file;
         $build->save();
 
         $build->users()->attach(Auth::id());
 
-        foreach ($this->components as $component)
-        {
+        foreach ($this->components as $component) {
             $components_json = json_encode($component['inputs']);
 
-            $jatos_component = new JatosComponent;
+            $jatos_component = new JatosComponent();
             $jatos_component->title = $component['title'];
             $jatos_component->json = $components_json;
-            $jatos_component->json_file = "null";
             $jatos_component->save();
             $build->jatos_components()->sync($jatos_component->id);
         }
+
+        $json_inputs = json_encode($this->components);
+        Storage::put('json/' . $json_file, $json_inputs);
 
         session()->flash('message', 'Project successfully updated.');
     }
@@ -225,7 +242,7 @@ class Builder extends Component
 
         $data = [
             'title' => $build->title,
-            'jas' => $build->jas_file,
+            'file_name' => $build->jas_json_file_name,
             'pages' => $pages,
         ];
 
@@ -242,7 +259,7 @@ class Builder extends Component
     {
         $build = Build::find($this->build_id);
 
-        return Storage::download('public/'.$build->zip_file);
+        return Storage::download('public/' . $build->zip_file);
     }
 
     public function render()

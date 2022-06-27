@@ -11,7 +11,7 @@ class BuilderNav extends Component
     public $can_download = false;
     public $new_title = '';
     public $is_update = false;
-    
+
     protected $listeners = [
         'created' => 'created',
         'builded' => 'builded',
@@ -19,8 +19,7 @@ class BuilderNav extends Component
 
     public function mount($build)
     {
-        if($build->id)
-        {
+        if ($build->id) {
             $this->is_update = true;
         }
     }
@@ -38,7 +37,7 @@ class BuilderNav extends Component
     public function addComponent()
     {
         $this->emit('toggleAddComponentModal');
-        $this->emit('add_component', $this->new_title);        
+        $this->emit('add_component', $this->new_title);
     }
 
     public function addInput($name)

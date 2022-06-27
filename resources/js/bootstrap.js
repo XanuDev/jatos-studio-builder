@@ -2,7 +2,7 @@ import _ from 'lodash';
 window._ = _;
 
 try {
-    window.$ = window.jQuery = require('jquery');    
+    window.$ = window.jQuery = require('jquery');
     //window.$ = window.jQuery = $;
     require('bootstrap');
     require('summernote');

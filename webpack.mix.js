@@ -13,18 +13,23 @@ let path = require('path');
  |
  */
 
- mix.webpackConfig({
+mix.webpackConfig({
     resolve: {
-        alias: { jQuery: path.resolve(__dirname, 'node_modules/jquery/dist/jquery.js') }
+        alias: {
+            jQuery: path.resolve(
+                __dirname,
+                'node_modules/jquery/dist/jquery.js'
+            ),
+        },
     },
     plugins: [
         // ProvidePlugin helps to recognize $ and jQuery words in code
         // And replace it with require('jquery')
         new webpack.ProvidePlugin({
             $: 'jquery',
-            jQuery: 'jquery'
-        })
-    ]
+            jQuery: 'jquery',
+        }),
+    ],
 });
 
 mix.js('resources/js/app.js', 'public/js')

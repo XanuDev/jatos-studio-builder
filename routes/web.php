@@ -15,16 +15,30 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' => false]);
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name(
+    'home'
+);
+Route::get('/about', [
+    App\Http\Controllers\HomeController::class,
+    'about',
+])->name('about');
 
-Route::get('/builder', [App\Http\Controllers\BuilderController::class, 'index'])->name('builder.index');
-Route::get('/builder/show/{build}', [App\Http\Controllers\BuilderController::class, 'show'])->name('builder.show');
-Route::get('/builder/edit/{build}', [App\Http\Controllers\BuilderController::class, 'edit'])->name('builder.edit');
-Route::get('/builder/new', [App\Http\Controllers\BuilderController::class, 'new'])->name('builder.new');
-Route::post('/builder/store', [App\Http\Controllers\BuilderController::class, 'store'])->name('builder.store');
-Route::post('/builder/build', [App\Http\Controllers\BuilderController::class, 'build'])->name('builder.build');
-Route::post('/builder/download', [App\Http\Controllers\BuilderController::class, 'download'])->name('builder.download');
+Route::resource(
+    'builder',
+    App\Http\Controllers\BuilderController::class
+)->except(['show']);
+Route::post('/builder/build', [
+    App\Http\Controllers\BuilderController::class,
+    'build',
+])->name('builder.build');
+Route::post('/builder/download', [
+    App\Http\Controllers\BuilderController::class,
+    'download',
+])->name('builder.download');
 
+Route::resource('user', App\Http\Controllers\UserController::class);
 
-Route::get('locale/change/{locale}', [App\Http\Controllers\LangController::class, 'change'])->name('changeLocale');
+Route::get('locale/change/{locale}', [
+    App\Http\Controllers\LangController::class,
+    'change',
+])->name('changeLocale');

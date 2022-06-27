@@ -22,10 +22,26 @@
                 </a>
             </li>
 
-            <li class="sidebar-item {{ set_active('builder/new') }}">
-                <a class="sidebar-link" href="{{ route('builder.new') }}">
+            <li class="sidebar-item {{ set_active('builder/create') }}">
+                <a class="sidebar-link" href="{{ route('builder.create') }}">
                     <i class="align-middle" data-feather="tool"></i>
                     <span class="align-middle">New Project</span>
+                </a>
+            </li>
+
+            <li class="sidebar-header">Users</li>
+
+            <li class="sidebar-item {{ set_active('users') }}">
+                <a class="sidebar-link" href="{{ route('user.index') }}">
+                    <i class="align-middle" data-feather="users"></i>
+                    <span class="align-middle">Users</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item {{ set_active('user/create') }}">
+                <a class="sidebar-link" href="{{ route('user.create') }}">
+                    <i class="align-middle" data-feather="user-plus"></i>
+                    <span class="align-middle">New User</span>
                 </a>
             </li>
 

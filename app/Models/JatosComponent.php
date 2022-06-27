@@ -9,11 +9,7 @@ class JatosComponent extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'title',
-        'json',
-        'json_file'
-    ];
+    protected $fillable = ['title', 'json', 'json_file'];
 
     public function builds()
     {

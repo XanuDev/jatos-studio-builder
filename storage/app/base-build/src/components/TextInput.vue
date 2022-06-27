@@ -1,9 +1,10 @@
 <template>
-    <div class="text-center">
-        <h3>{{ $store.state.inputs[$store.state.position].title }}</h3>
-        <p>{{ $store.state.inputs[$store.state.position].text }}</p>
-    </div>
-    <form>
+    <div>
+        <div class="text-center">
+            <h3>{{ $store.state.inputs[$store.state.position].title }}</h3>
+            <p>{{ $store.state.inputs[$store.state.position].text }}</p>
+        </div>
+
         <div class="form-group">
             <label for="text">Froga</label>
 
@@ -25,7 +26,7 @@
         <button class="btn btn-danger mt-2 mx-1" @click="onCancelButtonClick">
             Cancel
         </button>
-    </form>
+    </div>
 </template>
 <script setup>
 import { ref } from 'vue';
