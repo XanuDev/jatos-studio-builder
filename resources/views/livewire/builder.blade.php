@@ -16,12 +16,22 @@
     <div class="col">
         <div class="card">
             <div class="card-header">
-                {{ sizeof($components) ? $components[$active_component]['title'] : 'inputs' }}</div>
+                {{ sizeof($components) ? $components[$active_component]['title'] : 'No component selected' }}</div>
             <div class="card-body">
                 <div>
                     @if (session()->has('message'))
                         <div class="alert alert-success">
                             {{ session('message') }}
+                        </div>
+                    @endif
+                    @if (session()->has('warning'))
+                        <div class="alert alert-warning">
+                            {{ session('warning') }}
+                        </div>
+                    @endif
+                    @if (session()->has('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
                         </div>
                     @endif
                 </div>
@@ -42,15 +52,17 @@
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#input-collapse-{{ $key }}" aria-expanded="false"
                                         aria-controls="input-collapse-{{ $key }}">
-                                        {{ $input['type'] }}
+                                        {{ $input['name'] }}
                                     </button>
                                 </h2>
                                 <div id="input-collapse-{{ $key }}"
                                     class="accordion-collapse collapse bg-white"
                                     aria-labelledby="input-heading-{{ $key }}"
-                                    data-bs-parent="#buildAccordion">
+                                    data-bs-parent="#buildAccordion" wire:ignore.self>
                                     <div class="accordion-body">
-                                        @livewire($input['type'], [], key($key))
+                                        @include('inputs.' . $input['type'], [
+                                            'identifier' => $input['type'] . '-' . $key,
+                                        ])
                                     </div>
                                 </div>
                             </div>

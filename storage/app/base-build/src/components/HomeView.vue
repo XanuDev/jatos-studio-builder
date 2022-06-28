@@ -17,6 +17,10 @@
 </template>
 
 <script setup>
+import { useStore } from 'vuex';
+
+const store = useStore();
+
 const nextInput = (input) => {
     store.commit('setActive', input);
 };

@@ -17,9 +17,7 @@ import TextInput from './components/TextInput.vue';
 import AudioRecording from './components/AudioRecording.vue';
 import SubmitResult from './components/SubmitResult.vue';
 
-const inputs = require('../../../json/' +
-    process.env.VUE_APP_JSON_FILE +
-    '.json');
+const inputs = require('../../json/' + process.env.VUE_APP_JSON_FILE + '.json');
 
 const store = useStore();
 

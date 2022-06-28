@@ -31,22 +31,17 @@
             </button>
         </div>
         <div class="col-auto">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownInputsMenu"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    Add input
-                </button>
-                <ul class="dropdown-menu mt-5" aria-labelledby="dropdownInputsMenu">
-                    @foreach (\App\Constants\Component::LIST as $key => $item)
-                        @continue(!$item['active'])
-                        <li><a class="dropdown-item" href="#"
-                                wire:click="addInput('inputs.{{ $key }}')">{{ $item['name'] }}</a></li>
-                    @endforeach
-                </ul>
+            <a class="dropdown-toggle btn btn-secondary" href="#" data-bs-toggle="dropdown">Add Input
+            </a>
+            <div class="dropdown-menu dropdown-menu-end">
+                @foreach (\App\Constants\Component::LIST as $key => $item)
+                    @continue(!$item['active'])
+                    <a class="dropdown-item" href="#"
+                        wire:click="addInput('{{ $key }}')">{{ $item['name'] }}</a>
+                @endforeach
             </div>
         </div>
     </div>
-
 
     <!-- Modal -->
     <div class="modal fade" wire:ignore.self id="addComponentModal" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -54,7 +49,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addComponentModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="addComponentModalLabel">New Component</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -66,7 +61,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" wire:click.prevent="addComponent">Understood</button>
+                    <button type="button" class="btn btn-primary" wire:click.prevent="addComponent">Add</button>
                 </div>
             </div>
         </div>

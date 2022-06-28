@@ -37,6 +37,12 @@ class BuildProject implements ShouldQueue
     public function handle()
     {
         //https://symfony.com/doc/current/components/process.html
+
+        $images = '';
+        foreach ($this->data['images'] as $key => $image) {
+            $images .= $image;
+        }
+
         $build_process = new Process(
             ['sh', storage_path() . '/app/base-build/build.sh'],
             null,
@@ -44,6 +50,7 @@ class BuildProject implements ShouldQueue
                 'PROJECT_NAME' => $this->data['title'],
                 'FILE_NAME' => $this->data['file_name'],
                 'COMPONENT_PAGES' => $this->data['pages'],
+                'IMAGES' => $images
             ]
         );
         $build_process->setWorkingDirectory(

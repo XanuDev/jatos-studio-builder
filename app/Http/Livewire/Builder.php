@@ -6,10 +6,13 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\{Build, User, JatosComponent};
+use Livewire\WithFileUploads;
 use Livewire\Component;
 
 class Builder extends Component
 {
+    use WithFileUploads;
+
     public $build_id = false;
     public $build_title;
     public $build_description;
@@ -18,6 +21,7 @@ class Builder extends Component
     public $building = false;
     public $components = [];
     public $active_component = false;
+    public $images = [];
 
     protected $listeners = [
         'save' => 'store',
@@ -76,8 +80,10 @@ class Builder extends Component
     public function addInput($type)
     {
         if (sizeof($this->components) < 1) {
+            session()->flash('warning', 'No component selected');
             return;
-        } //TODO: error msg
+        }
+        
         $count = sizeof($this->components[$this->active_component]['inputs']);
         $input = \App\Constants\Component::LIST[$type];
 
@@ -85,7 +91,9 @@ class Builder extends Component
             'id' => $count,
             'type' => $type,
             'name' => $input['name'],
-            'text' => $input['name'],
+            'title' => '',
+            'content_type' => $input['content_type'],
+            'contents' => '',
             'component' => $input['component'],
         ];
     }
@@ -170,6 +178,14 @@ class Builder extends Component
         $this->build_id = $build->id;
 
         foreach ($this->components as $component) {
+
+            foreach($component['inputs'] as $key => $input) {                
+                if($input['content_type'] == 'img')
+                {
+                    $this->images[] = $component['inputs'][$key]['contents'] = $input['contents']->store('img');
+                }                
+            }
+            
             $components_json = json_encode($component['inputs']);
 
             $jatos_component = new JatosComponent();
@@ -244,6 +260,7 @@ class Builder extends Component
             'title' => $build->title,
             'file_name' => $build->jas_json_file_name,
             'pages' => $pages,
+            'images' => $this->images,
         ];
 
         \App\Jobs\BuildProject::dispatch($data);
