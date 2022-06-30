@@ -1,0 +1,74 @@
+version: '3'
+
+services:
+    app:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        image: php-8.1/app
+        volumes:
+            - './:/var/www/html'
+            - './devops/php.ini:/usr/local/etc/php/conf.d/local.ini'
+        tty: true
+        networks:
+            - jatosnet
+    nginx:
+        image: nginx:alpine
+        ports:
+            - '80:80'
+        tty: true
+        volumes:
+            - './:/var/www/html'
+            - './devops/nginx.conf:/etc/nginx/conf.d/default.conf'
+        networks:
+            - jatosnet
+    jatos:
+        image: jatos/jatos:3.7.4
+        ports:
+            - 9000:9000
+        networks:
+            - jatosnet
+        environment:
+            JATOS_DB_URL: 'jdbc:mysql://${DB_HOST}/jatos?characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC'
+            JATOS_DB_USERNAME: '${DB_USERNAME}'
+            JATOS_DB_PASSWORD: '${DB_PASSWORD}'
+            JATOS_DB_DRIVER: com.mysql.cj.jdbc.Driver
+            JATOS_JPA: mysqlPersistenceUnit
+        #volumes:
+        #- 'jatos-assets:/opt/docker/study_assets_root'
+        # - 'jatos-uploads:/opt/docker/result_uploads'
+        #- 'jatos-db:/opt/docker/database'
+    db:
+        image: 'mariadb:10.8.2-rc'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        volumes:
+            - 'mariadb-db:/var/lib/mysql'
+            - './devops/my.cnf:/etc/mysql/my.cnf'
+            - './devops/init:/docker-entrypoint-initdb.d'
+        networks:
+            - jatosnet
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - 8080:80
+        environment:
+            PMA_HOST: db
+        networks:
+            - jatosnet
+networks:
+    jatosnet:
+        driver: bridge
+volumes:
+    mariadb-db:
+        driver: local
+    jatos-assets:
+        driver: local
+    jatos-uploads:
+        driver: local
