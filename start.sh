@@ -2,10 +2,15 @@
 
 if [ -f ./.env ]; then
     source ./.env
-    export APP_DEBUG=${APP_DEBUG:-false}
+    export APP_DEBUG=${APP_DEBUG:-''}
+    export APP_KEY=${APP_KEY:-''}
 else
-    echo ".env file not found." >&2
-    exit 1
+    if [ -f ./.env.example ]; then
+        cp .env.example .env
+    else
+        echo ".env file not found." >&2
+        exit 1
+    fi
 fi
 
 if ! docker info > /dev/null 2>&1; then
@@ -31,9 +36,13 @@ if [ ! -d "./node_modules" ]; then
 fi
 
 if [ ! -f ./public/css/app.css ] || [ ! -f ./public/js/app.js ]; then
-    if [ APP_DEBUG ]; then
+    if [ $APP_DEBUG ]; then
         docker-compose exec app npm run dev
     else
         docker-compose exec app npm run prod
     fi
+fi
+
+if [ ! $APP_KEY ]; then    
+    docker-compose exec app php artisan key:generate
 fi
