@@ -5,7 +5,7 @@ export default createStore({
         inputs: null,
         position: 0,
         totalComponents: 0,
-        active: 'homeView',
+        active: 'HomeView',
         json_inputs: '',
     },
     getters: {

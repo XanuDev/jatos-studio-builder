@@ -7,7 +7,7 @@ fi
 rm -rf dist
 for image in $IMAGES
 do
-    cp ../$image ./src/assets/img/
+    cp ../$image ./assets/img/
 done
 
 BUILD_PAGES=$COMPONENT_PAGES VUE_APP_JSON_FILE=$FILE_NAME npm run build -- --dest $PROJECT_NAME
@@ -18,5 +18,5 @@ rm -rf $PROJECT_NAME
 
 for image in $IMAGES
 do
-    rm ./src/assets/$image
+    rm ./assets/$image
 done

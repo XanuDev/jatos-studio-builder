@@ -3,7 +3,7 @@
         <h1 class="my-4">
             {{ input.title }}
         </h1>
-        <img src="{{ input.contents }}" alt="" />
+        <img :src="input.contents" alt="" />
         <button class="btn btn-primary" @click="emit('nextInput')">Next</button>
     </div>
 </template>

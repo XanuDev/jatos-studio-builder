@@ -89,7 +89,7 @@ class Builder extends Component
             session()->flash('warning', 'No component selected');
             return;
         }
-        
+
         $count = sizeof($this->components[$this->active_component]['inputs']);
         $input = \App\Constants\Component::LIST[$type];
 
@@ -183,16 +183,17 @@ class Builder extends Component
 
         $this->build_id = $build->id;
 
-        foreach ($this->components as $component) {
+        foreach ($this->components as $c_key => $component) {
 
-            foreach($component['inputs'] as $key => $input) {                
+            foreach($component['inputs'] as $i_key => $input) {
                 if($input['content_type'] == 'img')
                 {
-                    $this->images[] = $component['inputs'][$key]['contents'] = $input['contents']->store('img');
-                }                
+                    $this->images[] = $this->components[$c_key]['inputs'][$i_key]['contents'] = $input['contents']->store('img');
+                }
             }
-            
+
             $components_json = json_encode($component['inputs']);
+
 
             $jatos_component = new JatosComponent();
             $jatos_component->title = $component['title'];
@@ -202,6 +203,7 @@ class Builder extends Component
         }
 
         $json_inputs = json_encode($this->components);
+
         Storage::put('json/' . $json_file, $json_inputs);
 
         $this->emit('created');

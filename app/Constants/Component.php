@@ -25,7 +25,7 @@ class Component
         ],
         'picture' => [
             'name' => 'Picture',
-            'component' => 'Picture',
+            'component' => 'ImageInput',
             'content_type' => 'img',
             'active' => true,
         ],
