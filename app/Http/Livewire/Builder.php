@@ -22,6 +22,7 @@ class Builder extends Component
     public $components = [];
     public $active_component = false;
     public $images = [];
+    public $preload = false;
 
     protected $listeners = [
         'save' => 'store',
@@ -37,7 +38,7 @@ class Builder extends Component
         if ($build->id) {
             $this->build_id = $build->id;
             $build = Build::find($this->build_id);
-
+            $this->preload = true;
             foreach ($build->jatos_components as $key => $component) {
                 $this->addComponent($component->title);
                 $inputs = json_decode($component->json, true);
@@ -47,6 +48,11 @@ class Builder extends Component
 
         $this->build_title = $build->title;
         $this->build_description = $build->description;
+    }
+
+    public function hydrate()
+    {
+        $this->preload = false;
     }
 
     private function setComponentActive($title)

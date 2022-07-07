@@ -1,0 +1,26 @@
+[
+    {
+        "title": "test",
+        "active": true,
+        "inputs": [
+            {
+                "id": 0,
+                "type": "home",
+                "name": "Home",
+                "title": "title 0",
+                "content_type": "text",
+                "contents": "content 0",
+                "component": "HomeView"
+            },
+            {
+                "id": 1,
+                "type": "text-input",
+                "name": "Text Input",
+                "title": "title1 ",
+                "content_type": "text",
+                "contents": "content 1",
+                "component": "TextInput"
+            }
+        ]
+    }
+]

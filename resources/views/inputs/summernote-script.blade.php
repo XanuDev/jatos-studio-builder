@@ -1,14 +1,32 @@
-<script>
-    (function($) {
-        $('#' + @js($identifier)).summernote({
-            height: 150,
-            callbacks: {
-                onChange: function(contents, $editable) {
-                    @this.set(
-                        'components.{{ $active_component }}.inputs.{{ $key }}.contents',
-                        contents);
-                }
-            }
-        });
-    })(window.jQuery);
-</script>
+    <script>
+        if (@js($preload)) {
+            document.addEventListener("livewire:load", function(event) {
+                (function($) {
+                    $('#' + @js($identifier)).summernote({
+                        height: 150,
+                        callbacks: {
+                            onChange: function(contents, $editable) {
+                                @this.set(
+                                    'components.{{ $active_component }}.inputs.{{ $key }}.contents',
+                                    contents);
+                            }
+                        }
+                    });
+                })(window.jQuery);
+            });
+
+        } else {
+            (function($) {
+                $('#' + @js($identifier)).summernote({
+                    height: 150,
+                    callbacks: {
+                        onChange: function(contents, $editable) {
+                            @this.set(
+                                'components.{{ $active_component }}.inputs.{{ $key }}.contents',
+                                contents);
+                        }
+                    }
+                });
+            })(window.jQuery);
+        }
+    </script>

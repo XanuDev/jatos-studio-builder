@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="text-center">
-            <h3>{{ $store.state.inputs[$store.state.position].title }}</h3>
-            <p>{{ $store.state.inputs[$store.state.position].text }}</p>
+            <h3>{{ input.title }}</h3>
+            <p>{{ input.contents }}</p>
         </div>
 
         <div class="form-group">
@@ -19,7 +19,7 @@
         <button
             type="submit"
             class="btn btn-primary mt-2 mx-1"
-            @click="onNextButtonClick"
+            @click="emit('nextInput')"
         >
             Next
         </button>
@@ -29,19 +29,28 @@
     </div>
 </template>
 <script setup>
-import { ref } from 'vue';
+import { useStore } from 'vuex';
+import { onBeforeMount, defineEmits, ref } from 'vue';
+
+const emit = defineEmits(['nextInput']);
+const store = useStore();
 
 const textInputValue = ref('');
 
-const onNextButtonClick = () => {
-    var resultData = {
-        name: textInputValue.value,
-    };
-    // eslint-disable-next-line
-    jatos.addJatosIds(resultData);
-    // eslint-disable-next-line
-    jatos.startNextComponent(resultData);
-};
+const input = ref(null);
+onBeforeMount(() => {
+    input.value = store.getters.getInputByID(store.state.position);
+});
+
+// const onNextButtonClick = () => {
+//     var resultData = {
+//         name: textInputValue.value,
+//     };
+//     // eslint-disable-next-line
+//     jatos.addJatosIds(resultData);
+//     // eslint-disable-next-line
+//     jatos.startNextComponent(resultData);
+// };
 
 const onCancelButtonClick = () => {
     // eslint-disable-next-line

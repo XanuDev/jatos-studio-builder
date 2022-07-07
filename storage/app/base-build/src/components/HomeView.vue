@@ -1,16 +1,12 @@
 <template>
     <div class="container text-center">
         <h1 class="my-4">
-            {{ $store.state.inputs[$store.state.position].text }}
+            {{ input.title }}
         </h1>
-        <button
-            class="btn btn-primary"
-            @click="
-                nextInput(
-                    $store.state.inputs[$store.state.position + 1].component
-                )
-            "
-        >
+        <p>
+            {{ input.contents }}
+        </p>
+        <button class="btn btn-primary" @click="emit('nextInput')">
             Start
         </button>
     </div>
@@ -18,10 +14,13 @@
 
 <script setup>
 import { useStore } from 'vuex';
+import { onBeforeMount, defineEmits, ref } from 'vue';
 
+const emit = defineEmits(['nextInput']);
 const store = useStore();
 
-const nextInput = (input) => {
-    store.commit('setActive', input);
-};
+const input = ref(null);
+onBeforeMount(() => {
+    input.value = store.getters.getInputByID(store.state.position);
+});
 </script>
