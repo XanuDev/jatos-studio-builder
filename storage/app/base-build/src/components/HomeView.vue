@@ -3,20 +3,16 @@
         <h1 class="my-4">
             {{ input.title }}
         </h1>
-        <p>
-            {{ input.contents }}
-        </p>
-        <button class="btn btn-primary" @click="emit('nextInput')">
-            Start
-        </button>
+        <div v-html="input.contents"></div>
+        <ButtonsComponent />
     </div>
 </template>
 
 <script setup>
 import { useStore } from 'vuex';
-import { onBeforeMount, defineEmits, ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
+import ButtonsComponent from './ButtonsComponent.vue';
 
-const emit = defineEmits(['nextInput']);
 const store = useStore();
 
 const input = ref(null);

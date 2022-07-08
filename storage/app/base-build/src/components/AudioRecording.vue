@@ -1,60 +1,30 @@
 <template>
     <div class="container text-center">
-        <h1 class="my-4">Audio Recorder</h1>
         <div class="wrapper">
-            <header>
-                <h1>Web dictaphone</h1>
-            </header>
-
             <section class="main-controls">
                 <canvas class="visualizer" height="60px"></canvas>
                 <div id="buttons">
                     <button class="record">Record</button>
                     <button class="stop">Stop</button>
-                    <button class="end" onclick="jatos.endStudy()">End</button>
                 </div>
             </section>
 
             <section class="sound-clips"></section>
         </div>
-
-        <label for="toggle">❔</label>
-        <input type="checkbox" id="toggle" />
-        <aside>
-            <h2>Information</h2>
-
-            <p>
-                Web dictaphone is built using
-                <a
-                    href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator.getUserMedia"
-                    >getUserMedia</a
-                >
-                and the
-                <a
-                    href="https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder_API"
-                    >MediaRecorder API</a
-                >, which provides an easier way to capture Media streams.
-            </p>
-
-            <p>
-                Icon courtesy of
-                <a href="http://findicons.com/search/microphone">Find Icons</a>.
-                Thanks to <a href="http://soledadpenades.com/">Sole</a> for the
-                Oscilloscope code!
-            </p>
-        </aside>
+        <ButtonsComponent />
     </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import ButtonsComponent from './ButtonsComponent.vue';
 
 let record;
 let stop;
 let soundClips;
 let canvas;
 let mainSection;
-let canvasCtx;
+const canvasCtx = ref(null);
 let audioCtx;
 
 const mainFunction = () => {
@@ -209,13 +179,13 @@ const visualize = (stream) => {
 
         analyser.getByteTimeDomainData(dataArray);
 
-        canvasCtx.fillStyle = 'rgb(200, 200, 200)';
-        canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+        canvasCtx.value.fillStyle = 'rgb(200, 200, 200)';
+        canvasCtx.value.fillRect(0, 0, WIDTH, HEIGHT);
 
-        canvasCtx.lineWidth = 2;
-        canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
+        canvasCtx.value.lineWidth = 2;
+        canvasCtx.value.strokeStyle = 'rgb(0, 0, 0)';
 
-        canvasCtx.beginPath();
+        canvasCtx.value.beginPath();
 
         let sliceWidth = (WIDTH * 1.0) / bufferLength;
         let x = 0;
@@ -225,16 +195,16 @@ const visualize = (stream) => {
             let y = (v * HEIGHT) / 2;
 
             if (i === 0) {
-                canvasCtx.moveTo(x, y);
+                canvasCtx.value.moveTo(x, y);
             } else {
-                canvasCtx.lineTo(x, y);
+                canvasCtx.value.lineTo(x, y);
             }
 
             x += sliceWidth;
         }
 
-        canvasCtx.lineTo(canvas.width, canvas.height / 2);
-        canvasCtx.stroke();
+        canvasCtx.value.lineTo(canvas.width, canvas.height / 2);
+        canvasCtx.value.stroke();
     }
 };
 

@@ -15,7 +15,7 @@
                 </button>
             @endif
             <button class="btn btn-outline-secondary mx-2 my-2 my-sm-0" {{ $can_build ? '' : 'disabled' }}
-                wire:click="$emit('build')">
+                wire:click="$emit('build')" id="btnBuild">
                 Build
             </button>
             <button class="btn btn-outline-success my-2 my-sm-0" {{ $can_download ? '' : 'disabled' }}

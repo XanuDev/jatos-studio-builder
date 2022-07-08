@@ -7,6 +7,7 @@ export default createStore({
         totalComponents: 0,
         active: 'HomeView',
         json_inputs: '',
+        isLast: false,
     },
     getters: {
         getInputs(state) {
@@ -33,6 +34,7 @@ export default createStore({
         },
         setPosition(state, position) {
             state.position = position;
+            state.isLast = state.totalComponents > position ? true : false;
         },
         setActive(state, active) {
             state.active = active;

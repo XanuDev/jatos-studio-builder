@@ -277,6 +277,8 @@ class Builder extends Component
 
         $this->building = false;
 
+        $this->dispatchBrowserEvent('finish-build');
+
         session()->flash('message', 'Project successfully builded.');
     }
 

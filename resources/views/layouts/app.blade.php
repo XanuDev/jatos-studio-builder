@@ -13,6 +13,7 @@
     <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @livewireStyles
+    @stack('styles')
 </head>
 
 <body>

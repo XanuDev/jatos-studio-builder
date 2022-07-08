@@ -6,13 +6,14 @@
         <p>
             {{ input.contents }}
         </p>
-        <button class="btn btn-primary" @click="nextInput()">Next</button>
+        <ButtonsComponent />
     </div>
 </template>
 
 <script setup>
 import { useStore } from 'vuex';
 import { onBeforeMount, ref } from 'vue';
+import ButtonsComponent from './ButtonsComponent.vue';
 
 const store = useStore();
 
@@ -20,9 +21,4 @@ const input = ref(null);
 onBeforeMount(() => {
     input.value = store.getters.getInputByID(store.state.position);
 });
-
-const nextInput = () => {
-    let next = store.getters.getInputByID(store.state.position + 1);
-    store.commit('setActive', next.component);
-};
 </script>

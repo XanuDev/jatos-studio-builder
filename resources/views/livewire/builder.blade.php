@@ -1,3 +1,19 @@
+@push('styles')
+    <style>
+        .bd-building-modal-lg .modal-dialog {
+            display: table;
+            position: relative;
+            margin: 0 auto;
+            top: calc(50% - 24px);
+        }
+
+        .bd-building-modal-lg .modal-dialog .modal-content {
+            background-color: transparent;
+            border: none;
+        }
+    </style>
+@endpush
+
 <div class="row">
     <div class="col-2 ml-2">
         <div class="card">
@@ -35,15 +51,6 @@
                         </div>
                     @endif
                 </div>
-                @if ($building)
-                    <div class="text-center">
-                        <span>Building...</span>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-                        </div>
-                    </div>
-                @endif
                 <div class="accordion" id="buildAccordion">
                     @if (sizeof($components))
                         @foreach ($components[$active_component]['inputs'] as $key => $input)
@@ -72,4 +79,31 @@
             </div>
         </div>
     </div>
+    <div class="modal fade bd-building-modal-lg" wire:ignore.self id="buildingModal" data-bs-backdrop="static"
+        data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" style="width: 480px">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+@push('scripts')
+    <script>
+        document.addEventListener("livewire:load", function(event) {
+            (function($) {
+                window.addEventListener('finish-build', event => {
+                    $('#buildingModal').modal('hide');
+                })
+
+                $('#btnBuild').click(() => {
+                    $('#buildingModal').modal('show');
+                })
+            })(window.jQuery);
+        });
+    </script>
+@endpush

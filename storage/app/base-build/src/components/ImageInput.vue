@@ -3,16 +3,16 @@
         <h1 class="my-4">
             {{ input.title }}
         </h1>
-        <img :src="input.contents" alt="" />
-        <button class="btn btn-primary" @click="emit('nextInput')">Next</button>
+        <img :src="input.contents" alt="" class="img-fluid" />
+        <ButtonsComponent />
     </div>
 </template>
 
 <script setup>
 import { useStore } from 'vuex';
-import { onBeforeMount, defineEmits, ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
+import ButtonsComponent from './ButtonsComponent.vue';
 
-const emit = defineEmits(['nextInput']);
 const store = useStore();
 
 const input = ref(null);
