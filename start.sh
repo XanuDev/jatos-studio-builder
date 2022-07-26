@@ -30,6 +30,7 @@ if [ ! -d "./vendor" ]; then
 fi
 
 docker-compose exec app php artisan migrate --seed
+docker-compose exec app php artisan storage:link
 
 if [ ! -d "./node_modules" ]; then
     docker-compose exec app npm install

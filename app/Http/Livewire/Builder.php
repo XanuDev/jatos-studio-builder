@@ -187,13 +187,12 @@ class Builder extends Component
 
             foreach($component['inputs'] as $i_key => $input) {
                 if($input['content_type'] == 'img')
-                {
-                    $this->images[] = $this->components[$c_key]['inputs'][$i_key]['contents'] = $input['contents']->store('img');
+                {                    
+                    $this->images[] = $this->components[$c_key]['inputs'][$i_key]['contents'] = $input['contents']->store('img', 'public');                    
                 }
             }
-
-            $components_json = json_encode($component['inputs']);
-
+            
+            $components_json = json_encode($this->components[$c_key]['inputs']);
 
             $jatos_component = new JatosComponent();
             $jatos_component->title = $component['title'];

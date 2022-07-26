@@ -1,3 +1,6 @@
+<div wire:ignore>
+    <div id="{{ $identifier }}">{!! $components[$active_component]['inputs'][$key]['contents'] !!}</div>
+</div>
     <script>
         if (@js($preload)) {
             document.addEventListener("livewire:load", function(event) {
@@ -12,6 +15,7 @@
                             }
                         }
                     });
+                    
                 })(window.jQuery);
             });
 
@@ -27,6 +31,7 @@
                         }
                     }
                 });
+                console.log('components.{{ $active_component }}.inputs.{{ $key }}.contents')
             })(window.jQuery);
         }
     </script>
