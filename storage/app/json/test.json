@@ -19,7 +19,7 @@
                 "title": "title1 ",
                 "content_type": "text",
                 "contents": "content 1",
-                "component": "AudioRecording"
+                "component": "TextInput"
             }
         ]
     }

@@ -8,7 +8,10 @@
             Cancel
         </button>
 
-        <button class="btn btn-primary mt-2 mx-1" @click="nextInput">
+        <button
+            class="btn btn-primary mt-2 mx-1"
+            @click="nextInput(props.resultDataObject, props.resultFile)"
+        >
             <span v-if="$store.state.isLast"> Finish </span>
             <span v-else> Next </span>
         </button>
@@ -16,10 +19,31 @@
 </template>
 <script setup>
 import { useStore } from 'vuex';
+import { defineProps } from 'vue';
+import { isProxy } from 'vue';
+
+const props = defineProps({
+    resultDataObject: Object,
+    resultFile: String,
+});
 
 const store = useStore();
 
-const nextInput = () => {
+const nextInput = (resultDataObject, file) => {
+    if (resultDataObject) {
+        if (isProxy(resultDataObject)) {
+            resultDataObject = JSON.parse(JSON.stringify(resultDataObject));
+        }
+        console.log(resultDataObject);
+        if (file) {
+            // eslint-disable-next-line
+            jatos.uploadResultFile(resultDataObject, file).done(() => {});
+        } else {
+            // eslint-disable-next-line
+            jatos.submitResultData(resultDataObject);
+        }
+    }
+
     let newPos = store.state.position + 1;
     if (newPos > store.state.totalComponents - 1) {
         // eslint-disable-next-line

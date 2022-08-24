@@ -15,7 +15,7 @@
                 v-model="textInputValue"
             />
         </div>
-        <ButtonsComponent />
+        <ButtonsComponent :resultDataObject="result" />
     </div>
 </template>
 <script setup>
@@ -26,6 +26,7 @@ import ButtonsComponent from './ButtonsComponent.vue';
 const store = useStore();
 
 const textInputValue = ref('');
+const result = ref({ text: textInputValue });
 
 const input = ref(null);
 onBeforeMount(() => {
