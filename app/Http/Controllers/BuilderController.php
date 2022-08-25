@@ -93,4 +93,9 @@ class BuilderController extends Controller
     {
         //
     }
+
+    public function import()
+    {
+        return view('builder.import');
+    }
 }
