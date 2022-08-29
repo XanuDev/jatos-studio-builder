@@ -94,6 +94,14 @@ class BuilderController extends Controller
         //
     }
 
+    public function build_import(Request $request)
+    {
+        $build = new Build();
+        $build->title = $request->title;
+        $build->description = $request->description;
+        return view('builder.builder', ['build' => $build, 'json' => $request->json]);
+    }
+
     public function import()
     {
         return view('builder.import');

@@ -1,17 +1,17 @@
 @push('styles')
-    <style>
-        .bd-building-modal-lg .modal-dialog {
-            display: table;
-            position: relative;
-            margin: 0 auto;
-            top: calc(50% - 24px);
-        }
+<style>
+    .bd-building-modal-lg .modal-dialog {
+        display: table;
+        position: relative;
+        margin: 0 auto;
+        top: calc(50% - 24px);
+    }
 
-        .bd-building-modal-lg .modal-dialog .modal-content {
-            background-color: transparent;
-            border: none;
-        }
-    </style>
+    .bd-building-modal-lg .modal-dialog .modal-content {
+        background-color: transparent;
+        border: none;
+    }
+</style>
 @endpush
 
 <div class="row">
@@ -21,9 +21,9 @@
             <div class="card-body">
                 <div class="list-group">
                     @foreach ($components as $key => $component)
-                        <a href="#" wire:click="setActive({{ $key }})"
-                            class="list-group-item list-group-item-action {{ $component['active'] ? 'active' : '' }}"
-                            {{ $component['active'] ? 'aria-current="true"' : '' }}>{{ $component['title'] }}</a>
+                    <a href="#" wire:click="setActive({{ $key }})"
+                        class="list-group-item list-group-item-action {{ $component['active'] ? 'active' : '' }}" {{
+                        $component['active'] ? 'aria-current="true"' : '' }}>{{ $component['title'] }}</a>
                     @endforeach
                 </div>
             </div>
@@ -34,46 +34,29 @@
             <div class="card-header">
                 {{ sizeof($components) ? $components[$active_component]['title'] : 'No component selected' }}</div>
             <div class="card-body">
-                <div>
-                    @if (session()->has('message'))
-                        <div class="alert alert-success">
-                            {{ session('message') }}
-                        </div>
-                    @endif
-                    @if (session()->has('warning'))
-                        <div class="alert alert-warning">
-                            {{ session('warning') }}
-                        </div>
-                    @endif
-                    @if (session()->has('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-                </div>
+                @include('layouts.messages')
                 <div class="accordion" id="buildAccordion">
                     @if (sizeof($components))
-                        @foreach ($components[$active_component]['inputs'] as $key => $input)
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="input-heading-{{ $key }}">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#input-collapse-{{ $key }}" aria-expanded="false"
-                                        aria-controls="input-collapse-{{ $key }}">
-                                        {{ $input['name'] }}
-                                    </button>
-                                </h2>
-                                <div id="input-collapse-{{ $key }}"
-                                    class="accordion-collapse collapse bg-white"
-                                    aria-labelledby="input-heading-{{ $key }}"
-                                    data-bs-parent="#buildAccordion" wire:ignore.self>
-                                    <div class="accordion-body">
-                                        @include('inputs.' . $input['type'], [
-                                            'identifier' => $input['type'] . '-' . $key,
-                                        ])
-                                    </div>
-                                </div>
+                    @foreach ($components[$active_component]['inputs'] as $key => $input)
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="input-heading-{{ $key }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#input-collapse-{{ $key }}" aria-expanded="false"
+                                aria-controls="input-collapse-{{ $key }}">
+                                {{ $input['name'] }}
+                            </button>
+                        </h2>
+                        <div id="input-collapse-{{ $key }}" class="accordion-collapse collapse bg-white"
+                            aria-labelledby="input-heading-{{ $key }}" data-bs-parent="#buildAccordion"
+                            wire:ignore.self>
+                            <div class="accordion-body">
+                                @include('inputs.' . $input['type'], [
+                                'identifier' => $input['type'] . '-' . $key,
+                                ])
                             </div>
-                        @endforeach
+                        </div>
+                    </div>
+                    @endforeach
                     @endif
                 </div>
             </div>
@@ -93,8 +76,8 @@
 
 </div>
 @push('scripts')
-    <script>
-        document.addEventListener("livewire:load", function(event) {
+<script>
+    document.addEventListener("livewire:load", function(event) {
             (function($) {
                 window.addEventListener('finish-build', event => {
                     $('#buildingModal').modal('hide');
@@ -105,5 +88,5 @@
                 })
             })(window.jQuery);
         });
-    </script>
+</script>
 @endpush

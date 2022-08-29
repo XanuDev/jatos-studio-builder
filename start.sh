@@ -2,7 +2,7 @@
 
 if [ -f ./.env ]; then
     source ./.env
-    export APP_DEBUG=${APP_DEBUG:-''}
+    export APP_DEBUG=${APP_DEBUG:-'true'}
     export APP_KEY=${APP_KEY:-''}
 else
     if [ -f ./.env.example ]; then
@@ -29,8 +29,14 @@ if [ ! -d "./vendor" ]; then
     docker-compose exec app composer install
 fi
 
+sleep 5 # Wait for mysql to be ready to accept connections
+
 docker-compose exec app php artisan migrate --seed
-docker-compose exec app php artisan storage:link
+
+if [ ! -h "./public/storage" ]; then
+    docker-compose exec app php artisan storage:link  
+fi
+
 
 if [ ! -d "./node_modules" ]; then
     docker-compose exec app npm install

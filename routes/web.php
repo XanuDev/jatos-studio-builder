@@ -19,6 +19,7 @@ Route::get('/',                     [App\Http\Controllers\HomeController::class,
 Route::get('/about',                [App\Http\Controllers\HomeController::class,    'about'])->name('about');
 Route::post('/builder/build',       [App\Http\Controllers\BuilderController::class, 'build'])->name('builder.build');
 Route::get('/builder/import',       [App\Http\Controllers\BuilderController::class, 'import'])->name('builder.import');
+Route::post('/builder/import',       [App\Http\Controllers\BuilderController::class, 'build_import'])->name('builder.import');
 Route::post('/builder/download',    [App\Http\Controllers\BuilderController::class, 'download'])->name('builder.download');
 
 Route::resource('builder',  App\Http\Controllers\BuilderController::class)->except(['show']);

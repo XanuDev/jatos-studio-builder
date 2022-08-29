@@ -33,8 +33,14 @@ class Builder extends Component
         'add_input' => 'addInput',
     ];
 
-    public function mount($build)
-    {
+    public function mount($build, $json = false)
+    {        
+        if($json)
+        {
+            $this->components = json_decode($json, true);
+            $this->preload = true;              
+        }
+
         if ($build->id) {
             $this->build_id = $build->id;
             $build = Build::find($this->build_id);
@@ -153,8 +159,29 @@ class Builder extends Component
         return json_encode($jas);
     }
 
+    public function clear_image($key, $active)
+    {        
+        $this->components[$active]['inputs'][$key]['contents'] = '';
+    }
+
     public function store()
     {
+        //Check if all image inputs has files
+        foreach ($this->components as $c_key => $component) {
+            foreach($component['inputs'] as $i_key => $input) {
+                if($input['content_type'] == 'img')
+                {  
+
+                    if(!is_object($input['contents']))
+                    {
+                        session()->flash('warning', 'There are image type inputs without file');
+                        return;
+                    }
+
+                }
+            }
+        }
+       
         $file = Str::replace(' ', '_', $this->build_title);
 
         $jas_json = $this->createJasJson($file);

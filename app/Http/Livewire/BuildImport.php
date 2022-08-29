@@ -2,25 +2,53 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Build;
 use Livewire\Component;
-use Livewire\WithFileUploads;
-
+use App\Http\Controllers\BuilderController;
 class BuildImport extends Component
 {
-    use WithFileUploads;
-    public $test = false;
-    public $content;
+    public $file_content = false;
+    public $content = '';
+    
+    public function clear()
+    {        
+        $this->file_content = false;
+        $this->content = '';
+     
+    }
 
+    public function import()
+    {        
+        json_decode($this->content); 
+        if(json_last_error() != JSON_ERROR_NONE)
+        {
+            session()->flash('error', 'Incorrect format');            
+            return false;
+        }
 
+        return true;
+    }
 
+    public function load_file()
+    {
+        if($this->file_content)
+        {
+            json_decode($this->file_content);            
+
+            if(json_last_error() == JSON_ERROR_NONE)
+            {
+                $this->content = $this->file_content;
+            }
+            else
+            {   
+                $this->content = '';
+                session()->flash('error', 'Incorrect format');
+            }
+        }
+    }
 
     public function render()
     {
-        if($this->test)
-        {
-            $this->content = file_get_contents($this->test);
-        }
-
         return view('livewire.build-import');
     }
 }
