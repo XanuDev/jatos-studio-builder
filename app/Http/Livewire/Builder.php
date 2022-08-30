@@ -204,8 +204,6 @@ class Builder extends Component
         $build->user_id = Auth::id();
         $build->save();
 
-        //$build->users()->attach(Auth::id());
-
         $this->build_id = $build->id;
 
         foreach ($this->components as $c_key => $component) {

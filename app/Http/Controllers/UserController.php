@@ -36,6 +36,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|unique:users|min:3|max:250',
+            'email' => 'required|unique:users|min:3|max:250',
+            'password' => 'required|min:3|max:250',
+        ]);
+
         $build = new User();
         $build->name = $request->name;
         $build->email = $request->email;

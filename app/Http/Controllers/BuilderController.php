@@ -30,7 +30,7 @@ class BuilderController extends Controller
      */
     public function create()
     {
-        return view('builder.new');
+        return view('builder.create');
     }
 
     /**
@@ -91,7 +91,9 @@ class BuilderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Build::destroy($id);
+        session()->flash('message', 'Build deleted');
+        return back();
     }
 
     public function build_import(Request $request)

@@ -26,4 +26,15 @@ class Build extends Model
     {
         return $this->belongsToMany(JatosComponent::class);
     }
+
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($build) {
+            $build->jatos_components()->delete();
+            $build->jatos_components()->detach();
+        });
+    }
 }

@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+@include('partials.messages')
+
 <div class="card flex-fill">
     <div class="card-header">
         <h5 class="card-title mb-0">{{ __('Projects') }}</h5>
@@ -17,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($builds as $build)
+            @foreach ($builds as $key => $build)
             <tr>
                 <td>{{ $build->id }}</th>
                 <td>{{ $build->title }}</td>
@@ -31,8 +33,14 @@
                 <td>
                     <a href="{{ route('builder.edit', $build) }}"><i class="align-middle text-primary"
                             data-feather="edit"></i></a>
-                    <a href="{{ route('builder.destroy', $build) }}"><i class="align-middle text-danger"
-                            data-feather="trash-2"></i></a>
+                    <form id="delete-form-{{ $key }}" action="{{ route('builder.destroy', ['builder' => $build->id])}}"
+                        method="POST" class="dropdown-item">
+                        @csrf
+                        @method('DELETE')
+                    </form>
+                    <a href="#"
+                        onclick="event.preventDefault(); document.getElementById('delete-form-{{ $key }}').submit();"><i
+                            class="align-middle text-danger" data-feather="trash-2"></i></a>
                 </td>
             </tr>
             @endforeach
