@@ -23,7 +23,8 @@
                 <td>
                     <a href="{{ route('user.edit', $user) }}"><i class="align-middle text-primary"
                             data-feather="edit"></i></a>
-                    <a href="{{ route('user.show', $user) }}"><i class="align-middle" data-feather="eye"></i></a>
+                    {{-- <a href="{{ route('user.show', $user) }}"><i class="align-middle" data-feather="eye"></i></a>
+                    --}}
                     <a href="{{ route('user.destroy', $user) }}"><i class="align-middle text-danger"
                             data-feather="trash-2"></i></a>
                 </td>

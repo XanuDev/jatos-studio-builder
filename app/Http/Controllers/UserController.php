@@ -24,8 +24,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('user.create');
+    {        
+        return view('user.create', ['user' => new User]);
     }
 
     /**
@@ -45,10 +45,10 @@ class UserController extends Controller
         $build = new User();
         $build->name = $request->name;
         $build->email = $request->email;
-        $build->password = $request->password;
+        $build->password = bcrypt($request->password);
         $build->save();
 
-        return back();
+        return redirect()->route('user.index');
     }
 
     /**
@@ -68,9 +68,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(User $user)
+    {        
+        return view('user.edit', ['user' => $user]);
     }
 
     /**
@@ -80,9 +80,23 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(User $user, Request $request)
     {
-        //
+        $status = ['success' => __('The update was correct!')];
+
+        $this->validate($request, [
+            'name' => 'required|min:3|max:250|unique:users,name,'.$user->id,
+            'email' => 'required|min:3|max:250|unique:users,email,'.$user->id,
+        ]);
+
+        $password = $request->password ? bcrypt($request->password) : false;
+        
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if($password) $user->password = $password;
+        $user->push();
+
+        return redirect()->back()->with($status);
     }
 
     /**
@@ -93,6 +107,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $status = ['success' => __('The delete was correct!')];
+        Build::destroy($id);        
+        return redirect()->back()->with($status);
     }
 }

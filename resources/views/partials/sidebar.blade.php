@@ -38,7 +38,7 @@
 
             <li class="sidebar-header">{{ __('Users') }}</li>
 
-            <li class="sidebar-item {{ set_active('users') }}">
+            <li class="sidebar-item {{ set_active('user') }}">
                 <a class="sidebar-link" href="{{ route('user.index') }}">
                     <i class="align-middle" data-feather="users"></i>
                     <span class="align-middle">{{ __('Users') }}</span>
