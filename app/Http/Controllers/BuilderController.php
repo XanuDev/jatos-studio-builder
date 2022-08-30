@@ -66,7 +66,7 @@ class BuilderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {        
+    {
         $build = Build::find($id);
         return view('builder.builder', ['build' => $build]);
     }

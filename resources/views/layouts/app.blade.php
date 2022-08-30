@@ -19,12 +19,12 @@
 <body>
     <div class="wrapper">
         @auth
-            @include('partials.sidebar')
+        @include('partials.sidebar')
         @endauth
 
         <div class="main">
             @auth
-                @include('partials.navbar')
+            @include('partials.navbar')
             @endauth
             <main class="content">
                 <div class="container-fluid p-0">

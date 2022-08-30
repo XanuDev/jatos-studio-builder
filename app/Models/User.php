@@ -37,6 +37,6 @@ class User extends Authenticatable
 
     public function builds()
     {
-        return $this->belongsToMany(Build::class);
+        return $this->hasMany(Build::class);
     }
 }

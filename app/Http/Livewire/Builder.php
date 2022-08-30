@@ -34,11 +34,10 @@ class Builder extends Component
     ];
 
     public function mount($build, $json = false)
-    {        
-        if($json)
-        {
+    {
+        if ($json) {
             $this->components = json_decode($json, true);
-            $this->preload = true;              
+            $this->preload = true;
         }
 
         if ($build->id) {
@@ -160,28 +159,25 @@ class Builder extends Component
     }
 
     public function clear_image($key, $active)
-    {        
+    {
         $this->components[$active]['inputs'][$key]['contents'] = '';
     }
 
-    public function store()
+    public function store($is_private)
     {
         //Check if all image inputs has files
         foreach ($this->components as $c_key => $component) {
-            foreach($component['inputs'] as $i_key => $input) {
-                if($input['content_type'] == 'img')
-                {  
+            foreach ($component['inputs'] as $i_key => $input) {
+                if ($input['content_type'] == 'img') {
 
-                    if(!is_object($input['contents']))
-                    {
+                    if (!is_object($input['contents'])) {
                         session()->flash('warning', 'There are image type inputs without file');
                         return;
                     }
-
                 }
             }
         }
-       
+
         $file = Str::replace(' ', '_', $this->build_title);
 
         $jas_json = $this->createJasJson($file);
@@ -203,22 +199,23 @@ class Builder extends Component
         $build->description = $this->build_description;
         $build->jas = $jas_json;
         $build->jas_json_file_name = $file_name;
+        $build->is_private = $is_private ? true : false;
         $build->zip_file = $zip_file;
+        $build->user_id = Auth::id();
         $build->save();
 
-        $build->users()->attach(Auth::id());
+        //$build->users()->attach(Auth::id());
 
         $this->build_id = $build->id;
 
         foreach ($this->components as $c_key => $component) {
 
-            foreach($component['inputs'] as $i_key => $input) {
-                if($input['content_type'] == 'img')
-                {                    
-                    $this->images[] = $this->components[$c_key]['inputs'][$i_key]['contents'] = $input['contents']->store('img', 'public');                    
+            foreach ($component['inputs'] as $i_key => $input) {
+                if ($input['content_type'] == 'img') {
+                    $this->images[] = $this->components[$c_key]['inputs'][$i_key]['contents'] = $input['contents']->store('img', 'public');
                 }
             }
-            
+
             $components_json = json_encode($this->components[$c_key]['inputs']);
 
             $jatos_component = new JatosComponent();

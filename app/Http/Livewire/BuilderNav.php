@@ -11,6 +11,7 @@ class BuilderNav extends Component
     public $can_download = false;
     public $new_title = '';
     public $is_update = false;
+    public $is_private = false;
 
     protected $listeners = [
         'created' => 'created',

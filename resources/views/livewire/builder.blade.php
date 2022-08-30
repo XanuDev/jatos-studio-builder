@@ -17,7 +17,7 @@
 <div class="row">
     <div class="col-2 ml-2">
         <div class="card">
-            <div class="card-header">Components</div>
+            <div class="card-header">{{ __('Components') }}</div>
             <div class="card-body">
                 <div class="list-group">
                     @foreach ($components as $key => $component)
@@ -34,7 +34,7 @@
             <div class="card-header">
                 {{ sizeof($components) ? $components[$active_component]['title'] : 'No component selected' }}</div>
             <div class="card-body">
-                @include('layouts.messages')
+                @include('partials.messages')
                 <div class="accordion" id="buildAccordion">
                     @if (sizeof($components))
                     @foreach ($components[$active_component]['inputs'] as $key => $input)

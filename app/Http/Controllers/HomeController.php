@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\{Build, User};
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,15 +25,19 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user = User::find(Auth::id());
         $builds = Build::limit('10')
             ->orderBy('created_at', 'desc')
             ->get();
         $users_count = User::count();
         $builds_count = Build::count();
+        $my_builds_count = $user->builds->count();
+
         return view('home', [
             'builds' => $builds,
             'users_count' => $users_count,
             'builds_count' => $builds_count,
+            'my_builds_count' => $my_builds_count,
         ]);
     }
 

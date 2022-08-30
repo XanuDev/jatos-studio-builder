@@ -2,7 +2,7 @@
     <div class="card-header">
         <h5 class="card-title mb-0">{{ __('Import project') }}</h5>
     </div>
-    @include('layouts.messages')
+    @include('partials.messages')
     <div class="card-body">
         <form action="{{ route('builder.import') }}" method="POST" id="json_form">
             @csrf

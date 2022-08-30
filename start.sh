@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-if [ -f ./.env ]; then
-    source ./.env
-    export APP_DEBUG=${APP_DEBUG:-'true'}
-    export APP_KEY=${APP_KEY:-''}
-else
+if [ ! -f ./.env ]; then
     if [ -f ./.env.example ]; then
         cp .env.example .env
     else
@@ -12,6 +8,11 @@ else
         exit 1
     fi
 fi
+
+source ./.env
+export APP_DEBUG=${APP_DEBUG:-'true'}
+export APP_KEY=${APP_KEY:-''}
+export APP_ENV=${APP_ENV:-'local'}
 
 if ! docker info > /dev/null 2>&1; then
     echo "Docker is not running." >&2
@@ -29,14 +30,15 @@ if [ ! -d "./vendor" ]; then
     docker-compose exec app composer install
 fi
 
-sleep 5 # Wait for mysql to be ready to accept connections
+if [ $APP_ENV != "production" ]; then
+    sleep 5 # Wait for mysql to be ready to accept connections
 
-docker-compose exec app php artisan migrate --seed
+    docker-compose exec app php artisan migrate --seed
+fi
 
 if [ ! -h "./public/storage" ]; then
     docker-compose exec app php artisan storage:link  
 fi
-
 
 if [ ! -d "./node_modules" ]; then
     docker-compose exec app npm install
