@@ -22,8 +22,10 @@
                 <div class="list-group">
                     @foreach ($components as $key => $component)
                     <a href="#" wire:click="setActive({{ $key }})"
-                        class="list-group-item list-group-item-action {{ $component['active'] ? 'active' : '' }}" {{
-                        $component['active'] ? 'aria-current="true"' : '' }}>{{ $component['title'] }}</a>
+                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-cente {{ $component['active'] ? 'active' : '' }}"
+                        {{ $component['active'] ? 'aria-current="true"' : '' }}>{{ $component['title'] }}
+                        <button wire:click="removeComponent({{$key}})" class="btn btn-sm btn-danger">X</button>
+                    </a>
                     @endforeach
                 </div>
             </div>
@@ -50,8 +52,12 @@
                             aria-labelledby="input-heading-{{ $key }}" data-bs-parent="#buildAccordion"
                             wire:ignore.self>
                             <div class="accordion-body">
+                                <div class="d-flex flex-row-reverse ">
+                                    <button class="btn btn-sm btn-outline-danger"
+                                        wire:click="removeInput({{ $key }})">X</button>
+                                </div>
                                 @include('inputs.' . $input['type'], [
-                                'identifier' => $input['type'] . '-' . $key,
+                                'identifier' => $input['type']. '-' . $active_component . '-' . $key,
                                 ])
                             </div>
                         </div>

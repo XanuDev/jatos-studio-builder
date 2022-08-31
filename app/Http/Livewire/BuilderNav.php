@@ -7,6 +7,7 @@ use Livewire\Component;
 class BuilderNav extends Component
 {
     public $build;
+    public $nav_title = '';
     public $can_build = false;
     public $can_download = false;
     public $new_title = '';
@@ -20,6 +21,7 @@ class BuilderNav extends Component
 
     public function mount($build)
     {
+        $this->nav_title = $build->title;
         if ($build->id) {
             $this->is_update = true;
         }
@@ -39,6 +41,7 @@ class BuilderNav extends Component
     {
         $this->emit('toggleAddComponentModal');
         $this->emit('add_component', $this->new_title);
+        $this->new_title = '';
     }
 
     public function addInput($name)

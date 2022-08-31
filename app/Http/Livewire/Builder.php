@@ -74,6 +74,7 @@ class Builder extends Component
 
     public function setActive($key)
     {
+        if (!sizeof($this->components)) return;
         $this->setComponentActive($this->components[$key]['title']);
     }
 
@@ -301,6 +302,16 @@ class Builder extends Component
         $this->dispatchBrowserEvent('finish-build');
 
         session()->flash('message', 'Project successfully builded.');
+    }
+
+    public function removeInput($key)
+    {
+        array_splice($this->components[$this->active_component]['inputs'], $key, 1);
+    }
+
+    public function removeComponent($key)
+    {
+        array_splice($this->components, $key, 1);
     }
 
     public function download()

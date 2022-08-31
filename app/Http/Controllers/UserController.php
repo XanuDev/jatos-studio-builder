@@ -24,7 +24,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {        
+    {
         return view('user.create', ['user' => new User]);
     }
 
@@ -69,7 +69,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
-    {        
+    {
         return view('user.edit', ['user' => $user]);
     }
 
@@ -85,15 +85,15 @@ class UserController extends Controller
         $status = ['success' => __('The update was correct!')];
 
         $this->validate($request, [
-            'name' => 'required|min:3|max:250|unique:users,name,'.$user->id,
-            'email' => 'required|min:3|max:250|unique:users,email,'.$user->id,
+            'name' => 'required|min:3|max:250|unique:users,name,' . $user->id,
+            'email' => 'required|min:3|max:250|unique:users,email,' . $user->id,
         ]);
 
         $password = $request->password ? bcrypt($request->password) : false;
-        
+
         $user->name = $request->name;
         $user->email = $request->email;
-        if($password) $user->password = $password;
+        if ($password) $user->password = $password;
         $user->push();
 
         return redirect()->back()->with($status);
@@ -108,7 +108,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         $status = ['success' => __('The delete was correct!')];
-        Build::destroy($id);        
+        User::destroy($id);
+        //TODO: User proyects
         return redirect()->back()->with($status);
     }
 }

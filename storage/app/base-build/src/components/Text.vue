@@ -3,9 +3,7 @@
         <h1 class="my-4">
             {{ input.title }}
         </h1>
-        <p>
-            {{ input.contents }}
-        </p>
+        <div v-html="input.contents"></div>
         <ButtonsComponent />
     </div>
 </template>
