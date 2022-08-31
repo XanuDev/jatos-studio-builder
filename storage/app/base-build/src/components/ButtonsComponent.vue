@@ -34,7 +34,6 @@ const nextInput = (resultDataObject, file) => {
         if (isProxy(resultDataObject)) {
             resultDataObject = JSON.parse(JSON.stringify(resultDataObject));
         }
-        console.log(resultDataObject);
         if (file) {
             // eslint-disable-next-line
             jatos.uploadResultFile(resultDataObject, file).done(() => {});

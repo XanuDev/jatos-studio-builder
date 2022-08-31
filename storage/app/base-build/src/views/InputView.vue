@@ -2,12 +2,10 @@
     <div>
         <div class="text-center">
             <h3>{{ input.title }}</h3>
-            <p>{{ input.contents }}</p>
+            <div v-html="input.contents"></div>
         </div>
 
         <div class="form-group">
-            <label for="text">Froga</label>
-
             <input
                 type="text"
                 class="form-control"

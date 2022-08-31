@@ -21,15 +21,20 @@
         (function($) {
             $('#' + @js($identifier)).summernote({
                 height: 150,
+           
                 callbacks: {
                     onChange: function(contents, $editable) {
                         @this.set(
                             'components.{{ $active_component }}.inputs.{{ $key }}.contents',
                             contents);
-                    }
+                    },
+                    // onImageUpload: function(image) {
+                    //     console.log($('#' + @js($identifier))).summernote("insertNode", image);
+                    //     console.log(image);
+                    
+                    // }  
                 }
-            });
-            console.log('components.{{ $active_component }}.inputs.{{ $key }}.contents')
+            });            
         })(window.jQuery);
     }
 </script>

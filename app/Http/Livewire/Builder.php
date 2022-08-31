@@ -166,18 +166,44 @@ class Builder extends Component
 
     public function store($is_private)
     {
-        //Check if all image inputs has files
+        //dd(Str::uuid()->toString());
+        $dom = new \DomDocument();
+        $uploaded_images = [];
         foreach ($this->components as $c_key => $component) {
             foreach ($component['inputs'] as $i_key => $input) {
-                if ($input['content_type'] == 'img') {
+                $dom->loadHtml($input['contents'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+                $imageFile = $dom->getElementsByTagName('img');
 
-                    if (!is_object($input['contents'])) {
-                        session()->flash('warning', 'There are image type inputs without file');
+                foreach ($imageFile as $item => $image) {
+
+                    $data = $image->getAttribute('src');
+                    $file_name = $image->getAttribute('data-filename');
+                    $extension = pathinfo($file_name, PATHINFO_EXTENSION);
+                    list($type, $data) = explode(';', $data);
+                    list(, $data)      = explode(',', $data);
+                    $type = explode('/', $type);
+
+                    if ($type[0] != "data:image") {
+                        session()->flash('danger', 'Image format no supported [' . $file_name . ']');
+                        Storage::delete($uploaded_images);
                         return;
                     }
+
+                    $imageData = base64_decode($data);
+                    $image_name = "public/img/" . time() . $item . '.' . $extension;
+                    Storage::put('img', $imageData);
+
+                    $uploaded_images[] = $image_name;
+
+                    $image->removeAttribute('src');
+                    $image->setAttribute('src', $image_name);
                 }
+                $input['contents'] = $dom->saveHTML();
             }
         }
+
+
+        dd($uploaded_images);
 
         $file = Str::replace(' ', '_', $this->build_title);
 
@@ -208,12 +234,6 @@ class Builder extends Component
         $this->build_id = $build->id;
 
         foreach ($this->components as $c_key => $component) {
-
-            foreach ($component['inputs'] as $i_key => $input) {
-                if ($input['content_type'] == 'img') {
-                    $this->images[] = $this->components[$c_key]['inputs'][$i_key]['contents'] = $input['contents']->store('img', 'public');
-                }
-            }
 
             $components_json = json_encode($this->components[$c_key]['inputs']);
 
