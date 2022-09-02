@@ -73,8 +73,9 @@ class Builder extends Component
     }
 
     public function setActive($key)
-    {
+    {        
         if (!sizeof($this->components)) return;
+        if (!array_key_exists($key, $this->components)) $key = 0;
         $this->setComponentActive($this->components[$key]['title']);
     }
 
@@ -85,8 +86,7 @@ class Builder extends Component
             'active' => false,
             'inputs' => [],
         ];
-        $this->setComponentActive($title);
-        $this->addInput('home');
+        $this->setComponentActive($title);        
     }
 
     public function addInput($type)
@@ -164,47 +164,50 @@ class Builder extends Component
         $this->components[$active]['inputs'][$key]['contents'] = '';
     }
 
+    private function load_image($dom, &$contents)
+    {
+        if(empty($contents)) return;
+        
+        $dom->loadHtml($contents, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $imageFile = $dom->getElementsByTagName('img');
+        
+        foreach ($imageFile as $key => $image) {
+
+            $data = $image->getAttribute('src');
+            $file_name = $image->getAttribute('data-filename');
+            $extension = pathinfo($file_name, PATHINFO_EXTENSION);
+            list($type, $data) = explode(';', $data);
+            list(, $data)      = explode(',', $data);
+            $type = explode('/', $type);
+
+            if ($type[0] != "data:image") {
+                session()->flash('danger', 'Image format no supported [' . $file_name . ']');
+                Storage::delete($this->images);
+                return;
+            }
+
+            $imageData = base64_decode($data);
+            $image_name = "public/img/" . Str::random(20) . '.' . $extension;
+            Storage::put('img', $imageData);
+
+            $this->images[] = $image_name;
+
+            $image->removeAttribute('src');
+            $image->setAttribute('src', $image_name);
+        }
+        $contents = $dom->saveHTML(); 
+    }
+
     public function store($is_private)
     {
-        //dd(Str::uuid()->toString());
         $dom = new \DomDocument();
-        $uploaded_images = [];
-        foreach ($this->components as $c_key => $component) {
-            foreach ($component['inputs'] as $i_key => $input) {
-                $dom->loadHtml($input['contents'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-                $imageFile = $dom->getElementsByTagName('img');
-
-                foreach ($imageFile as $item => $image) {
-
-                    $data = $image->getAttribute('src');
-                    $file_name = $image->getAttribute('data-filename');
-                    $extension = pathinfo($file_name, PATHINFO_EXTENSION);
-                    list($type, $data) = explode(';', $data);
-                    list(, $data)      = explode(',', $data);
-                    $type = explode('/', $type);
-
-                    if ($type[0] != "data:image") {
-                        session()->flash('danger', 'Image format no supported [' . $file_name . ']');
-                        Storage::delete($uploaded_images);
-                        return;
-                    }
-
-                    $imageData = base64_decode($data);
-                    $image_name = "public/img/" . time() . $item . '.' . $extension;
-                    Storage::put('img', $imageData);
-
-                    $uploaded_images[] = $image_name;
-
-                    $image->removeAttribute('src');
-                    $image->setAttribute('src', $image_name);
-                }
-                $input['contents'] = $dom->saveHTML();
+        
+        foreach ($this->components as $key => $component) {
+            foreach ($this->components[$key]['inputs'] as &$input) {
+                $this->load_image($dom, $input['contents']);
             }
         }
-
-
-        dd($uploaded_images);
-
+        
         $file = Str::replace(' ', '_', $this->build_title);
 
         $jas_json = $this->createJasJson($file);
@@ -331,6 +334,7 @@ class Builder extends Component
 
     public function removeComponent($key)
     {
+        //dd($this->components);
         array_splice($this->components, $key, 1);
     }
 

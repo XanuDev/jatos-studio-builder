@@ -1,11 +1,9 @@
 <template>
     <div class="main">
         <main class="content container">
-            <HomeView v-if="$store.state.active == 'HomeView'" />
-            <TextInput v-if="$store.state.active == 'TextInput'" />
-            <ImageInput v-if="$store.state.active == 'ImageInput'" />
-            <AudioRecording v-if="$store.state.active == 'AudioRecording'" />
-            <SubmitResult v-if="$store.state.active == 'SubmitResult'" />
+            <AudioView v-if="$store.state.active == 'AudioView'" />
+            <InputView v-if="$store.state.active == 'InputView'" />
+            <OutputView v-if="$store.state.active == 'OutputView'" />
         </main>
     </div>
 </template>
@@ -13,11 +11,9 @@
 <script setup>
 import { onBeforeMount } from 'vue';
 import { useStore } from 'vuex';
-import HomeView from './components/HomeView.vue';
-import TextInput from './components/TextInput.vue';
-import ImageInput from './components/ImageInput.vue';
-import AudioRecording from './components/AudioRecording.vue';
-import SubmitResult from './components/SubmitResult.vue';
+import AudioView from './views/AudioView.vue';
+import InputView from './views/InputView.vue';
+import OutputView from './views/OutputView.vue';
 
 const inputs = require('../../json/' + process.env.VUE_APP_JSON_FILE + '.json');
 

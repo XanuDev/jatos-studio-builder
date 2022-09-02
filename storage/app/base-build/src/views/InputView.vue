@@ -19,7 +19,7 @@
 <script setup>
 import { useStore } from 'vuex';
 import { onBeforeMount, ref } from 'vue';
-import ButtonsComponent from './ButtonsComponent.vue';
+import ButtonsComponent from '../components/ButtonsComponent.vue';
 
 const store = useStore();
 

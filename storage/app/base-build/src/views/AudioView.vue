@@ -40,7 +40,7 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import ButtonsComponent from './ButtonsComponent.vue';
+import ButtonsComponent from '../components/ButtonsComponent.vue';
 
 let record;
 let stop;

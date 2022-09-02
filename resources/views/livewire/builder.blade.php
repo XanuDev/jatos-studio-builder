@@ -56,7 +56,7 @@
                                     <button class="btn btn-sm btn-outline-danger"
                                         wire:click="removeInput({{ $key }})">X</button>
                                 </div>
-                                @include('inputs.' . $input['type'], [
+                                @include('components.' . $input['type'], [
                                 'identifier' => $input['type']. '-' . $active_component . '-' . $key,
                                 ])
                             </div>

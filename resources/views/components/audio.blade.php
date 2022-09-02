@@ -7,5 +7,5 @@
         <div id="{{ $identifier }}"></div>
     </div>
 
-    @include('inputs.summernote-script')
+    @include('partials.summernote-script')
 </div>
