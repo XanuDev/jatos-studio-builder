@@ -37,4 +37,8 @@ $(function () {
     window.livewire.on('toggleAddComponentModal', () =>
         $('#addComponentModal').modal('toggle')
     );
+    
+    window.livewire.on('toggleDeleteModal', () => 
+        $('#deleteModal').modal('toggle')
+    );
 });

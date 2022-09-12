@@ -62,6 +62,6 @@ class BuildProject implements ShouldQueue
             throw new ProcessFailedException($build_process);
         }
 
-        Log::info($build_process->getOutput());
+        //Log::info($build_process->getOutput());
     }
 }

@@ -54,7 +54,8 @@
                             <div class="accordion-body">
                                 <div class="d-flex flex-row-reverse ">
                                     <button class="btn btn-sm btn-outline-danger"
-                                        wire:click="removeInput({{ $key }})">X</button>
+                                        wire:click.prevent="$emitTo('delete-modal', 'open', {{ $key }}, 'removeInput')"
+                                        data-toggle="modal">X</button>
                                 </div>
                                 @include('components.' . $input['type'], [
                                 'identifier' => $input['type']. '-' . $active_component . '-' . $key,
@@ -80,6 +81,12 @@
         </div>
     </div>
 
+    <div wire:ignore>
+        {{-- Delete Modal --}}
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <livewire:delete-modal>
+        </div>
+    </div>
 </div>
 @push('scripts')
 <script>
