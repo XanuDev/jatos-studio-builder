@@ -31,7 +31,8 @@ class Builder extends Component
         'download' => 'download',
         'add_component' => 'addComponent',
         'add_input' => 'addInput',
-        'removeInput' => 'removeInput'
+        'removeInput' => 'removeInput',
+        'removeComponent' => 'removeComponent'
     ];
 
     public function mount($build, $json = false)
@@ -336,6 +337,7 @@ class Builder extends Component
     public function removeComponent($key)
     {        
         array_splice($this->components, $key, 1);
+        $this->setActive($key - 1);
     }
 
     public function download()

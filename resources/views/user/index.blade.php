@@ -23,9 +23,7 @@
                 <td>
                     <a href="{{ route('user.edit', $user) }}"><i class="align-middle text-primary"
                             data-feather="edit"></i></a>
-                    {{-- <a href="{{ route('user.show', $user) }}"><i class="align-middle" data-feather="eye"></i></a>
-                    --}}
-                    <a href="{{ route('user.destroy', $user) }}"><i class="align-middle text-danger"
+                    <a href="#" class="btnTrash" data-key="{{ $user->id }}"><i class="align-middle text-danger"
                             data-feather="trash-2"></i></a>
                 </td>
             </tr>
@@ -33,4 +31,24 @@
         </tbody>
     </table>
 </div>
+
+<div wire:ignore>
+    {{-- Delete Modal --}}
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <livewire:delete-modal>
+    </div>
+</div>
+
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener("livewire:load", function(event) {
+        (function($) {
+            $('.btnTrash').click((e) => {
+                Livewire.emitTo('delete-modal', 'open', e.currentTarget.dataset.key, false, 'user'); 
+            })
+        })(window.jQuery);
+    });
+</script>
+@endpush

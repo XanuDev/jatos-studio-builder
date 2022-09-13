@@ -24,7 +24,9 @@
                     <a href="#" wire:click="setActive({{ $key }})"
                         class="list-group-item list-group-item-action d-flex justify-content-between align-items-cente {{ $component['active'] ? 'active' : '' }}"
                         {{ $component['active'] ? 'aria-current="true"' : '' }}>{{ $component['title'] }}
-                        <button wire:click="removeComponent({{$key}})" class="btn btn-sm btn-danger">X</button>
+                        <button class="btn btn-sm btn-danger"
+                            wire:click.prevent="$emitTo('delete-modal', 'open', {{ $key }}, 'removeComponent')"
+                            data-toggle="modal">X</button>
                     </a>
                     @endforeach
                 </div>

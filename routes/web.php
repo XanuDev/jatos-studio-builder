@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/builder/download',    [App\Http\Controllers\BuilderController::class, 'download'])->name('builder.download');
     
     Route::resource('builder',  App\Http\Controllers\BuilderController::class)->except(['show']);
-    Route::resource('user',     App\Http\Controllers\UserController::class);
+    Route::resource('user',     App\Http\Controllers\UserController::class)->except(['show']);
     
     Route::get('locale/change/{locale}', [App\Http\Controllers\LangController::class, 'change'])->name('changeLocale');
     
