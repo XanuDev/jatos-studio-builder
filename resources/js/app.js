@@ -21,11 +21,13 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-(function ($) {
-    // $ works fine in here
-    // ...
+// FormBuilder
+import formBuilder from 'formBuilder';
 
-    // Uncaught TypeError: $(...).summernote is not a function
+// jquery-ui
+import 'jquery-ui/ui/widgets/sortable';
+
+(function ($) {
     $('#summernote').summernote();
 })(window.jQuery);
 

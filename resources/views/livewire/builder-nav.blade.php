@@ -10,7 +10,8 @@
                 {{ __('Update') }}
             </button>
             @else
-            <button class="btn btn-outline-primary mx-2 my-2 my-sm-0" wire:click="$emit('save', '{{ $is_private }}')">
+            <button class="btn btn-outline-primary mx-2 my-2 my-sm-0" id="saveBtn"
+                wire:click="$emit('save', '{{ $is_private }}')">
                 {{ __('Save') }}
             </button>
             @endif

@@ -59,7 +59,7 @@
                                         wire:click.prevent="$emitTo('delete-modal', 'open', {{ $key }}, 'removeInput')"
                                         data-toggle="modal">X</button>
                                 </div>
-                                @include('components.' . $input['type'], [
+                                @include('builder.components.' . $input['type'], [
                                 'identifier' => $input['type']. '-' . $active_component . '-' . $key,
                                 ])
                             </div>
@@ -90,18 +90,19 @@
         </div>
     </div>
 </div>
+
 @push('scripts')
 <script>
     document.addEventListener("livewire:load", function(event) {
-            (function($) {
-                window.addEventListener('finish-build', event => {
-                    $('#buildingModal').modal('hide');
-                })
+        (function($) {
+            window.addEventListener('finish-build', event => {
+                $('#buildingModal').modal('hide');
+            })
 
-                $('#btnBuild').click(() => {
-                    $('#buildingModal').modal('show');
-                })
-            })(window.jQuery);
-        });
+            $('#btnBuild').click(() => {
+                $('#buildingModal').modal('show');
+            })
+        })(window.jQuery);
+    });
 </script>
 @endpush

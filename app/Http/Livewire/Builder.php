@@ -75,7 +75,7 @@ class Builder extends Component
     }
 
     public function setActive($key)
-    {        
+    {
         if (!sizeof($this->components)) return;
         if (!array_key_exists($key, $this->components)) $key = 0;
         $this->setComponentActive($this->components[$key]['title']);
@@ -88,7 +88,7 @@ class Builder extends Component
             'active' => false,
             'inputs' => [],
         ];
-        $this->setComponentActive($title);        
+        $this->setComponentActive($title);
     }
 
     public function addInput($type)
@@ -168,11 +168,11 @@ class Builder extends Component
 
     private function load_image($dom, &$contents)
     {
-        if(empty($contents)) return;
-        
+        if (empty($contents)) return;
+
         $dom->loadHtml($contents, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $imageFile = $dom->getElementsByTagName('img');
-        
+
         foreach ($imageFile as $key => $image) {
 
             $data = $image->getAttribute('src');
@@ -197,19 +197,19 @@ class Builder extends Component
             $image->removeAttribute('src');
             $image->setAttribute('src', $image_name);
         }
-        $contents = $dom->saveHTML(); 
+        $contents = $dom->saveHTML();
     }
 
     public function store($is_private)
     {
         $dom = new \DomDocument();
-        
+
         foreach ($this->components as $key => $component) {
             foreach ($this->components[$key]['inputs'] as &$input) {
                 $this->load_image($dom, $input['contents']);
             }
         }
-        
+
         $file = Str::replace(' ', '_', $this->build_title);
 
         $jas_json = $this->createJasJson($file);
@@ -331,11 +331,11 @@ class Builder extends Component
 
     public function removeInput($key)
     {
-        array_splice($this->components[$this->active_component]['inputs'], $key, 1);        
+        array_splice($this->components[$this->active_component]['inputs'], $key, 1);
     }
 
     public function removeComponent($key)
-    {        
+    {
         array_splice($this->components, $key, 1);
         $this->setActive($key - 1);
     }
