@@ -21,7 +21,7 @@ const store = useStore();
 
 onBeforeMount(() => {
     let component_inputs = inputs.find((e) => {
-        return e.title == document.title;
+        return e.title == 'Component 1'; //document.title;
     });
 
     store.commit('setInputs', component_inputs.inputs);

@@ -202,10 +202,15 @@ class Builder extends Component
 
     public function store($is_private)
     {
+
         $dom = new \DomDocument();
 
         foreach ($this->components as $key => $component) {
             foreach ($this->components[$key]['inputs'] as &$input) {
+                if ($input['type'] == 'input') {
+                    $input['fields'] = json_decode($input['fields']);
+                    continue;
+                }
                 $this->load_image($dom, $input['contents']);
             }
         }

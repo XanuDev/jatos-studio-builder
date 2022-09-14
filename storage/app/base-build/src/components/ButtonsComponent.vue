@@ -1,7 +1,7 @@
 <template>
     <div>
         <button class="btn btn-primary mt-2 mx-1" @click="nextInput">
-            Previus
+            Previous
         </button>
 
         <button class="btn btn-danger mt-2 mx-1" @click="onCancelButtonClick">
@@ -40,6 +40,7 @@ const nextInput = (resultDataObject, file) => {
         } else {
             // eslint-disable-next-line
             jatos.submitResultData(resultDataObject);
+            store.state.results = [];
         }
     }
 

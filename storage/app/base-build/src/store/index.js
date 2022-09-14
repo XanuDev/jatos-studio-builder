@@ -8,6 +8,7 @@ export default createStore({
         active: 'InputView',
         json_inputs: '',
         isLast: false,
+        results: [],
     },
     getters: {
         getInputs(state) {
@@ -27,6 +28,9 @@ export default createStore({
         getTotalComponents(state) {
             return state.totalComponents;
         },
+        getResults(state) {
+            return state.results;
+        },
     },
     mutations: {
         setInputs(state, inputs) {
@@ -41,6 +45,9 @@ export default createStore({
         },
         setTotalComponents(state, total) {
             state.totalComponents = total;
+        },
+        setResults(state, key, value) {
+            state.results[key].value = value;
         },
     },
     actions: {},

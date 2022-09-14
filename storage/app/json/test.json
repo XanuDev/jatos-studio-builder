@@ -1,25 +1,115 @@
 [
     {
-        "title": "index",
+        "title": "Component 1",
         "active": true,
         "inputs": [
             {
                 "id": 0,
-                "type": "home",
-                "name": "Home",
-                "title": "title 0",
+                "type": "input",
+                "name": "Input",
+                "title": "Input 1",
                 "content_type": "text",
-                "contents": "content 0",
-                "component": "HomeView"
-            },
-            {
-                "id": 1,
-                "type": "text-input",
-                "name": "Text Input",
-                "title": "title1 ",
-                "content_type": "text",
-                "contents": "content 1",
-                "component": "TextInput"
+                "contents": "",
+                "component": "InputView",
+                "fields": [
+                    {
+                        "type": "checkbox-group",
+                        "required": false,
+                        "label": "Checkbox Group",
+                        "name": "checkbox-group-1663162026403-0",
+                        "values": [
+                            {
+                                "label": "Option 1",
+                                "value": "option-1",
+                                "selected": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "date",
+                        "required": false,
+                        "label": "Date Field",
+                        "className": "form-control",
+                        "name": "date-1663162028174-0"
+                    },
+                    {
+                        "type": "header",
+                        "label": "Header"
+                    },
+                    {
+                        "type": "number",
+                        "required": false,
+                        "label": "Number",
+                        "className": "form-control",
+                        "name": "number-1663162030728-0"
+                    },
+                    {
+                        "type": "paragraph",
+                        "label": "Paragraph"
+                    },
+                    {
+                        "type": "radio-group",
+                        "required": false,
+                        "label": "Radio Group",
+                        "name": "radio-group-1663162034180-0",
+                        "values": [
+                            {
+                                "label": "Option 1",
+                                "value": "option-1",
+                                "selected": false
+                            },
+                            {
+                                "label": "Option 2",
+                                "value": "option-2",
+                                "selected": false
+                            },
+                            {
+                                "label": "Option 3",
+                                "value": "option-3",
+                                "selected": false
+                            }
+                        ]
+                    },
+                    {
+                        "type": "select",
+                        "required": false,
+                        "label": "Select",
+                        "className": "form-control",
+                        "name": "select-1663162036000-0",
+                        "multiple": false,
+                        "values": [
+                            {
+                                "label": "Option 1",
+                                "value": "option-1",
+                                "selected": true
+                            },
+                            {
+                                "label": "Option 2",
+                                "value": "option-2",
+                                "selected": false
+                            },
+                            {
+                                "label": "Option 3",
+                                "value": "option-3",
+                                "selected": false
+                            }
+                        ]
+                    },
+                    {
+                        "type": "text",
+                        "required": false,
+                        "label": "Text Field",
+                        "className": "form-control",
+                        "name": "text-1663162041123-0"
+                    },
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Text Area",
+                        "className": "form-control",
+                        "name": "textarea-1663162042750-0"
+                    }
+                ]
             }
         ]
     }
