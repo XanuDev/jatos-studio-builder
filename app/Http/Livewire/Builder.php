@@ -189,20 +189,20 @@ class Builder extends Component
             }
 
             $imageData = base64_decode($data);
-            $image_name = "public/img/" . Str::random(20) . '.' . $extension;
-            Storage::put('img', $imageData);
+            $image_name = Str::random(20) . '.' . $extension;
+            Storage::put('public/img/' . $image_name, $imageData);
 
             $this->images[] = $image_name;
 
             $image->removeAttribute('src');
-            $image->setAttribute('src', $image_name);
+            $image->setAttribute('src', 'img/' . $image_name);
+            $image->setAttribute('data-filename', 'img/' . $image_name);
         }
         $contents = $dom->saveHTML();
     }
 
     public function store($is_private)
     {
-
         $dom = new \DomDocument();
 
         foreach ($this->components as $key => $component) {
