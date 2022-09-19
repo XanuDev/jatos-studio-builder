@@ -6,7 +6,8 @@
 
         <div class="col-auto ms-auto text-end mt-n1">
             @if ($is_update)
-            <button class="btn btn-outline-primary mx-2 my-2 my-sm-0" wire:click="$emit('update')">
+            <button class="btn btn-outline-primary mx-2 my-2 my-sm-0" id="saveBtn"
+                wire:click="$emit('update', '{{ $is_private }}')">
                 {{ __('Update') }}
             </button>
             @else

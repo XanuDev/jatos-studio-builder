@@ -24,6 +24,8 @@ class BuilderNav extends Component
         $this->nav_title = $build->title;
         if ($build->id) {
             $this->is_update = true;
+            $this->can_build = true;
+            $this->can_download = true;
         }
     }
 

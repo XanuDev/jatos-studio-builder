@@ -3,9 +3,8 @@
     <input type="text" id="title-{{ $identifier }}"
         wire:model="components.{{ $active_component }}.inputs.{{ $key }}.title" class="form-control mb-2">
 
-    {{-- @include('partials.summernote-script') --}}
-
     <div class="mt-4">
-        @include('partials.form-builder')
+        <livewire:form-builder :identifier="$identifier" :input_key="$key" :component="$active_component"
+            :components="$components" wire:key="$identifier">
     </div>
 </div>

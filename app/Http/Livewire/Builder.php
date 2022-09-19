@@ -16,6 +16,7 @@ class Builder extends Component
     public $build_id = false;
     public $build_title;
     public $build_description;
+    public $build_file_name;
     public $created = false;
     public $builded = false;
     public $building = false;
@@ -23,6 +24,7 @@ class Builder extends Component
     public $active_component = false;
     public $images = [];
     public $preload = false;
+    public $loaded_builders = [];
 
     protected $listeners = [
         'save' => 'store',
@@ -32,7 +34,8 @@ class Builder extends Component
         'add_component' => 'addComponent',
         'add_input' => 'addInput',
         'removeInput' => 'removeInput',
-        'removeComponent' => 'removeComponent'
+        'removeComponent' => 'removeComponent',
+        'add_builder' => 'add_builder'
     ];
 
     public function mount($build, $json = false)
@@ -44,7 +47,7 @@ class Builder extends Component
 
         if ($build->id) {
             $this->build_id = $build->id;
-            $build = Build::find($this->build_id);
+            $this->build_file_name = $build->jas_json_file_name;
             $this->preload = true;
             foreach ($build->jatos_components as $key => $component) {
                 $this->addComponent($component->title);
@@ -60,6 +63,22 @@ class Builder extends Component
     public function hydrate()
     {
         $this->preload = false;
+    }
+
+    public function addBuilder($identifier)
+    {
+        $this->loaded_builders[] = $identifier;
+    }
+
+    public function removeBuilder($identifier)
+    {
+        $key = array_search($identifier, $this->loaded_builders);
+        array_slice($this->loaded_builders, $key);
+    }
+
+    public function isBuilderLoaded($identifier)
+    {
+        return in_array($identifier, $this->loaded_builders);
     }
 
     private function setComponentActive($title)
@@ -203,6 +222,7 @@ class Builder extends Component
 
     public function store($is_private)
     {
+        return;
         $dom = new \DomDocument();
 
         foreach ($this->components as $key => $component) {
@@ -263,33 +283,38 @@ class Builder extends Component
         session()->flash('message', 'Project successfully created.');
     }
 
-    public function update()
+    public function update($is_private)
     {
+        dd($this->components);
+        $dom = new \DomDocument();
+
+        foreach ($this->components as $key => $component) {
+            foreach ($this->components[$key]['inputs'] as &$input) {
+                if ($input['type'] == 'input') {
+                    $input['fields'] = json_decode($input['fields']);
+                    continue;
+                }
+                $this->load_image($dom, $input['contents']);
+            }
+        }
+
         $file = Str::replace(' ', '_', $this->build_title);
 
         $jas_json = $this->createJasJson($file);
 
-        $randomString = '';
-        for ($i = 0; $i < 18; $i++) {
-            $randomString .= (string) rand(0, 9);
-        }
-
-        $file_name = $file . $randomString;
+        $file_name = $this->build_file_name;
         $jas_file = $file_name . '.jas';
         $json_file = $file_name . '.json';
-        $zip_file = $file . '.zip';
 
         Storage::put('jas/' . $jas_file, $jas_json);
 
         $build = Build::find($this->build_id);
 
         $build->jas = $jas_json;
-        $build->jas_json_file_name = $file_name;
-        $build->zip_file = $zip_file;
+        $build->is_private = $is_private ? true : false;
         $build->save();
 
-        $build->users()->attach(Auth::id());
-
+        $build->jatos_components()->detach();
         foreach ($this->components as $component) {
             $components_json = json_encode($component['inputs']);
 
@@ -297,7 +322,7 @@ class Builder extends Component
             $jatos_component->title = $component['title'];
             $jatos_component->json = $components_json;
             $jatos_component->save();
-            $build->jatos_components()->sync($jatos_component->id);
+            $build->jatos_components()->attach($jatos_component->id);
         }
 
         $json_inputs = json_encode($this->components);

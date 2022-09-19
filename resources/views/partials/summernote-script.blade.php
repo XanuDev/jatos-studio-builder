@@ -28,11 +28,6 @@
                             'components.{{ $active_component }}.inputs.{{ $key }}.contents',
                             contents);
                     },
-                    // onImageUpload: function(image) {
-                    //     console.log($('#' + @js($identifier))).summernote("insertNode", image);
-                    //     console.log(image);
-                    
-                    // }  
                 }
             });            
         })(window.jQuery);
