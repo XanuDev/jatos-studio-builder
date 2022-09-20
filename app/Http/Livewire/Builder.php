@@ -24,7 +24,6 @@ class Builder extends Component
     public $active_component = false;
     public $images = [];
     public $preload = false;
-    public $loaded_builders = [];
 
     protected $listeners = [
         'save' => 'store',
@@ -63,22 +62,6 @@ class Builder extends Component
     public function hydrate()
     {
         $this->preload = false;
-    }
-
-    public function addBuilder($identifier)
-    {
-        $this->loaded_builders[] = $identifier;
-    }
-
-    public function removeBuilder($identifier)
-    {
-        $key = array_search($identifier, $this->loaded_builders);
-        array_slice($this->loaded_builders, $key);
-    }
-
-    public function isBuilderLoaded($identifier)
-    {
-        return in_array($identifier, $this->loaded_builders);
     }
 
     private function setComponentActive($title)
@@ -222,7 +205,6 @@ class Builder extends Component
 
     public function store($is_private)
     {
-        return;
         $dom = new \DomDocument();
 
         foreach ($this->components as $key => $component) {

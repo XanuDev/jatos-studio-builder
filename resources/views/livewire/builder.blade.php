@@ -24,9 +24,6 @@
                     <a href="#" wire:click="setActive({{ $key }})"
                         class="list-group-item list-group-item-action d-flex justify-content-between align-items-cente {{ $component['active'] ? 'active' : '' }}"
                         {{ $component['active'] ? 'aria-current="true"' : '' }}>{{ $component['title'] }}
-                        <button class="btn btn-sm btn-danger"
-                            wire:click.prevent="$emitTo('delete-modal', 'open', {{ $key }}, 'removeComponent')"
-                            data-toggle="modal">X</button>
                     </a>
                     @endforeach
                 </div>
@@ -34,42 +31,60 @@
         </div>
     </div>
     <div class="col">
-        <div class="card">
+        @include('partials.messages')
+        @foreach ($components as $component_key => $component)
+
+        <div class="card" {!! $component['active'] ? '' : 'style="display: none"' !!}>
             <div class="card-header">
-                {{ sizeof($components) ? $components[$active_component]['title'] : 'No component selected' }}</div>
+                <div class="row justify-content-between">
+                    <div class="col-4">
+                        {{ $component['title'] }}
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-sm btn-danger"
+                            wire:click.prevent="$emitTo('delete-modal', 'open', {{ $component_key }}, 'removeComponent')"
+                            data-toggle="modal">{{ __('Remove') }}</button>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
-                @include('partials.messages')
-                <div class="accordion" id="buildAccordion">
-                    @if (sizeof($components))
-                    @foreach ($components[$active_component]['inputs'] as $key => $input)
+
+                <div class="accordion" id="buildAccordion-{{ $component_key }}">
+
+                    @foreach ($component['inputs'] as $input_key => $input)
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="input-heading-{{ $key }}">
+                        <h2 class="accordion-header" id="input-heading-{{ $component_key }}-{{  $input_key }}">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#input-collapse-{{ $key }}" aria-expanded="false"
-                                aria-controls="input-collapse-{{ $key }}">
+                                data-bs-target="#input-collapse-{{ $component_key }}-{{ $input_key }}"
+                                aria-expanded="false"
+                                aria-controls="input-collapse-{{ $component_key }}-{{ $input_key }}">
                                 {{ $input['name'] }}
                             </button>
                         </h2>
-                        <div id="input-collapse-{{ $key }}" class="accordion-collapse collapse bg-white"
-                            aria-labelledby="input-heading-{{ $key }}" data-bs-parent="#buildAccordion"
-                            wire:ignore.self>
+                        <div id="input-collapse-{{ $component_key }}-{{ $input_key }}"
+                            class="accordion-collapse collapse bg-white"
+                            aria-labelledby="input-heading-{{ $component_key }}-{{ $input_key }}"
+                            data-bs-parent="#buildAccordion-{{ $component_key }}" wire:ignore.self>
                             <div class="accordion-body">
                                 <div class="d-flex flex-row-reverse ">
                                     <button class="btn btn-sm btn-outline-danger"
-                                        wire:click.prevent="$emitTo('delete-modal', 'open', {{ $key }}, 'removeInput')"
+                                        wire:click.prevent="$emitTo('delete-modal', 'open', {{ $input_key }}, 'removeInput')"
                                         data-toggle="modal">X</button>
                                 </div>
+
                                 @include('builder.components.' . $input['type'], [
-                                'identifier' => $input['type']. '-' . $active_component . '-' . $key,
+                                'identifier' => $input['type']. '-' . $component_key . '-' . $input_key,
                                 ])
+
                             </div>
                         </div>
                     </div>
                     @endforeach
-                    @endif
+
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
     <div class="modal fade bd-building-modal-lg" wire:ignore.self id="buildingModal" data-bs-backdrop="static"
         data-bs-keyboard="false" tabindex="-1">
@@ -93,6 +108,18 @@
 
 @push('scripts')
 <script>
+    var form_builder_options = {
+        i18n: {
+            locale: 'en-US',
+            location: window.location.protocol +'//'+ window.location.hostname + '/formbuilder/lang',
+            extension: '.lang'
+        },
+        disabledActionButtons: ['data', 'save', 'clear'],
+        disableFields: ['autocomplete', 'button', 'file', 'hidden', 'starRating'],
+        disabledAttrs: ['access', 'className', 'subtype', 'inline', 
+                        'toggle', 'other', 'max', 'min', 'maxlength', 'step'],
+    };
+
     document.addEventListener("livewire:load", function(event) {
         (function($) {
             window.addEventListener('finish-build', event => {
