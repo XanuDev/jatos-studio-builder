@@ -1,22 +1,103 @@
 [
     {
-        "title": "Component 1",
+        "title": "component1",
+        "active": false,
+        "inputs": [
+            {
+                "id": 0,
+                "type": "input",
+                "name": "Input",
+                "title": "datos persona",
+                "content_type": "text",
+                "contents": "",
+                "component": "InputView",
+                "fields": [
+                    {
+                        "type": "text",
+                        "required": false,
+                        "label": "nombre",
+                        "className": "form-control",
+                        "name": "text-1663747372215-0"
+                    },
+                    {
+                        "type": "number",
+                        "required": false,
+                        "label": "edad",
+                        "className": "form-control",
+                        "name": "number-1663747382928-0"
+                    },
+                    {
+                        "type": "select",
+                        "required": false,
+                        "label": "Sexo",
+                        "className": "form-control",
+                        "name": "select-1663747398765-0",
+                        "multiple": false,
+                        "values": [
+                            {
+                                "label": "Masculino",
+                                "value": "m",
+                                "selected": true
+                            },
+                            {
+                                "label": "Femenino",
+                                "value": "f",
+                                "selected": false
+                            },
+                            {
+                                "label": "Otros",
+                                "value": "o",
+                                "selected": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "type": "output",
+                "name": "Output",
+                "title": "prueba output",
+                "content_type": "text",
+                "contents": "<p>prueba de texto<img style=\"width: 550px;\" data-filename=\"img\/11TL1GTbMRLouqvjRqJj.webp\" src=\"img\/11TL1GTbMRLouqvjRqJj.webp\"><\/p>\n",
+                "component": "OutputView"
+            },
+            {
+                "id": 2,
+                "type": "audio",
+                "name": "Audio",
+                "title": "audio test",
+                "content_type": "text",
+                "contents": "<p>graba tu audio<\/p>\n",
+                "component": "AudioView"
+            }
+        ]
+    },
+    {
+        "title": "componen2",
         "active": true,
         "inputs": [
             {
                 "id": 0,
                 "type": "input",
                 "name": "Input",
-                "title": "Input 1",
+                "title": "Formulario completo",
                 "content_type": "text",
                 "contents": "",
                 "component": "InputView",
                 "fields": [
                     {
+                        "type": "date",
+                        "required": false,
+                        "label": "Date Field",
+                        "className": "form-control",
+                        "name": "date-1663747538848-0"
+                    },
+                    {
                         "type": "checkbox-group",
                         "required": false,
                         "label": "Checkbox Group",
-                        "name": "checkbox-group-1663162026403-0",
+                        "name": "checkbox-group-1663747543468-0",
                         "values": [
                             {
                                 "label": "Option 1",
@@ -24,13 +105,6 @@
                                 "selected": true
                             }
                         ]
-                    },
-                    {
-                        "type": "date",
-                        "required": false,
-                        "label": "Date Field",
-                        "className": "form-control",
-                        "name": "date-1663162028174-0"
                     },
                     {
                         "type": "header",
@@ -41,7 +115,7 @@
                         "required": false,
                         "label": "Number",
                         "className": "form-control",
-                        "name": "number-1663162030728-0"
+                        "name": "number-1663747534075-0"
                     },
                     {
                         "type": "paragraph",
@@ -51,7 +125,7 @@
                         "type": "radio-group",
                         "required": false,
                         "label": "Radio Group",
-                        "name": "radio-group-1663162034180-0",
+                        "name": "radio-group-1663747528786-0",
                         "values": [
                             {
                                 "label": "Option 1",
@@ -75,7 +149,7 @@
                         "required": false,
                         "label": "Select",
                         "className": "form-control",
-                        "name": "select-1663162036000-0",
+                        "name": "select-1663747526833-0",
                         "multiple": false,
                         "values": [
                             {
@@ -100,14 +174,14 @@
                         "required": false,
                         "label": "Text Field",
                         "className": "form-control",
-                        "name": "text-1663162041123-0"
+                        "name": "text-1663747525135-0"
                     },
                     {
                         "type": "textarea",
                         "required": false,
                         "label": "Text Area",
                         "className": "form-control",
-                        "name": "textarea-1663162042750-0"
+                        "name": "textarea-1663747522315-0"
                     }
                 ]
             }

@@ -1,5 +1,5 @@
 <div wire:ignore>
-    <div id="{{ $identifier }}">{!! $components[$active_component]['inputs'][$input_key]['contents'] !!}</div>
+    <div id="{{ $identifier }}">{!! $components[$component_key]['inputs'][$input_key]['contents'] !!}</div>
 </div>
 <script>
     if (@js($preload)) {
@@ -10,7 +10,7 @@
                     callbacks: {
                         onChange: function(contents, $editable) {
                             @this.set(
-                                'components.{{ $active_component }}.inputs.{{ $input_key }}.contents',
+                                'components.{{ $component_key }}.inputs.{{ $input_key }}.contents',
                                 contents);
                         }
                     }
@@ -25,7 +25,7 @@
                 callbacks: {
                     onChange: function(contents, $editable) {
                         @this.set(
-                            'components.{{ $active_component }}.inputs.{{ $input_key }}.contents',
+                            'components.{{ $component_key }}.inputs.{{ $input_key }}.contents',
                             contents);
                     },
                 }

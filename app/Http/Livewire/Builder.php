@@ -267,7 +267,6 @@ class Builder extends Component
 
     public function update($is_private)
     {
-        dd($this->components);
         $dom = new \DomDocument();
 
         foreach ($this->components as $key => $component) {
@@ -276,7 +275,7 @@ class Builder extends Component
                     $input['fields'] = json_decode($input['fields']);
                     continue;
                 }
-                $this->load_image($dom, $input['contents']);
+                //$this->load_image($dom, $input['contents']);
             }
         }
 
