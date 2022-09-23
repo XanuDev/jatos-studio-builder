@@ -1,6 +1,10 @@
 <template>
     <div class="container text-center">
-        <div class="wrapper">
+        <h1 class="my-4">
+            {{ input.title }}
+        </h1>
+        <div v-html="input.contents"></div>
+        <div class="wrapper mt-3">
             <section class="main-controls mt-3">
                 <div class="progress" v-show="recording">
                     <div
@@ -39,8 +43,13 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, onBeforeMount, ref } from 'vue';
 import ButtonsComponent from '../components/ButtonsComponent.vue';
+import { useStore } from 'vuex';
+
+const store = useStore();
+
+const input = ref(null);
 
 let record;
 let stop;
@@ -91,6 +100,10 @@ const mainFunction = () => {
 
     navigator.mediaDevices.getUserMedia(constraints).then(onSuccess, onError);
 };
+
+onBeforeMount(() => {
+    input.value = store.getters.getInputByPos(store.state.position);
+});
 
 onMounted(() => {
     if (!navigator.mediaDevices.getUserMedia) {

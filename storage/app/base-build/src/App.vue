@@ -20,10 +20,6 @@ const inputs = require('../../json/' + process.env.VUE_APP_JSON_FILE + '.json');
 const store = useStore();
 
 onBeforeMount(() => {
-    inputs.forEach((e) => {
-        console.log(e.title, document.title);
-    });
-
     let component_inputs = inputs.find((e) => {
         return e.title == document.title;
     });
@@ -31,5 +27,6 @@ onBeforeMount(() => {
     store.commit('setInputs', component_inputs.inputs);
     store.state.active = component_inputs.inputs[0].type;
     store.commit('setTotalComponents', component_inputs.inputs.length);
+    store.commit('setPosition', 0);
 });
 </script>

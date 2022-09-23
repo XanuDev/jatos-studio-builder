@@ -17,6 +17,7 @@ class Builder extends Component
     public $build_title;
     public $build_description;
     public $build_file_name;
+    public $input_id = 0;
     public $created = false;
     public $builded = false;
     public $building = false;
@@ -100,11 +101,10 @@ class Builder extends Component
             return;
         }
 
-        $count = sizeof($this->components[$this->active_component]['inputs']);
         $input = \App\Constants\Component::LIST[$type];
 
         $this->components[$this->active_component]['inputs'][] = [
-            'id' => $count,
+            'id' => ++$this->input_id,
             'type' => $type,
             'name' => $input['name'],
             'title' => '',

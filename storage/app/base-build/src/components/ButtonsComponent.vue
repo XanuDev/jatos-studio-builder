@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button class="btn btn-primary mt-2 mx-1" @click="nextInput">
+        <button class="btn btn-primary mt-2 mx-1" disabled @click="nextInput">
             Previous
         </button>
 
@@ -31,15 +31,17 @@ const store = useStore();
 
 const nextInput = (resultDataObject, file) => {
     if (resultDataObject) {
+        let result = {};
         if (isProxy(resultDataObject)) {
-            resultDataObject = JSON.parse(JSON.stringify(resultDataObject));
+            result = { ...resultDataObject };
         }
+
         if (file) {
             // eslint-disable-next-line
             jatos.uploadResultFile(resultDataObject, file).done(() => {});
         } else {
             // eslint-disable-next-line
-            jatos.submitResultData(resultDataObject);
+            jatos.submitResultData(result);
             store.state.results = [];
         }
     }
@@ -51,8 +53,8 @@ const nextInput = (resultDataObject, file) => {
         return;
     }
     store.commit('setPosition', newPos);
-    let next = store.getters.getInputByID(newPos);
-    store.commit('setActive', next.component);
+    let next = store.getters.getInputByPos(newPos);
+    store.commit('setActive', next.type);
 };
 const onCancelButtonClick = () => {
     // eslint-disable-next-line

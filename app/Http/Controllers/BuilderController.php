@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\{Build, User};
+use Illuminate\Support\Facades\Auth;
 
 class BuilderController extends Controller
 {
@@ -19,7 +21,8 @@ class BuilderController extends Controller
      */
     public function index()
     {
-        $builds = Build::all();
+        $user = Auth::id();
+        $builds = Build::where('user_id', $user)->orWhere('is_private', false)->get();
         return view('builder.index', ['builds' => $builds]);
     }
 
@@ -107,5 +110,12 @@ class BuilderController extends Controller
     public function import()
     {
         return view('builder.import');
+    }
+
+    public function download($id)
+    {
+        $build = Build::find($id);
+
+        return Storage::download('public/' . $build->zip_file);
     }
 }

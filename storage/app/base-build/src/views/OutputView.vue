@@ -17,6 +17,6 @@ const store = useStore();
 
 const input = ref(null);
 onBeforeMount(() => {
-    input.value = store.getters.getInputByID(store.state.position);
+    input.value = store.getters.getInputByPos(store.state.position);
 });
 </script>

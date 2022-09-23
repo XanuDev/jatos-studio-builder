@@ -35,6 +35,8 @@
                             data-feather="edit"></i></a>
                     <a href="#" class="btnTrash" data-key="{{ $build->id }}"><i class="align-middle text-danger"
                             data-feather="trash-2"></i></a>
+                    <a href="{{ route('builder.download', ['id' => $build->id]) }}"><i class="align-middle text-success"
+                            data-feather="download"></i></a>
                 </td>
             </tr>
             @endforeach

@@ -5,7 +5,7 @@ export default createStore({
         inputs: null,
         position: 0,
         totalComponents: 0,
-        active: 'InputView',
+        active: '',
         json_inputs: '',
         isLast: false,
         results: [],
@@ -18,6 +18,9 @@ export default createStore({
             return state.inputs.find((e) => {
                 return e.id == id;
             });
+        },
+        getInputByPos: (state) => (pos) => {
+            return state.inputs[pos];
         },
         getPosition(state) {
             return state.position;
@@ -38,7 +41,7 @@ export default createStore({
         },
         setPosition(state, position) {
             state.position = position;
-            state.isLast = state.totalComponents > position ? true : false;
+            state.isLast = state.totalComponents - 1 == position;
         },
         setActive(state, active) {
             state.active = active;

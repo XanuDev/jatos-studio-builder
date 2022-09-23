@@ -1,13 +1,13 @@
 [
     {
-        "title": "component1",
-        "active": false,
+        "title": "Componente 1",
+        "active": true,
         "inputs": [
             {
                 "id": 0,
                 "type": "input",
                 "name": "Input",
-                "title": "datos persona",
+                "title": "Datos Personales",
                 "content_type": "text",
                 "contents": "",
                 "component": "InputView",
@@ -15,41 +15,48 @@
                     {
                         "type": "text",
                         "required": false,
-                        "label": "nombre",
+                        "label": "Nombre",
                         "className": "form-control",
-                        "name": "text-1663747372215-0"
+                        "name": "name"
                     },
                     {
                         "type": "number",
                         "required": false,
-                        "label": "edad",
+                        "label": "Edad",
                         "className": "form-control",
-                        "name": "number-1663747382928-0"
+                        "name": "age"
                     },
                     {
                         "type": "select",
                         "required": false,
                         "label": "Sexo",
                         "className": "form-control",
-                        "name": "select-1663747398765-0",
+                        "name": "sex",
                         "multiple": false,
                         "values": [
                             {
                                 "label": "Masculino",
-                                "value": "m",
+                                "value": "male",
                                 "selected": true
                             },
                             {
                                 "label": "Femenino",
-                                "value": "f",
+                                "value": "female",
                                 "selected": false
                             },
                             {
                                 "label": "Otros",
-                                "value": "o",
+                                "value": "others",
                                 "selected": false
                             }
                         ]
+                    },
+                    {
+                        "type": "textarea",
+                        "required": false,
+                        "label": "Describete",
+                        "className": "form-control",
+                        "name": "description"
                     }
                 ]
             },
@@ -57,47 +64,40 @@
                 "id": 1,
                 "type": "output",
                 "name": "Output",
-                "title": "prueba output",
+                "title": "Texto del output",
                 "content_type": "text",
-                "contents": "<p>prueba de texto<img style=\"width: 550px;\" data-filename=\"img\/11TL1GTbMRLouqvjRqJj.webp\" src=\"img\/11TL1GTbMRLouqvjRqJj.webp\"><\/p>\n",
+                "contents": "<p><span style='color: rgb(0, 0, 0); font-family: \"Open Sans\", Arial, sans-serif; text-align: justify;'><b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique turpis vitae gravida tincidunt. Integer neque leo, aliquam vehicula erat a, tristique laoreet est. Pellentesque euismod semper erat lobortis molestie. Aenean finibus volutpat cursus. Aliquam pretium id quam eget mattis. Nullam at turpis cursus, scelerisque lorem id, commodo nulla. Integer facilisis nulla enim. Donec vitae elit nec tellus pulvinar commodo et nec ex. Donec nibh nisi, semper ac porttitor non, gravida a augue.<\/b><\/span><br><\/p>\n",
                 "component": "OutputView"
             },
             {
                 "id": 2,
                 "type": "audio",
                 "name": "Audio",
-                "title": "audio test",
+                "title": "Graba tu audio",
                 "content_type": "text",
-                "contents": "<p>graba tu audio<\/p>\n",
+                "contents": "<p>Graba un audio con:<p>- bla bla bla<\/p><p>- bla bla bla<\/p><\/p>\n",
                 "component": "AudioView"
             }
         ]
     },
     {
-        "title": "componen2",
-        "active": true,
+        "title": "Componente 2",
+        "active": false,
         "inputs": [
             {
                 "id": 0,
                 "type": "input",
                 "name": "Input",
-                "title": "Formulario completo",
+                "title": "test de inputs",
                 "content_type": "text",
                 "contents": "",
                 "component": "InputView",
                 "fields": [
                     {
-                        "type": "date",
-                        "required": false,
-                        "label": "Date Field",
-                        "className": "form-control",
-                        "name": "date-1663747538848-0"
-                    },
-                    {
                         "type": "checkbox-group",
                         "required": false,
                         "label": "Checkbox Group",
-                        "name": "checkbox-group-1663747543468-0",
+                        "name": "checkbox-group-1663920818687-0",
                         "values": [
                             {
                                 "label": "Option 1",
@@ -105,6 +105,13 @@
                                 "selected": true
                             }
                         ]
+                    },
+                    {
+                        "type": "date",
+                        "required": false,
+                        "label": "Date Field",
+                        "className": "form-control",
+                        "name": "date-1663920819214-0"
                     },
                     {
                         "type": "header",
@@ -115,7 +122,7 @@
                         "required": false,
                         "label": "Number",
                         "className": "form-control",
-                        "name": "number-1663747534075-0"
+                        "name": "number-1663920820205-0"
                     },
                     {
                         "type": "paragraph",
@@ -125,7 +132,7 @@
                         "type": "radio-group",
                         "required": false,
                         "label": "Radio Group",
-                        "name": "radio-group-1663747528786-0",
+                        "name": "radio-group-1663920821238-0",
                         "values": [
                             {
                                 "label": "Option 1",
@@ -149,7 +156,7 @@
                         "required": false,
                         "label": "Select",
                         "className": "form-control",
-                        "name": "select-1663747526833-0",
+                        "name": "select-1663920822086-0",
                         "multiple": false,
                         "values": [
                             {
@@ -174,14 +181,14 @@
                         "required": false,
                         "label": "Text Field",
                         "className": "form-control",
-                        "name": "text-1663747525135-0"
+                        "name": "text-1663920822653-0"
                     },
                     {
                         "type": "textarea",
                         "required": false,
                         "label": "Text Area",
                         "className": "form-control",
-                        "name": "textarea-1663747522315-0"
+                        "name": "textarea-1663920823245-0"
                     }
                 ]
             }

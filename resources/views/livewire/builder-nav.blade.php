@@ -11,7 +11,7 @@
                 {{ __('Update') }}
             </button>
             @else
-            <button class="btn btn-outline-primary mx-2 my-2 my-sm-0" id="saveBtn"
+            <button class="btn btn-outline-primary mx-2 my-2 my-sm-0" id="saveBtn" {{ $can_build ? 'disabled' : '' }}
                 wire:click="$emit('save', '{{ $is_private }}')">
                 {{ __('Save') }}
             </button>

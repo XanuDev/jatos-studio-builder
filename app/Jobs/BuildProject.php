@@ -12,6 +12,7 @@ use Illuminate\Queue\SerializesModels;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class BuildProject implements ShouldQueue
 {
@@ -43,11 +44,13 @@ class BuildProject implements ShouldQueue
             $images .= $image;
         }
 
+        $title = Str::replace(' ', '_', $this->data['title']);
+
         $build_process = new Process(
             ['sh', storage_path() . '/app/base-build/build.sh'],
             null,
             [
-                'PROJECT_NAME' => $this->data['title'],
+                'PROJECT_NAME' => $title,
                 'FILE_NAME' => $this->data['file_name'],
                 'COMPONENT_PAGES' => $this->data['pages'],
                 'IMAGES' => $images
