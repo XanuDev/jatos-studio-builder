@@ -25,15 +25,23 @@ if ! docker-compose -v > /dev/null 2>&1; then
 fi
 
 docker-compose up -d
+docker-compose exec -u 0 jatos chown -R 1:1 /opt/docker/study_assets_root
+docker-compose exec -u 0 jatos chown -R 1:1 /opt/docker/result_uploads
 
 if [ ! -d "./vendor" ]; then
     docker-compose exec app composer install
 fi
 
 if [ $APP_ENV != "production" ]; then
-    sleep 5 # Wait for mysql to be ready to accept connections
 
-    docker-compose exec app php artisan migrate --seed
+
+until docker-compose exec db mysqladmin ping -P 3306 -p${DB_PASSWORD} | grep "mysqld is alive" ; do  
+  >&2 echo "Waiting for MySQL to be ready for connections..."
+  sleep 3
+done
+
+docker-compose exec app php artisan migrate --seed
+
 fi
 
 if [ ! -h "./public/storage" ]; then
