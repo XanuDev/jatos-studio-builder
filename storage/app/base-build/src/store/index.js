@@ -9,6 +9,8 @@ export default createStore({
         json_inputs: '',
         isLast: false,
         results: [],
+        allResults: [],
+        result: null,
     },
     getters: {
         getInputs(state) {
@@ -22,6 +24,9 @@ export default createStore({
         getInputByPos: (state) => (pos) => {
             return state.inputs[pos];
         },
+        getResults: (state) => {
+            return state.results;
+        },
         getPosition(state) {
             return state.position;
         },
@@ -30,9 +35,6 @@ export default createStore({
         },
         getTotalComponents(state) {
             return state.totalComponents;
-        },
-        getResults(state) {
-            return state.results;
         },
     },
     mutations: {
@@ -49,10 +51,21 @@ export default createStore({
         setTotalComponents(state, total) {
             state.totalComponents = total;
         },
-        setResults(state, key, value) {
-            state.results[key].value = value;
+        addResult(state) {
+            state.allResults = [state.result, ...state.allResults];
+        },
+        clearResult(state) {
+            state.result = null;
+            state.results = [];
         },
     },
-    actions: {},
+    actions: {
+        addResultAction(contex) {
+            contex.commit('addResult');
+        },
+        clearResultAction(contex) {
+            contex.commit('clearResult');
+        },
+    },
     modules: {},
 });

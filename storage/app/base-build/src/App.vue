@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <main class="content container">
+        <main class="content container" :key="$store.state.position">
             <AudioView v-if="$store.state.active == 'audio'" />
             <InputView v-if="$store.state.active == 'input'" />
             <OutputView v-if="$store.state.active == 'output'" />

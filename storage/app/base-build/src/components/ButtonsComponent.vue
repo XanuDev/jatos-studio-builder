@@ -31,23 +31,24 @@ const store = useStore();
 
 const nextInput = (resultDataObject, file) => {
     if (resultDataObject) {
-        let result = {};
         if (isProxy(resultDataObject)) {
-            result = { ...resultDataObject };
+            store.state.result = { ...resultDataObject };
+            store.dispatch('addResultAction');
         }
 
-        if (file) {
-            // eslint-disable-next-line
-            jatos.uploadResultFile(resultDataObject, file).done(() => {});
-        } else {
-            // eslint-disable-next-line
-            jatos.submitResultData(result);
-            store.state.results = [];
-        }
+        store.dispatch('clearResultAction');
     }
 
     let newPos = store.state.position + 1;
     if (newPos > store.state.totalComponents - 1) {
+        if (file) {
+            // eslint-disable-next-line
+            jatos.uploadResultFile(resultDataObject, file).done(() => {});
+        }
+
+        // eslint-disable-next-line
+        jatos.submitResultData(store.state.allResults);
+
         // eslint-disable-next-line
         jatos.endStudy();
         return;
