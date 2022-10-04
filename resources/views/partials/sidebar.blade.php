@@ -13,7 +13,7 @@
                 </a>
             </li>
 
-            <li class="sidebar-header">{{ __('Form Builder') }}</li>
+            <li class="sidebar-header">{{ __('Builder') }}</li>
 
             <li class="sidebar-item {{ set_active('builder') }}">
                 <a class="sidebar-link" href="{{ route('builder.index') }}">
@@ -26,13 +26,6 @@
                 <a class="sidebar-link" href="{{ route('builder.create') }}">
                     <i class="align-middle" data-feather="tool"></i>
                     <span class="align-middle">{{ __('New Project') }}</span>
-                </a>
-            </li>
-
-            <li class="sidebar-item {{ set_active('builder/import') }}">
-                <a class="sidebar-link" href="{{ route('builder.import') }}">
-                    <i class="align-middle" data-feather="upload"></i>
-                    <span class="align-middle">{{ __('Import') }}</span>
                 </a>
             </li>
 
@@ -52,12 +45,12 @@
                 </a>
             </li>
 
-            <li class="sidebar-header">{{ __('Tools & Components') }}</li>
+            <li class="sidebar-header">{{ __('Tools') }}</li>
 
-            <li class="sidebar-item {{ set_active('about') }}">
-                <a class="sidebar-link" href="{{ route('about') }}">
-                    <i class="align-middle" data-feather="help-circle"></i>
-                    <span class="align-middle">{{ __('About') }}</span>
+            <li class="sidebar-item {{ set_active('builder/import') }}">
+                <a class="sidebar-link" href="{{ route('builder.import') }}">
+                    <i class="align-middle" data-feather="upload"></i>
+                    <span class="align-middle">{{ __('Import') }}</span>
                 </a>
             </li>
         </ul>
