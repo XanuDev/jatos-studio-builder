@@ -18,6 +18,5 @@
     "vueIndentScriptAndStyle": false,
     "rangeStart": 0,
     "rangeEnd": 1,
-    "endOfLine": "auto",
-    "plugins": ["@shufo/prettier-plugin-blade"]
+    "endOfLine": "auto"    
 }

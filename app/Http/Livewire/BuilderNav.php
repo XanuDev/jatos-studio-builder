@@ -7,11 +7,17 @@ use Livewire\Component;
 class BuilderNav extends Component
 {
     public $build;
+
     public $nav_title = '';
+
     public $can_build = false;
+
     public $can_download = false;
+
     public $new_title = '';
+
     public $is_update = false;
+
     public $is_private = false;
 
     protected $listeners = [

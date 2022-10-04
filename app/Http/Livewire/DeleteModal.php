@@ -5,15 +5,17 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 
 class DeleteModal extends Component
-{    
+{
     public $event = false;
+
     public $model = false;
+
     public $key = false;
 
     protected $listeners = ['open' => 'loadModal'];
 
     public function loadModal($key, $event = false, $model = false)
-    {     
+    {
         $this->key = $key;
         $this->event = $event;
         $this->model = $model;
@@ -21,8 +23,8 @@ class DeleteModal extends Component
     }
 
     public function delete()
-    {        
-        $this->emitUp($this->event,  $this->key );
+    {
+        $this->emitUp($this->event, $this->key);
         $this->emit('toggleDeleteModal');
     }
 

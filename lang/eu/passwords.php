@@ -16,6 +16,5 @@ return [
     'sent' => 'Zure pasahitza berrezartzeko esteka postaz bidali dizugu!',
     'throttled' => 'Mesedez, itxaron aurretik berriro saiatzean.',
     'token' => 'Pasahitza berreskuratzeko tokena baliogabea da.',
-    'user' =>
-        'Ezin izan dugu helbide elektroniko horrekin bat datorren erabiltzailerik aurkitu.',
+    'user' => 'Ezin izan dugu helbide elektroniko horrekin bat datorren erabiltzailerik aurkitu.',
 ];

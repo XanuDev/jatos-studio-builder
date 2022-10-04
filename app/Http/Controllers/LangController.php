@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
 class LangController extends Controller
@@ -24,7 +23,7 @@ class LangController extends Controller
      */
     public function change($locale)
     {
-        if (!in_array($locale, ['en', 'es', 'eu'])) {
+        if (! in_array($locale, ['en', 'es', 'eu'])) {
             abort(400);
         }
 

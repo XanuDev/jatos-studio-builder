@@ -18,10 +18,8 @@ return [
     'after' => 'Hau behar data bat egin ondoren, :date.',
     'after_or_equal' => 'Hau behar data bat egin ondoren, edo berdina :date.',
     'alpha' => 'Eremu hau soilik egin ahal izango ditu letrak.',
-    'alpha_dash' =>
-        'Eremu hau soilik egin ahal izango ditu letrak, zenbakiak, marrak eta azpimarrak.',
-    'alpha_num' =>
-        'Eremu hau soilik egin ahal izango ditu letrak eta zenbakiak.',
+    'alpha_dash' => 'Eremu hau soilik egin ahal izango ditu letrak, zenbakiak, marrak eta azpimarrak.',
+    'alpha_num' => 'Eremu hau soilik egin ahal izango ditu letrak eta zenbakiak.',
     'array' => 'Eremu hau behar array bat.',
     'before' => 'Hau behar data bat aurretik :date.',
     'before_or_equal' => 'Hau behar data bat aurretik edo berdina :date.',
@@ -58,11 +56,9 @@ return [
     ],
     'gte' => [
         'array' => 'The content must have :value items or more.',
-        'file' =>
-            'The file size must be greater than or equal :value kilobytes.',
+        'file' => 'The file size must be greater than or equal :value kilobytes.',
         'numeric' => 'The value must be greater than or equal :value.',
-        'string' =>
-            'The string must be greater than or equal :value characters.',
+        'string' => 'The string must be greater than or equal :value characters.',
     ],
     'image' => 'Hau izan behar da irudi bat.',
     'in' => 'Hautatutako balio baliogabea da.',
@@ -106,24 +102,18 @@ return [
     'password' => 'Pasahitza ez da zuzena.',
     'present' => 'Eremu honetan egon behar.',
     'prohibited' => 'Eremu honetan debekatuta dago.',
-    'prohibited_if' =>
-        'Eremu honetan debekatuta dago denean :other da, :value.',
-    'prohibited_unless' =>
-        'Eremu honetan debekatuta dago ezean :other da :values.',
+    'prohibited_if' => 'Eremu honetan debekatuta dago denean :other da, :value.',
+    'prohibited_unless' => 'Eremu honetan debekatuta dago ezean :other da :values.',
     'prohibits' => 'This field prohibits :other from being present.',
     'regex' => 'Formatu hau ez da balioduna.',
     'required' => 'Eremu hau beharrezkoa da.',
     'required_array_keys' => 'This field must contain entries for: :values.',
     'required_if' => 'Eremu hau beharrezkoa da denean :other da :value.',
-    'required_unless' =>
-        'Eremu hau beharrezkoa da behintzat :other da :values.',
+    'required_unless' => 'Eremu hau beharrezkoa da behintzat :other da :values.',
     'required_with' => 'Eremu hau beharrezkoa da denean :values da gaur.',
-    'required_with_all' =>
-        'Eremu hau beharrezkoa da denean :values agertu dira.',
-    'required_without' =>
-        'Eremu hau beharrezkoa da denean :values ez da gaur egun.',
-    'required_without_all' =>
-        'Eremu hau beharrezkoa da, noiz ere ez :values agertu dira.',
+    'required_with_all' => 'Eremu hau beharrezkoa da denean :values agertu dira.',
+    'required_without' => 'Eremu hau beharrezkoa da denean :values ez da gaur egun.',
+    'required_without_all' => 'Eremu hau beharrezkoa da, noiz ere ez :values agertu dira.',
     'same' => 'Eremu honen balioa etorri behar du bat :other.',
     'size' => [
         'array' => 'The content must contain :size items.',

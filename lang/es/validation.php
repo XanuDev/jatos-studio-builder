@@ -16,16 +16,13 @@ return [
     'accepted_if' => ':attribute debe ser aceptado cuando :other sea :value.',
     'active_url' => ':attribute no es una URL válida.',
     'after' => ':attribute debe ser una fecha posterior a :date.',
-    'after_or_equal' =>
-        ':attribute debe ser una fecha posterior o igual a :date.',
+    'after_or_equal' => ':attribute debe ser una fecha posterior o igual a :date.',
     'alpha' => ':attribute sólo debe contener letras.',
-    'alpha_dash' =>
-        ':attribute sólo debe contener letras, números, guiones y guiones bajos.',
+    'alpha_dash' => ':attribute sólo debe contener letras, números, guiones y guiones bajos.',
     'alpha_num' => ':attribute sólo debe contener letras y números.',
     'array' => ':attribute debe ser un conjunto.',
     'before' => ':attribute debe ser una fecha anterior a :date.',
-    'before_or_equal' =>
-        ':attribute debe ser una fecha anterior o igual a :date.',
+    'before_or_equal' => ':attribute debe ser una fecha anterior o igual a :date.',
     'between' => [
         'array' => ':attribute tiene que tener entre :min - :max elementos.',
         'file' => ':attribute debe pesar entre :min - :max kilobytes.',
@@ -46,8 +43,7 @@ return [
     'dimensions' => 'Las dimensiones de la imagen :attribute no son válidas.',
     'distinct' => 'El campo :attribute contiene un valor duplicado.',
     'email' => ':attribute no es un correo válido.',
-    'ends_with' =>
-        'El campo :attribute debe finalizar con uno de los siguientes valores: :values',
+    'ends_with' => 'El campo :attribute debe finalizar con uno de los siguientes valores: :values',
     'enum' => 'El :attribute seleccionado es inválido.',
     'exists' => 'El :attribute seleccionado es inválido.',
     'file' => 'El campo :attribute debe ser un archivo.',
@@ -59,13 +55,10 @@ return [
         'string' => 'El campo :attribute debe tener más de :value caracteres.',
     ],
     'gte' => [
-        'array' =>
-            'El campo :attribute debe tener como mínimo :value elementos.',
-        'file' =>
-            'El campo :attribute debe tener como mínimo :value kilobytes.',
+        'array' => 'El campo :attribute debe tener como mínimo :value elementos.',
+        'file' => 'El campo :attribute debe tener como mínimo :value kilobytes.',
         'numeric' => 'El campo :attribute debe ser como mínimo :value.',
-        'string' =>
-            'El campo :attribute debe tener como mínimo :value caracteres.',
+        'string' => 'El campo :attribute debe tener como mínimo :value caracteres.',
     ],
     'image' => ':attribute debe ser una imagen.',
     'in' => ':attribute es inválido.',
@@ -79,17 +72,13 @@ return [
         'array' => 'El campo :attribute debe tener menos de :value elementos.',
         'file' => 'El campo :attribute debe tener menos de :value kilobytes.',
         'numeric' => 'El campo :attribute debe ser menor que :value.',
-        'string' =>
-            'El campo :attribute debe tener menos de :value caracteres.',
+        'string' => 'El campo :attribute debe tener menos de :value caracteres.',
     ],
     'lte' => [
-        'array' =>
-            'El campo :attribute debe tener como máximo :value elementos.',
-        'file' =>
-            'El campo :attribute debe tener como máximo :value kilobytes.',
+        'array' => 'El campo :attribute debe tener como máximo :value elementos.',
+        'file' => 'El campo :attribute debe tener como máximo :value kilobytes.',
         'numeric' => 'El campo :attribute debe ser como máximo :value.',
-        'string' =>
-            'El campo :attribute debe tener como máximo :value caracteres.',
+        'string' => 'El campo :attribute debe tener como máximo :value caracteres.',
     ],
     'mac_address' => 'El campo :attribute debe ser una dirección MAC válida.',
     'max' => [
@@ -102,8 +91,7 @@ return [
     'mimetypes' => ':attribute debe ser un archivo con formato: :values.',
     'min' => [
         'array' => ':attribute debe tener al menos :min elementos.',
-        'file' =>
-            'El tamaño de :attribute debe ser de al menos :min kilobytes.',
+        'file' => 'El tamaño de :attribute debe ser de al menos :min kilobytes.',
         'numeric' => 'El tamaño de :attribute debe ser de al menos :min.',
         'string' => ':attribute debe contener al menos :min caracteres.',
     ],
@@ -114,27 +102,18 @@ return [
     'password' => 'La contraseña es incorrecta.',
     'present' => 'El campo :attribute debe estar presente.',
     'prohibited' => 'El campo :attribute está prohibido.',
-    'prohibited_if' =>
-        'El campo :attribute está prohibido cuando :other es :value.',
-    'prohibited_unless' =>
-        'El campo :attribute está prohibido a menos que :other sea :values.',
+    'prohibited_if' => 'El campo :attribute está prohibido cuando :other es :value.',
+    'prohibited_unless' => 'El campo :attribute está prohibido a menos que :other sea :values.',
     'prohibits' => 'El campo :attribute prohibe que :other esté presente.',
     'regex' => 'El formato de :attribute es inválido.',
     'required' => 'El campo :attribute es obligatorio.',
-    'required_array_keys' =>
-        'El campo :attribute debe contener entradas para: :values.',
-    'required_if' =>
-        'El campo :attribute es obligatorio cuando :other es :value.',
-    'required_unless' =>
-        'El campo :attribute es obligatorio a menos que :other esté en :values.',
-    'required_with' =>
-        'El campo :attribute es obligatorio cuando :values está presente.',
-    'required_with_all' =>
-        'El campo :attribute es obligatorio cuando :values están presentes.',
-    'required_without' =>
-        'El campo :attribute es obligatorio cuando :values no está presente.',
-    'required_without_all' =>
-        'El campo :attribute es obligatorio cuando ninguno de :values está presente.',
+    'required_array_keys' => 'El campo :attribute debe contener entradas para: :values.',
+    'required_if' => 'El campo :attribute es obligatorio cuando :other es :value.',
+    'required_unless' => 'El campo :attribute es obligatorio a menos que :other esté en :values.',
+    'required_with' => 'El campo :attribute es obligatorio cuando :values está presente.',
+    'required_with_all' => 'El campo :attribute es obligatorio cuando :values están presentes.',
+    'required_without' => 'El campo :attribute es obligatorio cuando :values no está presente.',
+    'required_without_all' => 'El campo :attribute es obligatorio cuando ninguno de :values está presente.',
     'same' => ':attribute y :other deben coincidir.',
     'size' => [
         'array' => ':attribute debe contener :size elementos.',
@@ -142,8 +121,7 @@ return [
         'numeric' => 'El tamaño de :attribute debe ser :size.',
         'string' => ':attribute debe contener :size caracteres.',
     ],
-    'starts_with' =>
-        'El campo :attribute debe comenzar con uno de los siguientes valores: :values',
+    'starts_with' => 'El campo :attribute debe comenzar con uno de los siguientes valores: :values',
     'string' => 'El campo :attribute debe ser una cadena de caracteres.',
     'timezone' => ':Attribute debe ser una zona horaria válida.',
     'unique' => 'El campo :attribute ya ha sido registrado.',

@@ -2,28 +2,40 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Build;
+use App\Models\JatosComponent;
 use Illuminate\Support\Facades\Auth;
-use App\Models\{Build, User, JatosComponent};
-use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Builder extends Component
 {
     use WithFileUploads;
 
     public $build_id = false;
+
     public $build_title;
+
     public $build_description;
+
     public $build_file_name;
+
     public $input_id = 0;
+
     public $created = false;
+
     public $builded = false;
+
     public $building = false;
+
     public $components = [];
+
     public $active_component = false;
+
     public $images = [];
+
     public $preload = false;
 
     protected $listeners = [
@@ -35,7 +47,7 @@ class Builder extends Component
         'add_input' => 'addInput',
         'removeInput' => 'removeInput',
         'removeComponent' => 'removeComponent',
-        'add_builder' => 'add_builder'
+        'add_builder' => 'add_builder',
     ];
 
     public function mount($build, $json = false)
@@ -79,8 +91,12 @@ class Builder extends Component
 
     public function setActive($key)
     {
-        if (!sizeof($this->components)) return;
-        if (!array_key_exists($key, $this->components)) $key = 0;
+        if (! count($this->components)) {
+            return;
+        }
+        if (! array_key_exists($key, $this->components)) {
+            $key = 0;
+        }
         $this->setComponentActive($this->components[$key]['title']);
     }
 
@@ -96,8 +112,9 @@ class Builder extends Component
 
     public function addInput($type)
     {
-        if (sizeof($this->components) < 1) {
+        if (count($this->components) < 1) {
             session()->flash('warning', 'No component selected');
+
             return;
         }
 
@@ -170,23 +187,25 @@ class Builder extends Component
 
     private function load_image($dom, &$contents)
     {
-        if (empty($contents)) return;
+        if (empty($contents)) {
+            return;
+        }
 
         $dom->loadHtml($contents, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $imageFile = $dom->getElementsByTagName('img');
 
         foreach ($imageFile as $key => $image) {
-
             $data = $image->getAttribute('src');
             $file_name = $image->getAttribute('data-filename');
             $extension = pathinfo($file_name, PATHINFO_EXTENSION);
-            list($type, $data) = explode(';', $data);
-            list(, $data)      = explode(',', $data);
+            [$type, $data] = explode(';', $data);
+            [, $data] = explode(',', $data);
             $type = explode('/', $type);
 
-            if ($type[0] != "data:image") {
+            if ($type[0] != 'data:image') {
                 session()->flash('danger', 'Image format no supported [' . $file_name . ']');
                 Storage::delete($this->images);
+
                 return;
             }
 
@@ -205,12 +224,13 @@ class Builder extends Component
 
     public function store($is_private)
     {
-        $dom = new \DomDocument();
+        $dom = new \DomDocument;
 
         foreach ($this->components as $key => $component) {
             foreach ($this->components[$key]['inputs'] as &$input) {
                 if ($input['type'] == 'input') {
                     $input['fields'] = json_decode($input['fields']);
+
                     continue;
                 }
                 $this->load_image($dom, $input['contents']);
@@ -233,7 +253,7 @@ class Builder extends Component
 
         Storage::put('jas/' . $jas_file, $jas_json);
 
-        $build = new Build();
+        $build = new Build;
         $build->title = $this->build_title;
         $build->description = $this->build_description;
         $build->jas = $jas_json;
@@ -246,10 +266,9 @@ class Builder extends Component
         $this->build_id = $build->id;
 
         foreach ($this->components as $c_key => $component) {
-
             $components_json = json_encode($this->components[$c_key]['inputs']);
 
-            $jatos_component = new JatosComponent();
+            $jatos_component = new JatosComponent;
             $jatos_component->title = $component['title'];
             $jatos_component->json = $components_json;
             $jatos_component->save();
@@ -267,12 +286,13 @@ class Builder extends Component
 
     public function update($is_private)
     {
-        $dom = new \DomDocument();
+        $dom = new \DomDocument;
 
         foreach ($this->components as $key => $component) {
             foreach ($this->components[$key]['inputs'] as &$input) {
                 if ($input['type'] == 'input') {
                     $input['fields'] = json_decode($input['fields']);
+
                     continue;
                 }
                 //$this->load_image($dom, $input['contents']);
@@ -299,7 +319,7 @@ class Builder extends Component
         foreach ($this->components as $component) {
             $components_json = json_encode($component['inputs']);
 
-            $jatos_component = new JatosComponent();
+            $jatos_component = new JatosComponent;
             $jatos_component->title = $component['title'];
             $jatos_component->json = $components_json;
             $jatos_component->save();

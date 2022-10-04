@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Build;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use App\Models\{Build, User};
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BuilderController extends Controller
 {
@@ -23,6 +23,7 @@ class BuilderController extends Controller
     {
         $user = Auth::id();
         $builds = Build::where('user_id', $user)->orWhere('is_private', false)->get();
+
         return view('builder.index', ['builds' => $builds]);
     }
 
@@ -44,7 +45,7 @@ class BuilderController extends Controller
      */
     public function store(Request $request)
     {
-        $build = new Build();
+        $build = new Build;
         $build->title = $request->title;
         $build->description = $request->description;
 
@@ -71,6 +72,7 @@ class BuilderController extends Controller
     public function edit($id)
     {
         $build = Build::find($id);
+
         return view('builder.builder', ['build' => $build]);
     }
 
@@ -83,7 +85,6 @@ class BuilderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
@@ -96,14 +97,16 @@ class BuilderController extends Controller
     {
         Build::destroy($id);
         session()->flash('message', 'Build deleted');
+
         return back();
     }
 
     public function build_import(Request $request)
     {
-        $build = new Build();
+        $build = new Build;
         $build->title = $request->title;
         $build->description = $request->description;
+
         return view('builder.builder', ['build' => $build, 'json' => $request->json]);
     }
 

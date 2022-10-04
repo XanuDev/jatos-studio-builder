@@ -27,7 +27,6 @@ class Build extends Model
         return $this->belongsToMany(JatosComponent::class);
     }
 
-
     public static function boot()
     {
         parent::boot();

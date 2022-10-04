@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -15,6 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+
         return view('user.index', ['users' => $users]);
     }
 
@@ -42,7 +43,7 @@ class UserController extends Controller
             'password' => 'required|min:3|max:250',
         ]);
 
-        $build = new User();
+        $build = new User;
         $build->name = $request->name;
         $build->email = $request->email;
         $build->password = bcrypt($request->password);
@@ -59,7 +60,6 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -93,7 +93,9 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        if ($password) $user->password = $password;
+        if ($password) {
+            $user->password = $password;
+        }
         $user->push();
 
         return redirect()->back()->with($status);

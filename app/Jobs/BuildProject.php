@@ -3,16 +3,15 @@
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-use Symfony\Component\Process\Process;
-use Symfony\Component\Process\Exception\ProcessFailedException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 
 class BuildProject implements ShouldQueue
 {
@@ -53,7 +52,7 @@ class BuildProject implements ShouldQueue
                 'PROJECT_NAME' => $title,
                 'FILE_NAME' => $this->data['file_name'],
                 'COMPONENT_PAGES' => $this->data['pages'],
-                'IMAGES' => $images
+                'IMAGES' => $images,
             ]
         );
         $build_process->setWorkingDirectory(
@@ -61,7 +60,7 @@ class BuildProject implements ShouldQueue
         );
 
         $build_process->run();
-        if (!$build_process->isSuccessful()) {
+        if (! $build_process->isSuccessful()) {
             throw new ProcessFailedException($build_process);
         }
 

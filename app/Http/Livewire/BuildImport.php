@@ -2,13 +2,12 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Build;
 use Livewire\Component;
-use App\Http\Controllers\BuilderController;
 
 class BuildImport extends Component
 {
     public $file_content = false;
+
     public $content = '';
 
     public function clear()
@@ -22,6 +21,7 @@ class BuildImport extends Component
         json_decode($this->content);
         if (json_last_error() != JSON_ERROR_NONE) {
             session()->flash('error', 'Incorrect format');
+
             return false;
         }
 

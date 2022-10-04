@@ -18,8 +18,7 @@ return [
     'after' => 'Debe ser una fecha después de :date.',
     'after_or_equal' => 'Debe ser una fecha después o igual a :date.',
     'alpha' => 'Este campo solo puede contener letras.',
-    'alpha_dash' =>
-        'Este campo solo puede contener letras, números, guiones y guiones bajos.',
+    'alpha_dash' => 'Este campo solo puede contener letras, números, guiones y guiones bajos.',
     'alpha_num' => 'Este campo solo puede contener letras y números.',
     'array' => 'Este campo debe ser un array (colección).',
     'before' => 'Debe ser una fecha antes de :date.',
@@ -57,8 +56,7 @@ return [
     ],
     'gte' => [
         'array' => 'El contenido debe tener :value elementos o más.',
-        'file' =>
-            'El tamaño del archivo debe ser mayor o igual que :value kilobytes.',
+        'file' => 'El tamaño del archivo debe ser mayor o igual que :value kilobytes.',
         'numeric' => 'El valor debe ser mayor o igual que :value.',
         'string' => 'El texto debe ser mayor o igual de :value caracteres.',
     ],
@@ -78,8 +76,7 @@ return [
     ],
     'lte' => [
         'array' => 'El contenido no debe tener más de :value elementos.',
-        'file' =>
-            'El tamaño del archivo debe ser menor o igual que :value kilobytes.',
+        'file' => 'El tamaño del archivo debe ser menor o igual que :value kilobytes.',
         'numeric' => 'El valor debe ser menor o igual que :value.',
         'string' => 'El texto debe ser menor o igual de :value caracteres.',
     ],
@@ -106,22 +103,17 @@ return [
     'present' => 'Este campo debe estar presente.',
     'prohibited' => 'Este campo está prohibido',
     'prohibited_if' => 'Este campo está prohibido cuando :other es :value.',
-    'prohibited_unless' =>
-        'Este campo está prohibido a menos que :other sea :values.',
+    'prohibited_unless' => 'Este campo está prohibido a menos que :other sea :values.',
     'prohibits' => 'Este campo prohibe que :other esté presente.',
     'regex' => 'Este formato es inválido.',
     'required' => 'Este campo es requerido.',
     'required_array_keys' => 'Este campo debe contener entradas para: :values.',
     'required_if' => 'Este campo es requerido cuando :other es :value.',
-    'required_unless' =>
-        'Este campo es requerido a menos que :other esté en :values.',
+    'required_unless' => 'Este campo es requerido a menos que :other esté en :values.',
     'required_with' => 'Este campo es requerido cuando :values está presente.',
-    'required_with_all' =>
-        'Este campo es requerido cuando :values están presentes.',
-    'required_without' =>
-        'Este campo es requerido cuando :values no está presente.',
-    'required_without_all' =>
-        'Este campo es requerido cuando ninguno de :values están presentes.',
+    'required_with_all' => 'Este campo es requerido cuando :values están presentes.',
+    'required_without' => 'Este campo es requerido cuando :values no está presente.',
+    'required_without_all' => 'Este campo es requerido cuando ninguno de :values están presentes.',
     'same' => 'El valor de este campo debe ser igual a :other.',
     'size' => [
         'array' => 'El contenido debe tener :size elementos.',
@@ -129,8 +121,7 @@ return [
         'numeric' => 'El valor debe ser :size.',
         'string' => 'El texto debe ser de :size caracteres.',
     ],
-    'starts_with' =>
-        'Debe comenzar con alguno de los siguientes valores: :values.',
+    'starts_with' => 'Debe comenzar con alguno de los siguientes valores: :values.',
     'string' => 'Debe ser un texto.',
     'timezone' => 'Debe ser de una zona horaria válida.',
     'unique' => 'Este campo ya ha sido tomado.',
