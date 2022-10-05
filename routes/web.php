@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('builder', App\Http\Controllers\BuilderController::class)->except(['show']);
     Route::resource('user', App\Http\Controllers\UserController::class)->except(['show']);
+    Route::resource('gallery', App\Http\Controllers\GalleryController::class);
 
     Route::get('locale/change/{locale}', [App\Http\Controllers\LangController::class, 'change'])->name('changeLocale');
 });

@@ -58,14 +58,7 @@ class Builder extends Component
         }
 
         if ($build->id) {
-            $this->build_id = $build->id;
-            $this->build_file_name = $build->jas_json_file_name;
-            $this->preload = true;
-            foreach ($build->jatos_components as $key => $component) {
-                $this->addComponent($component->title);
-                $inputs = json_decode($component->json, true);
-                $this->components[$this->active_component]['inputs'] = $inputs;
-            }
+            $this->loadBuild($build);
         }
 
         $this->build_title = $build->title;
@@ -75,6 +68,18 @@ class Builder extends Component
     public function hydrate()
     {
         $this->preload = false;
+    }
+
+    public function loadBuild($build)
+    {
+        $this->build_id = $build->id;
+        $this->build_file_name = $build->jas_json_file_name;
+        $this->preload = true;
+        foreach ($build->jatos_components as $key => $component) {
+            $this->addComponent($component->title);
+            $inputs = json_decode($component->json, true);
+            $this->components[$this->active_component]['inputs'] = $inputs;
+        }
     }
 
     private function setComponentActive($title)
