@@ -9,7 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @livewireStyles
@@ -35,8 +36,9 @@
             @include('partials.footer')
         </div>
     </div>
-    @stack('scripts')
     @livewireScripts
+    <script src="{{ asset('js/app.js') }}"></script>
+    @stack('scripts')
 </body>
 
 </html>

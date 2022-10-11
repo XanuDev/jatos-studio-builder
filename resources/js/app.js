@@ -27,10 +27,6 @@ import formBuilder from 'formBuilder';
 // jquery-ui
 import 'jquery-ui/ui/widgets/sortable';
 
-(function ($) {
-    $('#summernote').summernote();
-})(window.jQuery);
-
 $(function () {
     // Activate tooltip
     $('[data-toggle="tooltip"]').tooltip();

@@ -3,5 +3,5 @@
     <input type="text" id="title-{{ $identifier }}"
         wire:model="components.{{ $active_component }}.inputs.{{ $input_key }}.title" class="form-control mb-2">
 
-    @include('partials.summernote-script')
+    @include('partials.ckeditor')
 </div>

@@ -2,14 +2,11 @@ import _ from 'lodash';
 window._ = _;
 
 try {
-    window.$ = window.jQuery = require('jquery');
-    //window.$ = window.jQuery = $;
-    require('bootstrap');
-    require('summernote');
-    require('summernote/dist/summernote.css');
-    require('summernote/dist/summernote.js');
+    
+    window.$ = window.jQuery = require('jquery');            
+    require('bootstrap');    
 } catch (e) {
-    //error loading bootstrap
+    //error loading bootstrap   
 }
 
 /**

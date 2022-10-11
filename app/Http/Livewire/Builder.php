@@ -190,43 +190,6 @@ class Builder extends Component
         $this->components[$active]['inputs'][$key]['contents'] = '';
     }
 
-    private function load_image($dom, &$contents)
-    {
-        if (empty($contents)) {
-            return;
-        }
-
-        $dom->loadHtml($contents, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $imageFile = $dom->getElementsByTagName('img');
-
-        foreach ($imageFile as $key => $image) {
-            $data = $image->getAttribute('src');
-            $file_name = $image->getAttribute('data-filename');
-            $extension = pathinfo($file_name, PATHINFO_EXTENSION);
-            [$type, $data] = explode(';', $data);
-            [, $data] = explode(',', $data);
-            $type = explode('/', $type);
-
-            if ($type[0] != 'data:image') {
-                session()->flash('danger', 'Image format no supported [' . $file_name . ']');
-                Storage::delete($this->images);
-
-                return;
-            }
-
-            $imageData = base64_decode($data);
-            $image_name = Str::random(20) . '.' . $extension;
-            Storage::put('public/img/' . $image_name, $imageData);
-
-            $this->images[] = $image_name;
-
-            $image->removeAttribute('src');
-            $image->setAttribute('src', 'img/' . $image_name);
-            $image->setAttribute('data-filename', 'img/' . $image_name);
-        }
-        $contents = $dom->saveHTML();
-    }
-
     public function store($is_private)
     {
         $dom = new \DomDocument;
@@ -238,9 +201,21 @@ class Builder extends Component
 
                     continue;
                 }
-                $this->load_image($dom, $input['contents']);
+                
+                if (empty($input['contents'])) {
+                    continue;
+                }
+
+                $dom->loadHtml($input['contents'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+                $imageFile = $dom->getElementsByTagName('img');
+                foreach ($imageFile as $key => $image) {
+                    $image_name = $image->getAttribute('src');
+                    $this->images[] = $image_name;
+                }
             }
         }
+
+        
 
         $file = Str::replace(' ', '_', $this->build_title);
 
