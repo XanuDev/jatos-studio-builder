@@ -23,6 +23,7 @@ Alpine.start();
 
 // FormBuilder
 import formBuilder from 'formBuilder';
+window.formBuilder = formBuilder;
 
 // jquery-ui
 import 'jquery-ui/ui/widgets/sortable';

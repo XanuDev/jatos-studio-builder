@@ -1,8 +1,7 @@
 import _ from 'lodash';
 window._ = _;
 
-try {
-    
+try {    
     window.$ = window.jQuery = require('jquery');            
     require('bootstrap');    
 } catch (e) {
