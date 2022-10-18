@@ -190,7 +190,7 @@ class Builder extends Component
         $this->components[$active]['inputs'][$key]['contents'] = '';
     }
 
-    public function store($is_private)
+    private function save_fields()
     {
         $dom = new \DomDocument;
 
@@ -201,21 +201,24 @@ class Builder extends Component
 
                     continue;
                 }
-                
+
                 if (empty($input['contents'])) {
                     continue;
                 }
 
                 $dom->loadHtml($input['contents'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-                $imageFile = $dom->getElementsByTagName('img');
-                foreach ($imageFile as $key => $image) {
+                $images = $dom->getElementsByTagName('img');
+                foreach ($images as $key => $image) {
                     $image_name = $image->getAttribute('src');
                     $this->images[] = $image_name;
                 }
             }
         }
+    }
 
-        
+    public function store($is_private)
+    {
+        $this->save_fields();
 
         $file = Str::replace(' ', '_', $this->build_title);
 
@@ -266,18 +269,7 @@ class Builder extends Component
 
     public function update($is_private)
     {
-        $dom = new \DomDocument;
-
-        foreach ($this->components as $key => $component) {
-            foreach ($this->components[$key]['inputs'] as &$input) {
-                if ($input['type'] == 'input') {
-                    $input['fields'] = json_decode($input['fields']);
-
-                    continue;
-                }
-                //$this->load_image($dom, $input['contents']);
-            }
-        }
+        $this->save_fields();
 
         $file = Str::replace(' ', '_', $this->build_title);
 
