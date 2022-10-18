@@ -21,7 +21,6 @@ class BuilderNav extends Component
     public $is_private = false;
 
     protected $listeners = [
-        'created' => 'created',
         'builded' => 'builded',
     ];
 
@@ -31,13 +30,8 @@ class BuilderNav extends Component
         if ($build->id) {
             $this->is_update = true;
             $this->can_build = true;
-            $this->can_download = true;
         }
-    }
-
-    public function created()
-    {
-        $this->can_build = true;
+        $this->can_download = downloadExist($build->title);
     }
 
     public function builded()

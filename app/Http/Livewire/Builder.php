@@ -24,8 +24,6 @@ class Builder extends Component
 
     public $input_id = 0;
 
-    public $created = false;
-
     public $builded = false;
 
     public $building = false;
@@ -262,9 +260,9 @@ class Builder extends Component
 
         Storage::put('json/' . $json_file, $json_inputs);
 
-        $this->emit('created');
-
         session()->flash('message', 'Project successfully created.');
+
+        return redirect()->to('/builder/' . $build->id . '/edit');
     }
 
     public function update($is_private)
@@ -302,6 +300,8 @@ class Builder extends Component
         Storage::put('json/' . $json_file, $json_inputs);
 
         session()->flash('message', 'Project successfully updated.');
+
+        return redirect(request()->header('Referer'));
     }
 
     public function build()
