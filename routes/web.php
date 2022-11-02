@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/builder/download/{id}', [App\Http\Controllers\BuilderController::class, 'download'])->name('builder.download');
 
     Route::resource('builder', App\Http\Controllers\BuilderController::class)->except(['show']);
-    Route::resource('user', App\Http\Controllers\UserController::class)->except(['show']);
+    Route::middleware('admin')->resource('user', App\Http\Controllers\UserController::class)->except(['show']);
     Route::resource('gallery', App\Http\Controllers\GalleryController::class);
 
     Route::post('ckeditor/upload', [App\Http\Controllers\CKEditorController::class, 'upload'])->name('ckeditor.image-upload');

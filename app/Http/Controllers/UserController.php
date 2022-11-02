@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {        
+        $this->middleware('admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -43,11 +48,12 @@ class UserController extends Controller
             'password' => 'required|min:3|max:250',
         ]);
 
-        $build = new User;
-        $build->name = $request->name;
-        $build->email = $request->email;
-        $build->password = bcrypt($request->password);
-        $build->save();
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->admin = isset($request->admin);
+        $user->save();
 
         return redirect()->route('user.index');
     }
@@ -81,7 +87,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(User $user, Request $request)
-    {
+    {        
         $status = ['success' => __('The update was correct!')];
 
         $this->validate($request, [
@@ -92,10 +98,11 @@ class UserController extends Controller
         $password = $request->password ? bcrypt($request->password) : false;
 
         $user->name = $request->name;
-        $user->email = $request->email;
+        $user->email = $request->email;        
         if ($password) {
             $user->password = $password;
         }
+        $user->admin = isset($request->admin);
         $user->push();
 
         return redirect()->back()->with($status);

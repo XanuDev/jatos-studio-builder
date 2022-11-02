@@ -17,6 +17,11 @@
             <label for="password">{{ __('Password') }}</label>
             <input type="password" class="form-control" id="password" name="password">
         </div>
-        <button type="submit" class="btn btn-primary">{{ __($btn_text) }}</button>
+        <div class="form-group my-3">
+            <label for="admin">{{ __('Admin') }}</label>
+            <input type="checkbox" class="form-check-input" id="admin" name="admin" {{ old('admin', $user->admin) ?
+            'checked' : ''}} >
+        </div>
+        <button type=" submit" class="btn btn-primary">{{ __($btn_text) }}</button>
     </div>
 </div>

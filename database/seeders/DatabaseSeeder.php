@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         \App\Models\User::firstOrCreate(
-            ['email' => 'kudeatzailea@talaios.coop'],
-            ['name' => 'Admin', 'password' => bcrypt('secret')]
+            ['email' => 'admin@local.host'],
+            ['name' => 'Admin', 'password' => bcrypt('secret'), 'admin' => true]
         );
     }
 }

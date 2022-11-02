@@ -28,7 +28,7 @@
                     <span class="align-middle">{{ __('New Project') }}</span>
                 </a>
             </li>
-
+            @if(Auth::user()->admin)
             <li class="sidebar-header">{{ __('Users') }}</li>
 
             <li class="sidebar-item {{ set_active('user') }}">
@@ -44,7 +44,7 @@
                     <span class="align-middle">{{ __('New User') }}</span>
                 </a>
             </li>
-
+            @endif()
             <li class="sidebar-header">{{ __('Tools') }}</li>
 
             <li class="sidebar-item {{ set_active('builder/import') }}">
