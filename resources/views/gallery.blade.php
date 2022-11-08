@@ -33,7 +33,9 @@
 
                 <h5 class="card-title">{{ $image->title }}</h5>
 
-                <img class="card-img-top" src="{{  asset($image->thumbnail) }}" alt="Card image cap">
+                <a href="#" onclick="copy_url('{{  $image->image }}');">
+                    <img class="card-img-top" src="{{  asset($image->thumbnail) }}" alt="Card image cap">
+                </a>
                 <div class="card-body text-center">
                     <form action="{{ route('gallery.destroy', $image->id) }}" method="post"
                         onsubmit="return confirm('Are you sure you want to delete this record?');">
@@ -45,7 +47,7 @@
 
             </div>
             @empty
-            <p>No record found.</p>
+            <p>{{ __('No record found') }}.</p>
             @endforelse
             {{ $images->links() }}
         </div>
@@ -54,3 +56,13 @@
 </div>
 
 @endsection
+
+@push('scripts')
+<script>
+    function copy_url(url) 
+    {
+        navigator.clipboard.writeText('/' + url);      
+        alert("Copied the text: " + url);
+    }
+</script>
+@endpush

@@ -7,13 +7,13 @@ import './modules/theme';
 import './modules/feather';
 
 // Charts
-import './modules/chartjs';
+//import './modules/chartjs';
 
 // Forms
 import './modules/flatpickr';
 
 // Maps
-import './modules/vector-maps';
+//import './modules/vector-maps';
 
 import Alpine from 'alpinejs';
 
@@ -24,6 +24,10 @@ Alpine.start();
 // FormBuilder
 import formBuilder from 'formBuilder';
 window.formBuilder = formBuilder;
+
+// Quill editor
+import Quill from 'quill';
+window.Quill = Quill;
 
 // jquery-ui
 import 'jquery-ui/ui/widgets/sortable';

@@ -28,6 +28,7 @@ mix.webpackConfig({
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
+            Quill: "Quill",
         }),
     ],
 });

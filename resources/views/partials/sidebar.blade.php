@@ -47,6 +47,13 @@
             @endif()
             <li class="sidebar-header">{{ __('Tools') }}</li>
 
+            <li class="sidebar-item {{ set_active('gallery') }}">
+                <a class="sidebar-link" href="{{ route('gallery.index') }}">
+                    <i class="align-middle" data-feather="camera"></i>
+                    <span class="align-middle">{{ __('Gallery') }}</span>
+                </a>
+            </li>
+
             <li class="sidebar-item {{ set_active('builder/import') }}">
                 <a class="sidebar-link" href="{{ route('builder.import') }}">
                     <i class="align-middle" data-feather="upload"></i>

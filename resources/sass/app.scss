@@ -5,10 +5,6 @@
  * Licensed under MIT (https://github.com/adminkit/adminkit/blob/master/LICENSE)
  */
 
- @import '~jquery-ui/themes/base/all.css';
-
-// Variables
-@import '1-variables/app';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
@@ -37,14 +33,17 @@
 // @import "~bootstrap/scss/helpers";
 // @import "~bootstrap/scss/utilities/api";
 
+// Variables
+@import '1-variables/app';
+
 // Theme mixins
-@import '2-mixins/button';
+ @import '2-mixins/button';
 
 // Theme components
 @import '3-components/avatar';
 @import '3-components/buttons';
 @import '3-components/card';
-@import '3-components/chart';
+//@import '3-components/chart';
 @import '3-components/content';
 @import '3-components/dropdown';
 @import '3-components/feather';
@@ -64,11 +63,14 @@
 // Theme utilities
 @import '4-utilities/cursors';
 
-// 3rd party plugins
-@import '~jsvectormap/dist/css/jsvectormap';
+//3rd party plugins
+//@import '~jsvectormap/dist/css/jsvectormap';
 @import '~simplebar/dist/simplebar';
 @import '~flatpickr/dist/flatpickr';
+//@import "~filepond/dist/filepond";
+@import '~quill/dist/quill.snow.css';
+@import '~jquery-ui/themes/base/all.css';
 
-// 3rd party plugin styles
+//3rd party plugin styles
 @import '5-vendor/flatpickr';
 @import '5-vendor/simplebar';
