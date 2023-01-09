@@ -121,6 +121,16 @@ class Builder extends Component
             return;
         }
 
+        if ($type == 'audio') {
+            foreach ($this->components[$this->active_component]['inputs']as $key => $value) {
+                if ($value['type'] == 'audio') {
+                    session()->flash('warning', 'There can only be one audio per component');
+
+                    return;
+                }
+            }
+        }
+
         $input = \App\Constants\Component::LIST[$type];
 
         $this->components[$this->active_component]['inputs'][] = [

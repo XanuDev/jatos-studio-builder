@@ -1,18 +1,11 @@
 <div class="mt-2 bg-white" wire:ignore>
-    <textarea class="wysiwyg" id="{{ $identifier }}"
+    <div id="{{ $identifier }}" class="form-textarea w-full" x-data x-init="ClassicEditor.create(document.querySelector('#{{ $identifier }}')).then(
+        function(editor){
+            editor.model.document.on('change:data', () => {
+               $dispatch('input', editor.getData())
+            })
+        })" wire:key="{{ $identifier }}" x-ref="{{ $identifier }}"
         wire:model="components.{{ $component_key }}.inputs.{{ $input_key }}.contents">
         {!! $components[$component_key]['inputs'][$input_key]['contents'] !!}
-    </textarea>
+    </div>
 </div>
-
-<script>
-    if (@js($preload)) {
-        window.addEventListener('load', function () {  
-            ClassicEditor.create(document.querySelector('#' + @js($identifier)));
-        });
-    }
-    else
-    {
-        ClassicEditor.create(document.querySelector('#' + @js($identifier)));
-    }
-</script>

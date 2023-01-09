@@ -5,6 +5,8 @@ import './bootstrap';
 import './modules/sidebar';
 import './modules/theme';
 import './modules/feather';
+import ClassicEditor from './modules/ckeditor';
+window.ClassicEditor = ClassicEditor;
 
 // Charts
 //import './modules/chartjs';
@@ -24,12 +26,6 @@ Alpine.start();
 // FormBuilder
 import formBuilder from 'formBuilder';
 window.formBuilder = formBuilder;
-
-// Ckeditor
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic/build/ckeditor';
-window.ClassicEditor = ClassicEditor;
-
-// ref: https://tobiasahlin.com/blog/move-from-jquery-to-vanilla-javascript/#document-ready
 
 var ready = (callback) => {
   if (document.readyState != "loading") callback();
