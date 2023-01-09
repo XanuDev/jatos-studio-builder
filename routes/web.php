@@ -28,7 +28,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::middleware('admin')->resource('user', App\Http\Controllers\UserController::class)->except(['show']);
     Route::resource('gallery', App\Http\Controllers\GalleryController::class);
 
-    Route::post('ckeditor/upload', [App\Http\Controllers\CKEditorController::class, 'upload'])->name('ckeditor.image-upload');
-
     Route::get('locale/change/{locale}', [App\Http\Controllers\LangController::class, 'change'])->name('changeLocale');
 });

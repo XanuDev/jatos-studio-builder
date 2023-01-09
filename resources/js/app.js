@@ -25,9 +25,24 @@ Alpine.start();
 import formBuilder from 'formBuilder';
 window.formBuilder = formBuilder;
 
-// Quill editor
-import Quill from 'quill';
-window.Quill = Quill;
+// Ckeditor
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic/build/ckeditor';
+window.ClassicEditor = ClassicEditor;
+
+// ref: https://tobiasahlin.com/blog/move-from-jquery-to-vanilla-javascript/#document-ready
+
+var ready = (callback) => {
+  if (document.readyState != "loading") callback();
+  else document.addEventListener("DOMContentLoaded", callback);
+}
+
+
+// Quill
+
+//import Quill from './modules/quill';
+
+//window.Quill = Quill;
+
 
 // jquery-ui
 import 'jquery-ui/ui/widgets/sortable';

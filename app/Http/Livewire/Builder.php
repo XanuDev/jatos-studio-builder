@@ -216,6 +216,8 @@ class Builder extends Component
 
     public function store($is_private)
     {
+        dd($this->components);
+
         $this->save_fields();
 
         $file = Str::replace(' ', '_', $this->build_title);
