@@ -130,42 +130,6 @@
                 $('#buildingModal').modal('show');
             })
         })(window.jQuery);
-    });
-
-    function chargeQuill(identifier) {
-        var quill = new Quill('#' + identifier, {
-                theme: 'snow',
-                modules: {
-                    toolbar: {
-                        container: [
-                            ['bold', 'italic', 'underline', 'strike'],
-                            ['blockquote', 'code-block'],                    
-                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                            [{ 'script': 'sub'}, { 'script': 'super' }],
-                            [{ 'indent': '-1'}, { 'indent': '+1' }],
-                            [{ 'direction': 'rtl' }],
-                            [{ 'size': ['small', false, 'large', 'huge'] }],
-                            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],  
-                            [{ 'color': [] }, { 'background': [] }],
-                            [{ 'font': [] }],
-                            [{ 'align': [] }],
-                            ['link', 'image', 'video'],
-                            ['clean']
-                        ],
-                        handlers: {
-                            image: function () {
-                                var range = this.quill.getSelection();
-                                var value = prompt('What is the image URL');
-                                if(value){
-                                    this.quill.insertEmbed(range.index, 'image', value, Quill.sources.USER);
-                                }
-                            }
-                        }
-                    } ,
-                }
-            })
-
-            return quill;
-    }
+    });   
 </script>
 @endpush

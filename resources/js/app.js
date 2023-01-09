@@ -36,14 +36,6 @@ var ready = (callback) => {
   else document.addEventListener("DOMContentLoaded", callback);
 }
 
-
-// Quill
-
-//import Quill from './modules/quill';
-
-//window.Quill = Quill;
-
-
 // jquery-ui
 import 'jquery-ui/ui/widgets/sortable';
 
