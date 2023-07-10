@@ -225,9 +225,7 @@ class Builder extends Component
     }
 
     public function store($is_private)
-    {
-        dd($this->components);
-
+    {        
         $this->save_fields();
 
         $file = Str::replace(' ', '_', $this->build_title);
@@ -331,7 +329,7 @@ class Builder extends Component
             'file_name' => $build->jas_json_file_name,
             'pages' => $pages,
             'images' => $this->images,
-        ];
+        ];        
 
         \App\Jobs\BuildProject::dispatch($data);
 
