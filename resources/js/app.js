@@ -47,4 +47,8 @@ $(function () {
     window.livewire.on('toggleDeleteModal', () => 
         $('#deleteModal').modal('toggle')
     );
+
+    window.livewire.on('mediaModal', () => 
+    $('#mediaModal').modal('toggle')
+);
 });
